@@ -1,1 +1,1 @@
-# word-cut
+# WordCut
