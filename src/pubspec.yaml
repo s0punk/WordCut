@@ -1,7 +1,7 @@
 name: word_cut
-description: "A new Flutter project."
+description: "Word game"
 publish_to: 'none'
-version: 0.1.0
+version: 1.0.0
 
 environment:
   sdk: ^3.9.0
@@ -9,11 +9,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_riverpod: ^2.6.1
+  intl: any
+  riverpod_annotation: ^2.6.1
 
 dev_dependencies:
+  build_runner: ^2.5.4
+  custom_lint: ^0.7.5
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  riverpod_generator: ^2.6.5
+  riverpod_lint: ^2.6.5
+  very_good_analysis: ^9.0.0
 
 flutter:
   uses-material-design: true
+  generate: true
