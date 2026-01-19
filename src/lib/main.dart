@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:word_cut/views/screens/game_screen.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const WordCut());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+/// Widget principal de l'application.
+class WordCut extends StatelessWidget {
+  /// Widget principal de l'application.
+  const WordCut({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+      restorationScopeId: "word_cut",
+      title: "WordCut",
+      debugShowCheckedModeBanner: false,
+      home: GameScreen(),
     );
   }
 }
