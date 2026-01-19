@@ -1,0 +1,5 @@
+arb-dir: lib/utils/l10n
+template-arb-file: app_en.arb
+untranslated-messages-file: lib/utils/l10n/missing_translations.json
+nullable-getter: false
+header: "// coverage:ignore-file"

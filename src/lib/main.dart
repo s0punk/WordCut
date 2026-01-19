@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:word_cut/utils/l10n/app_localizations.dart';
 import 'package:word_cut/views/screens/game_screen.dart';
 
 void main() {
@@ -17,6 +18,8 @@ class WordCut extends StatelessWidget {
       title: "WordCut",
       debugShowCheckedModeBanner: false,
       home: GameScreen(),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }
