@@ -102,7 +102,9 @@ class GameManager extends _$GameManager {
   /// Vérifie s'il est possible de continuer la partie.
   /// Il n'est pas possible de continuer la partie s'il ne reste plus de mot
   /// possible selon les lettres disponibles et le nombre de lettres restant.
-  Future<void> checkGameEnded() async {}
+  Future<bool> checkGameEnded() async {
+    return false;
+  }
 
   /// Démarre une nouvelle partie.
   Future<void> resetGame() async {

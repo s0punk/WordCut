@@ -58,12 +58,6 @@ class _GameScreenState extends ConsumerState<GameScreen> {
               child: const FitText.button("Reset game"),
             ),
             FitButton(
-              onTap: () {
-                ref.read(gameManagerProvider.notifier).resetGame();
-              },
-              child: const FitText.button("Reset game"),
-            ),
-            FitButton(
               onTap: () async {
                 await ref.read(gameManagerProvider.notifier).playWord("");
               },
