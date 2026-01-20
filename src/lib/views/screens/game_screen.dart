@@ -58,6 +58,18 @@ class _GameScreenState extends ConsumerState<GameScreen> {
               },
               child: const FitText.button("Reset game"),
             ),
+            FitButton(
+              onTap: () {
+                ref.read(gameManagerProvider.notifier).resetGame();
+              },
+              child: const FitText.button("Reset game"),
+            ),
+            FitButton(
+              onTap: () async {
+                await ref.read(gameManagerProvider.notifier).playWord("");
+              },
+              child: const FitText.button("Play a word"),
+            ),
             Text(ref.read(l10nProvider).localeName),
             Text("Score ${gameState.score}"),
             for (final word in gameState.words) Text(word),
