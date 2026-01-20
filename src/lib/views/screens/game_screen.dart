@@ -3,6 +3,7 @@ import 'package:flutter_fit_utils_ui/flutter_fit_utils_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
+import 'package:word_cut/views/widgets/word_input.dart';
 
 /// Page de jeux de l'app.
 ///
@@ -36,37 +37,10 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       ),
       body: SafeArea(
         minimum: FitTheme.of(context).pageMargin ?? EdgeInsets.zero,
-        child: Column(
-          spacing: 12,
-          children: [
-            FitButton(
-              onTap: () {
-                ref.read(gameStateNotifierProvider.notifier).incrementScore(10);
-              },
-              child: const FitText.button("Add score"),
-            ),
-            FitButton(
-              onTap: () {
-                ref.read(gameStateNotifierProvider.notifier).addWord("Hey!");
-              },
-              child: const FitText.button("Add word"),
-            ),
-            FitButton(
-              onTap: () {
-                ref.read(gameManagerProvider.notifier).resetGame();
-              },
-              child: const FitText.button("Reset game"),
-            ),
-            FitButton(
-              onTap: () async {
-                await ref.read(gameManagerProvider.notifier).playWord("");
-              },
-              child: const FitText.button("Play a word"),
-            ),
-            Text(ref.read(l10nProvider).localeName),
-            Text("Score ${gameState.score}"),
-            for (final word in gameState.words) Text(word),
-          ],
+        child: Center(
+          child: WordInput(
+            controller: TextEditingController(text: "Matelas"),
+          ),
         ),
       ),
     );
