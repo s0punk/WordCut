@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_fit_utils_ui/fit_text.dart';
 import 'package:flutter_fit_utils_ui/flutter_fit_utils_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_cut/providers/game_manager.dart';
