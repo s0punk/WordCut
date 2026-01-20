@@ -69,27 +69,12 @@ class GameManager extends _$GameManager {
 
     score += _baseWordScore - (lastWord.length - word.length);
 
-    if (lastWord.contains(word)) {
-      final oldDistribution = lastWord.getLetterDistribution();
-      final newDistribution = word.getLetterDistribution();
-
-      var differences = 0;
-      for (final e in oldDistribution.entries) {
-        differences += e.value - (newDistribution[e.key] ?? 0);
-      }
-
-      if (differences > lastWord.length - word.length) {
-        // Trop de lettre différente, le nouveau ne découle pas du précédent.
+    if (!lastWord.contains(word)) {
+      if (_isWordCompatible(lastWord, word)) {
+        score += 2;
+      } else {
         return -1;
       }
-
-      // Vérifier que le nouveau mot ne contient une lettre qui n'est pas dans
-      // le mot précédent.
-      if (newDistribution.entries.any((e) => oldDistribution[e.key] == null)) {
-        return -1;
-      }
-
-      score += 2;
     }
 
     ref.read(gameStateNotifierProvider.notifier)
@@ -103,6 +88,28 @@ class GameManager extends _$GameManager {
   /// Il n'est pas possible de continuer la partie s'il ne reste plus de mot
   /// possible selon les lettres disponibles et le nombre de lettres restant.
   Future<bool> checkGameEnded() async {
+    final gameState = ref.read(gameStateNotifierProvider);
+    if (gameState.words.isEmpty) {
+      return true;
+    }
+
+    final lastWord = gameState.words.last;
+    final wordList = await ref.read(wordListProvider.future);
+
+    final possibleWords = wordList.where(
+      (e) =>
+          e.length >= (lastWord.length - _maxLetterDiff) &&
+          e.length <= (lastWord.length - 1),
+    );
+
+    if (possibleWords.isEmpty) {
+      return true;
+    }
+
+    if (!possibleWords.any((e) => _isWordCompatible(lastWord, e))) {
+      return true;
+    }
+
     return false;
   }
 
@@ -120,5 +127,28 @@ class GameManager extends _$GameManager {
         .addWord(
           possibleWords.elementAt(Random().nextInt(possibleWords.length - 1)),
         );
+  }
+
+  bool _isWordCompatible(String lastWord, String word) {
+    final oldDistribution = lastWord.getLetterDistribution();
+    final newDistribution = word.getLetterDistribution();
+
+    var differences = 0;
+    for (final e in oldDistribution.entries) {
+      differences += e.value - (newDistribution[e.key] ?? 0);
+    }
+
+    if (differences > lastWord.length - word.length) {
+      // Trop de lettre différente, le nouveau ne découle pas du précédent.
+      return false;
+    }
+
+    // Vérifier que le nouveau mot ne contient une lettre qui n'est pas dans
+    // le mot précédent.
+    if (newDistribution.entries.any((e) => oldDistribution[e.key] == null)) {
+      return false;
+    }
+
+    return true;
   }
 }
