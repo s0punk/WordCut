@@ -29,18 +29,24 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(
-              Icons.settings,
-            ),
+            icon: const Icon(Icons.settings),
           ),
         ],
       ),
       body: SafeArea(
         minimum: FitTheme.of(context).pageMargin ?? EdgeInsets.zero,
-        child: Center(
-          child: WordInput(
-            controller: TextEditingController(text: "Matelas"),
-          ),
+        child: const Column(
+          spacing: 12,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            WordInput(
+              word: "MATELAS",
+            ),
+            WordInput(
+              length: 7,
+              enabled: true,
+            ),
+          ],
         ),
       ),
     );

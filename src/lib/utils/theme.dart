@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pinput/pinput.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:word_cut/views/widgets/word_input.dart';
 
 part 'theme.g.dart';
 
@@ -14,6 +16,37 @@ double defaultRadius(Ref ref) => 22;
 ColorScheme colorScheme(Ref ref) {
   return ColorScheme.fromSeed(
     seedColor: const Color(0xFF3AAFB9),
+  );
+}
+
+/// Thème par défaut utilisé par [WordInput].
+@Riverpod(keepAlive: true)
+PinTheme pinTheme(Ref ref) {
+  return const PinTheme(
+    width: 56,
+    height: 60,
+    textStyle: TextStyle(),
+    decoration: BoxDecoration(
+      color: Color.fromRGBO(222, 231, 240, .57),
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+    ),
+  );
+}
+
+/// Thème par défaut utilisé par [WordInput].
+@Riverpod(keepAlive: true)
+PinTheme disabledPinTheme(Ref ref) {
+  return PinTheme(
+    width: 56,
+    height: 60,
+    textStyle: TextStyle(
+      color: ref.read(colorSchemeProvider).surface,
+      fontWeight: FontWeight.bold,
+    ),
+    decoration: const BoxDecoration(
+      color: Color(0xFF6aaa64),
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+    ),
   );
 }
 

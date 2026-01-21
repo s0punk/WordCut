@@ -44,6 +44,44 @@ final colorSchemeProvider = Provider<ColorScheme>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ColorSchemeRef = ProviderRef<ColorScheme>;
+String _$pinThemeHash() => r'25dfdc6f5ccff33d465cc1e1d19ed0920b791519';
+
+/// Thème par défaut utilisé par [WordInput].
+///
+/// Copied from [pinTheme].
+@ProviderFor(pinTheme)
+final pinThemeProvider = Provider<PinTheme>.internal(
+  pinTheme,
+  name: r'pinThemeProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$pinThemeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef PinThemeRef = ProviderRef<PinTheme>;
+String _$disabledPinThemeHash() => r'b1f3bfa2a0bf785df54c30083a2078ede0d140ea';
+
+/// Thème par défaut utilisé par [WordInput].
+///
+/// Copied from [disabledPinTheme].
+@ProviderFor(disabledPinTheme)
+final disabledPinThemeProvider = Provider<PinTheme>.internal(
+  disabledPinTheme,
+  name: r'disabledPinThemeProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$disabledPinThemeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef DisabledPinThemeRef = ProviderRef<PinTheme>;
 String _$themeHash() => r'd88d5d000f3cc75d40a52dcaa2e10ec59c50fa8f';
 
 /// Provider du thème de l'application.
