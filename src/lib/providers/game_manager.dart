@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:word_cut/models/game_state.dart';
 import 'package:word_cut/providers/word_list.dart';
@@ -22,14 +23,16 @@ class GameStateNotifier extends _$GameStateNotifier {
   void addWord(String word) {
     state.words.add(word);
     ref.notifyListeners();
+
+    debugPrint("INF: Added $word to stack");
   }
 }
 
 /// Provider de la gestion de l'état du jeux.
 @Riverpod(keepAlive: true)
 class GameManager extends _$GameManager {
-  /// Longueur minimale du premier mot choisit aléatoirement.
   static const int _firstWordMinLength = 5;
+  static const int _firstWordMaxLength = 12;
 
   /// Différence maximale entre la longeur du dernier mot joué et le prochain.
   static const int _maxLetterDiff = 3;
@@ -48,12 +51,15 @@ class GameManager extends _$GameManager {
   /// Retourne le score obtenue avec le mot joué.
   /// Si le score est -1, le mot est refusé et ne peut pas être joué.
   Future<int> playWord(String word) async {
+    debugPrint("INF: Checking $word");
+
     final gameState = ref.read(gameStateNotifierProvider);
     final wordList = await ref.read(wordListProvider.future);
 
     var score = 0;
 
     if (!wordList.contains(word)) {
+      debugPrint("INF: $word not in word list");
       return -1;
     }
 
@@ -87,10 +93,13 @@ class GameManager extends _$GameManager {
   /// Vérifie s'il est possible de continuer la partie.
   /// Il n'est pas possible de continuer la partie s'il ne reste plus de mot
   /// possible selon les lettres disponibles et le nombre de lettres restant.
-  Future<bool> checkGameEnded() async {
+  ///
+  /// Si la partie peut être continuée, retourne un mot possible.
+  /// Si la partie ne peut pas être continuée, retourne null.
+  Future<String?> findCompatibleWord() async {
     final gameState = ref.read(gameStateNotifierProvider);
     if (gameState.words.isEmpty) {
-      return true;
+      return null;
     }
 
     final lastWord = gameState.words.last;
@@ -103,14 +112,14 @@ class GameManager extends _$GameManager {
     );
 
     if (possibleWords.isEmpty) {
-      return true;
+      return null;
     }
 
     if (!possibleWords.any((e) => _isWordCompatible(lastWord, e))) {
-      return true;
+      return null;
     }
 
-    return false;
+    return possibleWords.first;
   }
 
   /// Démarre une nouvelle partie.
@@ -119,13 +128,15 @@ class GameManager extends _$GameManager {
 
     final wordList = await ref.read(wordListProvider.future);
     final possibleWords = wordList.where(
-      (x) => x.length >= _firstWordMinLength,
+      (x) => x.length >= _firstWordMinLength && x.length <= _firstWordMaxLength,
     );
 
     ref
         .read(gameStateNotifierProvider.notifier)
         .addWord(
-          possibleWords.elementAt(Random().nextInt(possibleWords.length - 1)),
+          possibleWords
+              .elementAt(Random().nextInt(possibleWords.length - 1))
+              .toUpperCase(),
         );
   }
 

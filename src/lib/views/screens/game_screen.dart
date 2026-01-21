@@ -42,17 +42,25 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       ),
       body: SafeArea(
         minimum: FitTheme.of(context).pageMargin ?? EdgeInsets.zero,
-        child: const Column(
+        child: Column(
           spacing: 12,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            WordInput(
-              word: "MATELAS",
-            ),
-            WordInput(
-              length: 6,
-              enabled: true,
-            ),
+            for (final word in gameState.words)
+              WordInput(
+                word: word,
+              ),
+            if (gameState.words.isNotEmpty)
+              WordInput(
+                length: gameState.words.last.length - 1,
+                enabled: true,
+                autoFocus: true,
+                onCompleted: (value) async {
+                  final result = await ref
+                      .read(gameManagerProvider.notifier)
+                      .playWord(value);
+                },
+              ),
           ],
         ),
       ),
