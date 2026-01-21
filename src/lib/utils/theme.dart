@@ -26,7 +26,9 @@ PinTheme pinTheme(Ref ref) {
   return const PinTheme(
     width: 56,
     height: 60,
-    textStyle: TextStyle(),
+    textStyle: TextStyle(
+      fontSize: 16,
+    ),
     decoration: BoxDecoration(
       color: Color.fromRGBO(222, 231, 240, .57),
       borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -43,6 +45,7 @@ PinTheme disabledPinTheme(Ref ref) {
     textStyle: TextStyle(
       color: ref.read(colorSchemeProvider).surface,
       fontWeight: FontWeight.bold,
+      fontSize: 16,
     ),
     decoration: BoxDecoration(
       color: ref.read(colorSchemeProvider).primary,

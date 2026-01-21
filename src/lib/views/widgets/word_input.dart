@@ -17,11 +17,19 @@ class WordInput extends ConsumerStatefulWidget {
   /// Indique si la valeur de l'input est modifiable par l'utilisateur.
   final bool enabled;
 
+  /// Indique si l'input doit être focused par défaut.
+  final bool autoFocus;
+
+  /// Callback a exécuter lorsque l'utilisateur soumet son input.
+  final void Function(String value)? onCompleted;
+
   /// Input qui permet d'entrer et d'afficher un mot du jeux.
   const WordInput({
     this.word,
     this.length,
     this.enabled = false,
+    this.autoFocus = false,
+    this.onCompleted,
     super.key,
   });
 
@@ -39,57 +47,61 @@ class _WordInputState extends ConsumerState<WordInput> {
     final pinTheme = ref.watch(pinThemeProvider);
     final disabledPinTheme = ref.watch(disabledPinThemeProvider);
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        const spacing = 8.0;
-        final length = widget.word?.length ?? widget.length ?? 5;
+    return Align(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          const spacing = 8.0;
+          final length = widget.word?.length ?? widget.length ?? 5;
 
-        return Pinput.builder(
-          separatorBuilder: (_) => const SizedBox(width: spacing),
-          builder: (context, state) {
-            final theme = widget.enabled ? pinTheme : disabledPinTheme;
+          return Pinput.builder(
+            separatorBuilder: (_) => const SizedBox(width: spacing),
+            builder: (context, state) {
+              final theme = widget.enabled ? pinTheme : disabledPinTheme;
 
-            final pinSize = clampDouble(
-              (constraints.maxWidth - (spacing * (length - 1))) / length,
-              0,
-              theme.width ?? 56,
-            );
+              final pinSize = clampDouble(
+                (constraints.maxWidth - (spacing * (length - 1))) / length,
+                0,
+                theme.width ?? 56,
+              );
 
-            return DottedBorder(
-              options: RoundedRectDottedBorderOptions(
-                padding: EdgeInsets.zero,
-                radius: const Radius.circular(8),
-                dashPattern: [10, 4],
-                color: state.index >= length - 2 && widget.enabled
-                    ? Colors.black
-                    : Colors.transparent,
-              ),
-              child: Container(
-                width: pinSize,
-                height: theme.height,
-                margin: theme.margin,
-                padding: theme.padding,
-                decoration: theme.decoration,
-                constraints: theme.constraints,
-                alignment: Alignment.center,
-                child: Text(
-                  state.value,
-                  style: theme.textStyle,
+              return DottedBorder(
+                options: RoundedRectDottedBorderOptions(
+                  padding: EdgeInsets.zero,
+                  radius: const Radius.circular(8),
+                  dashPattern: [10, 4],
+                  color: state.index >= length - 2 && widget.enabled
+                      ? Colors.black
+                      : Colors.transparent,
                 ),
-              ),
-            );
-          },
-          length: length,
-          controller: controller,
-          enabled: widget.enabled,
-          enableSuggestions: false,
-          keyboardType: TextInputType.text,
-          hapticFeedbackType: HapticFeedbackType.lightImpact,
-          inputFormatters: [
-            UpperCaseTextFormatter(),
-          ],
-        );
-      },
+                child: Container(
+                  width: pinSize,
+                  height: theme.height,
+                  margin: theme.margin,
+                  padding: theme.padding,
+                  decoration: theme.decoration,
+                  constraints: theme.constraints,
+                  alignment: Alignment.center,
+                  child: Text(
+                    state.value,
+                    style: theme.textStyle,
+                  ),
+                ),
+              );
+            },
+            length: length,
+            controller: controller,
+            onCompleted: widget.onCompleted,
+            autofocus: widget.autoFocus,
+            enabled: widget.enabled,
+            enableSuggestions: false,
+            keyboardType: TextInputType.text,
+            hapticFeedbackType: HapticFeedbackType.lightImpact,
+            inputFormatters: [
+              UpperCaseTextFormatter(),
+            ],
+          );
+        },
+      ),
     );
   }
 }
