@@ -42,10 +42,6 @@ class _GameScreenState extends ConsumerState<GameScreen> {
             WordInput(
               word: "MATELAS",
             ),
-            WordInput(
-              length: 7,
-              enabled: true,
-            ),
           ],
         ),
       ),

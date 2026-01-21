@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pinput/pinput.dart';
@@ -34,17 +35,54 @@ class _WordInputState extends ConsumerState<WordInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Pinput(
-      length: widget.word?.length ?? widget.length ?? 5,
-      controller: controller,
-      enabled: widget.enabled,
-      enableSuggestions: false,
-      hapticFeedbackType: HapticFeedbackType.lightImpact,
-      defaultPinTheme: ref.watch(pinThemeProvider),
-      disabledPinTheme: ref.watch(disabledPinThemeProvider),
-      inputFormatters: [
-        UpperCaseTextFormatter(),
-      ],
+    final pinTheme = ref.watch(pinThemeProvider);
+    final optionalPinTheme = ref.watch(optionalPinThemeProvider);
+    final disabledPinTheme = ref.watch(disabledPinThemeProvider);
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        const spacing = 8.0;
+        final length = widget.word?.length ?? widget.length ?? 5;
+
+        return Pinput.builder(
+          separatorBuilder: (_) => const SizedBox(width: spacing),
+          builder: (context, state) {
+            final theme = state.index >= (length - 2)
+                ? optionalPinTheme
+                : widget.enabled
+                ? pinTheme
+                : disabledPinTheme;
+
+            final pinSize = clampDouble(
+              (constraints.maxWidth - (spacing * (length - 1))) / length,
+              0,
+              theme.width ?? 56,
+            );
+
+            return Container(
+              width: pinSize,
+              height: theme.height,
+              margin: theme.margin,
+              padding: theme.padding,
+              decoration: theme.decoration,
+              constraints: theme.constraints,
+              alignment: Alignment.center,
+              child: Text(
+                state.value,
+                style: theme.textStyle,
+              ),
+            );
+          },
+          length: length,
+          controller: controller,
+          enabled: widget.enabled,
+          enableSuggestions: false,
+          hapticFeedbackType: HapticFeedbackType.lightImpact,
+          inputFormatters: [
+            UpperCaseTextFormatter(),
+          ],
+        );
+      },
     );
   }
 }
