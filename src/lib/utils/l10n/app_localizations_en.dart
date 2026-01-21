@@ -12,4 +12,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get app => 'Word Cut';
+
+  @override
+  String get pitch => 'Less letters, more challenge.';
+
+  @override
+  String get play => 'Play';
 }

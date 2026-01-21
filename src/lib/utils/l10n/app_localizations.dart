@@ -104,6 +104,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Word Cut'**
   String get app;
+
+  /// No description provided for @pitch.
+  ///
+  /// In en, this message translates to:
+  /// **'Less letters, more challenge.'**
+  String get pitch;
+
+  /// No description provided for @play.
+  ///
+  /// In en, this message translates to:
+  /// **'Play'**
+  String get play;
 }
 
 class _AppLocalizationsDelegate

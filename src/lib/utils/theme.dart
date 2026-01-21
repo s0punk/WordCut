@@ -15,7 +15,8 @@ double defaultRadius(Ref ref) => 22;
 @Riverpod(keepAlive: true)
 ColorScheme colorScheme(Ref ref) {
   return ColorScheme.fromSeed(
-    seedColor: const Color(0xFF3AAFB9),
+    seedColor: const Color(0xFF6aaa64),
+    primary: const Color(0xFF6aaa64),
   );
 }
 
@@ -43,9 +44,9 @@ PinTheme disabledPinTheme(Ref ref) {
       color: ref.read(colorSchemeProvider).surface,
       fontWeight: FontWeight.bold,
     ),
-    decoration: const BoxDecoration(
-      color: Color(0xFF6aaa64),
-      borderRadius: BorderRadius.all(Radius.circular(8)),
+    decoration: BoxDecoration(
+      color: ref.read(colorSchemeProvider).primary,
+      borderRadius: const BorderRadius.all(Radius.circular(8)),
     ),
   );
 }

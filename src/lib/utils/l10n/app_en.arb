@@ -1,5 +1,7 @@
 {
     "@@locale": "en",
 
-    "app": "Word Cut"
+    "app": "Word Cut",
+    "pitch": "Less letters, more challenge.",
+    "play": "Play"
 }

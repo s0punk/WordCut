@@ -83,6 +83,7 @@ class _WordInputState extends ConsumerState<WordInput> {
           controller: controller,
           enabled: widget.enabled,
           enableSuggestions: false,
+          keyboardType: TextInputType.text,
           hapticFeedbackType: HapticFeedbackType.lightImpact,
           inputFormatters: [
             UpperCaseTextFormatter(),

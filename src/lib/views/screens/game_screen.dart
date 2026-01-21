@@ -38,6 +38,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
             icon: const Icon(Icons.settings),
           ),
         ],
+        automaticallyImplyLeading: false,
       ),
       body: SafeArea(
         minimum: FitTheme.of(context).pageMargin ?? EdgeInsets.zero,
