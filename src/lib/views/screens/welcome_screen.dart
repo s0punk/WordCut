@@ -4,6 +4,7 @@ import 'package:flutter_fit_utils_ui/fit_text.dart';
 import 'package:flutter_fit_utils_ui/fit_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
 import 'package:word_cut/utils/theme.dart';
 import 'package:word_cut/views/screens/game_screen.dart';
@@ -41,12 +42,15 @@ class WelcomeScreen extends ConsumerWidget {
             ),
             const Spacer(),
             FitButton(
-              onTap: () =>
-                  Navigator.of(
-                    context,
-                  ).pushReplacement(
-                    MaterialPageRoute<void>(builder: (_) => const GameScreen()),
-                  ),
+              onTap: () {
+                ref.read(gameManagerProvider.notifier).resetGame();
+
+                Navigator.of(
+                  context,
+                ).pushReplacement(
+                  MaterialPageRoute<void>(builder: (_) => const GameScreen()),
+                );
+              },
               color: ref.read(colorSchemeProvider).primary,
               child: FitText.button(
                 strings.play,
