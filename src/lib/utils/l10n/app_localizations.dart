@@ -102,7 +102,7 @@ abstract class AppLocalizations {
   /// No description provided for @app.
   ///
   /// In en, this message translates to:
-  /// **'WordCut'**
+  /// **'Word Cut'**
   String get app;
 }
 

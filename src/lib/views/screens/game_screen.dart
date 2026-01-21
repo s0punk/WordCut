@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fit_utils_ui/flutter_fit_utils_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
 import 'package:word_cut/views/widgets/word_input.dart';
@@ -25,7 +26,12 @@ class _GameScreenState extends ConsumerState<GameScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: FitText.title(strings.app),
+        title: FitText.title(
+          strings.app,
+          style: GoogleFonts.workbench(
+            fontSize: 32,
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () {},

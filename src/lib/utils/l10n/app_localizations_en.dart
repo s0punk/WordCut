@@ -11,5 +11,5 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get app => 'WordCut';
+  String get app => 'Word Cut';
 }
