@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,7 +37,6 @@ class _WordInputState extends ConsumerState<WordInput> {
   @override
   Widget build(BuildContext context) {
     final pinTheme = ref.watch(pinThemeProvider);
-    final optionalPinTheme = ref.watch(optionalPinThemeProvider);
     final disabledPinTheme = ref.watch(disabledPinThemeProvider);
 
     return LayoutBuilder(
@@ -47,11 +47,7 @@ class _WordInputState extends ConsumerState<WordInput> {
         return Pinput.builder(
           separatorBuilder: (_) => const SizedBox(width: spacing),
           builder: (context, state) {
-            final theme = state.index >= (length - 2)
-                ? optionalPinTheme
-                : widget.enabled
-                ? pinTheme
-                : disabledPinTheme;
+            final theme = widget.enabled ? pinTheme : disabledPinTheme;
 
             final pinSize = clampDouble(
               (constraints.maxWidth - (spacing * (length - 1))) / length,
@@ -59,17 +55,27 @@ class _WordInputState extends ConsumerState<WordInput> {
               theme.width ?? 56,
             );
 
-            return Container(
-              width: pinSize,
-              height: theme.height,
-              margin: theme.margin,
-              padding: theme.padding,
-              decoration: theme.decoration,
-              constraints: theme.constraints,
-              alignment: Alignment.center,
-              child: Text(
-                state.value,
-                style: theme.textStyle,
+            return DottedBorder(
+              options: RoundedRectDottedBorderOptions(
+                padding: EdgeInsets.zero,
+                radius: const Radius.circular(8),
+                dashPattern: [10, 4],
+                color: state.index >= length - 2 && widget.enabled
+                    ? Colors.black
+                    : Colors.transparent,
+              ),
+              child: Container(
+                width: pinSize,
+                height: theme.height,
+                margin: theme.margin,
+                padding: theme.padding,
+                decoration: theme.decoration,
+                constraints: theme.constraints,
+                alignment: Alignment.center,
+                child: Text(
+                  state.value,
+                  style: theme.textStyle,
+                ),
               ),
             );
           },

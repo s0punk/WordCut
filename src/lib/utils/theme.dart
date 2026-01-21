@@ -33,24 +33,6 @@ PinTheme pinTheme(Ref ref) {
   );
 }
 
-/// Thème d'un [WordInput] pour les lettres qui sont optionnelles.
-@Riverpod(keepAlive: true)
-PinTheme optionalPinTheme(Ref ref) {
-  return PinTheme(
-    width: 56,
-    height: 60,
-    textStyle: const TextStyle(),
-    decoration: BoxDecoration(
-      color: const Color.fromRGBO(222, 231, 240, .57),
-      borderRadius: const BorderRadius.all(Radius.circular(8)),
-      border: BoxBorder.all(
-        color: const Color(0xFF111111),
-        width: 4,
-      ),
-    ),
-  );
-}
-
 /// Thème d'un [WordInput] pour les mots acceptés.
 @Riverpod(keepAlive: true)
 PinTheme disabledPinTheme(Ref ref) {

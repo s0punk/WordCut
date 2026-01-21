@@ -63,25 +63,6 @@ final pinThemeProvider = Provider<PinTheme>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef PinThemeRef = ProviderRef<PinTheme>;
-String _$optionalPinThemeHash() => r'6af2e23271c2531b2f96e63b3968a2bee9ef5635';
-
-/// Thème d'un [WordInput] pour les lettres qui sont optionnelles.
-///
-/// Copied from [optionalPinTheme].
-@ProviderFor(optionalPinTheme)
-final optionalPinThemeProvider = Provider<PinTheme>.internal(
-  optionalPinTheme,
-  name: r'optionalPinThemeProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$optionalPinThemeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef OptionalPinThemeRef = ProviderRef<PinTheme>;
 String _$disabledPinThemeHash() => r'822e4c3eed8389c3467218b4b654aef64fed947c';
 
 /// Thème d'un [WordInput] pour les mots acceptés.
