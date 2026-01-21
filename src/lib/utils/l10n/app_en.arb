@@ -3,5 +3,9 @@
 
     "app": "Word Cut",
     "pitch": "Less letters, more challenge.",
-    "play": "Play"
+    "play": "Play",
+    "settings": "Settings",
+
+    "get": "Get",
+    "getHint": "Get a hint"
 }

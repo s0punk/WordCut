@@ -3,5 +3,9 @@
 
     "app": "Word Cut",
     "pitch": "Moins de lettres, plus de défis.",
-    "play": "Jouer"
+    "play": "Jouer",
+    "settings": "Paramètres",
+
+    "get": "Obtenir",
+    "getHint": "Obtenir un indice"
 }

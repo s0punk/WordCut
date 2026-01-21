@@ -18,4 +18,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get play => 'Play';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get get => 'Get';
+
+  @override
+  String get getHint => 'Get a hint';
 }

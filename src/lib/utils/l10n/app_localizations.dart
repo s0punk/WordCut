@@ -116,6 +116,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Play'**
   String get play;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @get.
+  ///
+  /// In en, this message translates to:
+  /// **'Get'**
+  String get get;
+
+  /// No description provided for @getHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Get a hint'**
+  String get getHint;
 }
 
 class _AppLocalizationsDelegate

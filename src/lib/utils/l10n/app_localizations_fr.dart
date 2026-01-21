@@ -18,4 +18,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get play => 'Jouer';
+
+  @override
+  String get settings => 'Paramètres';
+
+  @override
+  String get get => 'Obtenir';
+
+  @override
+  String get getHint => 'Obtenir un indice';
 }
