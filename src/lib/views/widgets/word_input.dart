@@ -95,6 +95,7 @@ class _WordInputState extends ConsumerState<WordInput> {
             enabled: widget.enabled,
             enableSuggestions: false,
             keyboardType: TextInputType.text,
+            closeKeyboardWhenCompleted: false,
             hapticFeedbackType: HapticFeedbackType.lightImpact,
             inputFormatters: [
               UpperCaseTextFormatter(),
