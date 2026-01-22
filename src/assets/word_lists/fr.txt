@@ -35907,7 +35907,6 @@ iekaterinbourg
 iéna
 ienisseï
 ier
-iᵉʳ
 if
 igloo
 iglou
@@ -35942,12 +35941,6 @@ iguaçu
 iguane
 iguanodon
 igue
-iide
-iie
-iiᵉ
-iiie
-iiiᵉ
-iind
 ikebana
 il
 ilan
@@ -38588,7 +38581,6 @@ irascible
 irato
 ire
 ire
-iʳᵉ
 irena
 irène
 irénée
@@ -38980,8 +38972,6 @@ ivana
 ivanhoé
 ivar
 ive
-ive
-ivᵉ
 ivette
 ivoire
 ivoirerie
@@ -38998,12 +38988,8 @@ ivrognesse
 ivy
 iwan
 iwasawa
-ixe
-ixᵉ
 ixelles
 ixia
-ixième
-ixion
 ixode
 izegem
 izmir
@@ -73276,7 +73262,6 @@ viduité
 vidure
 vie
 vie
-viᵉ
 vieillarde
 vieille
 vieillerie
@@ -73328,10 +73313,6 @@ vigousse
 viguerie
 vigueur
 viguier
-viie
-viiᵉ
-viiie
-viiiᵉ
 viking
 viktor
 viktoria
@@ -74241,7 +74222,6 @@ xanthopsie
 xavier
 xavière
 xe
-xᵉ
 xénarthre
 xénélasie
 xenia
