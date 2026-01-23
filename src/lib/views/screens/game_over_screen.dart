@@ -52,6 +52,8 @@ class _GameOverScreenState extends ConsumerState<GameOverScreen> {
         ? strings.congrats
         : strings.gameOver;
 
+    // TODO(s0punk): Add time used to solve.
+
     return SafeArea(
       minimum:
           FitTheme.of(context).pageMargin?.copyWith(bottom: 24) ??
