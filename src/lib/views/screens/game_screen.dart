@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
+import 'package:word_cut/utils/theme.dart';
 import 'package:word_cut/views/screens/game_over_screen.dart';
 import 'package:word_cut/views/screens/setting_screen.dart';
 import 'package:word_cut/views/widgets/word_input.dart';
@@ -134,6 +135,14 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                         onError(result);
                       }
                     },
+                  ),
+                if (gameOver)
+                  FitButton(
+                    onTap: onGameOver,
+                    color: ref.read(colorSchemeProvider).inversePrimary,
+                    child: FitText.button(
+                      strings.seeResults,
+                    ),
                   ),
               ],
             ),

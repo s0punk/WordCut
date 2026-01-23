@@ -26,6 +26,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chooseWord => 'Choose a Word';
 
   @override
+  String get seeResults => 'See results';
+
+  @override
   String get settings => 'Settings';
 
   @override

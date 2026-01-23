@@ -129,6 +129,12 @@ abstract class AppLocalizations {
   /// **'Choose a Word'**
   String get chooseWord;
 
+  /// No description provided for @seeResults.
+  ///
+  /// In en, this message translates to:
+  /// **'See results'**
+  String get seeResults;
+
   /// No description provided for @settings.
   ///
   /// In en, this message translates to:
