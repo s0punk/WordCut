@@ -11,6 +11,7 @@
 
     "score": "Score",
     "gameOver": "Partie terminée",
+    "noMorePossibilities": "Aucun autre mot ne peut être joué",
     "congrats": "Félicitation!",
 
     "get": "Obtenir",

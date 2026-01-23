@@ -38,6 +38,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get gameOver => 'Partie terminée';
 
   @override
+  String get noMorePossibilities => 'Aucun autre mot ne peut être joué';
+
+  @override
   String get congrats => 'Félicitation!';
 
   @override

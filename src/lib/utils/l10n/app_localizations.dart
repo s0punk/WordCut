@@ -153,6 +153,12 @@ abstract class AppLocalizations {
   /// **'Game Over'**
   String get gameOver;
 
+  /// No description provided for @noMorePossibilities.
+  ///
+  /// In en, this message translates to:
+  /// **'No other words can be played'**
+  String get noMorePossibilities;
+
   /// No description provided for @congrats.
   ///
   /// In en, this message translates to:

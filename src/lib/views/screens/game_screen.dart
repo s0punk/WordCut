@@ -125,6 +125,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                       if (result >= 0) {
                         // TODO(s0punk): Show score animation.
 
+                        // TODO(s0punk): Fix situations where game is not ending like it should.
                         if ((await ref
                                 .read(gameManagerProvider.notifier)
                                 .findCompatibleWord()) ==
