@@ -20,10 +20,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get play => 'Play';
 
   @override
+  String get playAgain => 'Play Again';
+
+  @override
+  String get chooseWord => 'Choose a Word';
+
+  @override
   String get settings => 'Settings';
 
   @override
   String get score => 'Score';
+
+  @override
+  String get gameOver => 'Game Over';
+
+  @override
+  String get congrats => 'Congratulation!';
 
   @override
   String get get => 'Get';

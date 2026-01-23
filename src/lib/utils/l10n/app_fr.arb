@@ -4,9 +4,13 @@
     "app": "Word Cut",
     "pitch": "Moins de lettres, plus de défis.",
     "play": "Jouer",
+    "playAgain": "Rejouer",
+    "chooseWord": "Choisir un mot",
     "settings": "Paramètres",
 
     "score": "Score",
+    "gameOver": "Partie terminée",
+    "congrats": "Félicitation!",
 
     "get": "Obtenir",
     "getHint": "Obtenir un indice"

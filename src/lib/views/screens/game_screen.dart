@@ -1,10 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fit_utils_ui/flutter_fit_utils_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
-import 'package:word_cut/utils/theme.dart';
+import 'package:word_cut/views/screens/game_over_screen.dart';
 import 'package:word_cut/views/screens/setting_screen.dart';
 import 'package:word_cut/views/widgets/word_input.dart';
 
@@ -21,6 +22,25 @@ class GameScreen extends ConsumerStatefulWidget {
 }
 
 class _GameScreenState extends ConsumerState<GameScreen> {
+  bool gameOver = false;
+
+  void onGameOver() {
+    setState(() {
+      gameOver = true;
+    });
+
+    showDialog<void>(
+      context: context,
+      builder: (context) => Dialog(
+        child: SizedBox(
+          height: clampDouble(MediaQuery.of(context).size.height * 0.5, 0, 450),
+          width: clampDouble(MediaQuery.of(context).size.width * 0.85, 0, 400),
+          child: const GameOverScreen(),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final strings = ref.watch(l10nProvider);
@@ -28,6 +48,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 75,
         title: Column(
           children: [
             FitText.title(
@@ -41,12 +62,15 @@ class _GameScreenState extends ConsumerState<GameScreen> {
               style: const TextStyle(
                 fontWeight: FontWeight.w500,
               ),
+              margin: const EdgeInsets.only(top: 6),
             ),
           ],
         ),
         actions: [
           IconButton(
             onPressed: () {
+              onGameOver();
+              return;
               showModalBottomSheet<void>(
                 context: context,
                 builder: (context) => const SizedBox(
@@ -62,26 +86,44 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       ),
       body: SafeArea(
         minimum: FitTheme.of(context).pageMargin ?? EdgeInsets.zero,
-        child: Column(
-          spacing: 12,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            for (final word in gameState.words)
-              WordInput(
-                word: word,
-              ),
-            if (gameState.words.isNotEmpty && gameState.words.last.length != 1)
-              WordInput(
-                length: gameState.words.last.length - 1,
-                enabled: true,
-                autoFocus: true,
-                onCompleted: (value) async {
-                  final result = await ref
-                      .read(gameManagerProvider.notifier)
-                      .playWord(value);
-                },
-              ),
-          ],
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              spacing: 12,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                for (final word in gameState.words)
+                  WordInput(
+                    word: word,
+                  ),
+                if (gameState.words.isNotEmpty &&
+                    gameState.words.last.length != 1)
+                  WordInput(
+                    length: gameState.words.last.length - 1,
+                    enabled: true,
+                    autoFocus: true,
+                    onCompleted: (value) async {
+                      final result = await ref
+                          .read(gameManagerProvider.notifier)
+                          .playWord(value);
+
+                      if (result >= 0) {
+                        // score animation ...
+
+                        if ((await ref
+                                .read(gameManagerProvider.notifier)
+                                .findCompatibleWord()) ==
+                            null) {
+                          onGameOver();
+                        }
+                      } else {
+                        // show error...
+                      }
+                    },
+                  ),
+              ],
+            ),
+          ),
         ),
       ),
     );

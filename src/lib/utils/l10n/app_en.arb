@@ -4,9 +4,13 @@
     "app": "Word Cut",
     "pitch": "Less letters, more challenge.",
     "play": "Play",
+    "playAgain": "Play Again",
+    "chooseWord": "Choose a Word",
     "settings": "Settings",
 
     "score": "Score",
+    "gameOver": "Game Over",
+    "congrats": "Congratulation!",
 
     "get": "Get",
     "getHint": "Get a hint"

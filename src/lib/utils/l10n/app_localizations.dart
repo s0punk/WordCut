@@ -117,6 +117,18 @@ abstract class AppLocalizations {
   /// **'Play'**
   String get play;
 
+  /// No description provided for @playAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Play Again'**
+  String get playAgain;
+
+  /// No description provided for @chooseWord.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a Word'**
+  String get chooseWord;
+
   /// No description provided for @settings.
   ///
   /// In en, this message translates to:
@@ -128,6 +140,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Score'**
   String get score;
+
+  /// No description provided for @gameOver.
+  ///
+  /// In en, this message translates to:
+  /// **'Game Over'**
+  String get gameOver;
+
+  /// No description provided for @congrats.
+  ///
+  /// In en, this message translates to:
+  /// **'Congratulation!'**
+  String get congrats;
 
   /// No description provided for @get.
   ///

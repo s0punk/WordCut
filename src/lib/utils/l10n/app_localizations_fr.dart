@@ -20,10 +20,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get play => 'Jouer';
 
   @override
+  String get playAgain => 'Rejouer';
+
+  @override
+  String get chooseWord => 'Choisir un mot';
+
+  @override
   String get settings => 'Paramètres';
 
   @override
   String get score => 'Score';
+
+  @override
+  String get gameOver => 'Partie terminée';
+
+  @override
+  String get congrats => 'Félicitation!';
 
   @override
   String get get => 'Obtenir';
