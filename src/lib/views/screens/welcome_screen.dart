@@ -20,6 +20,8 @@ class WelcomeScreen extends ConsumerWidget {
     BuildContext context, {
     required bool addRandomWord,
   }) {
+    // TODO(s0punk): Show loading indicator while the word list is loading to ensure smooth navigation animation.
+
     ref
         .read(gameManagerProvider.notifier)
         .resetGame(addRandomWord: addRandomWord);
