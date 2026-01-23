@@ -52,7 +52,6 @@ class WelcomeScreen extends ConsumerWidget {
                 );
               },
               color: ref.read(colorSchemeProvider).primary,
-              width: double.infinity,
               child: FitText.button(
                 strings.play,
               ),
