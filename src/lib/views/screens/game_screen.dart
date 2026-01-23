@@ -36,6 +36,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: FitText(error)));
+
+    // TODO(s0punk): Focus back on the input to avoid user having to manually click it to enter something else.
   }
 
   void onGameOver() {
@@ -120,7 +122,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                           .playWord(value);
 
                       if (result >= 0) {
-                        // score animation ...
+                        // TODO(s0punk): Show score animation.
 
                         if ((await ref
                                 .read(gameManagerProvider.notifier)
