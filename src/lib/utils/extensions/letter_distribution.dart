@@ -7,9 +7,13 @@ extension LetterExtension on String {
   Map<String, int> getLetterDistribution() {
     final distribution = <String, int>{};
 
-    for (final letter in split("")) {
-      var count = distribution[letter];
-      count = count == null ? 1 : count + 1;
+    for (final letter in toLowerCase().split("")) {
+      final count = distribution[letter];
+      if (count == null) {
+        distribution[letter] = 1;
+      } else {
+        distribution[letter] = count + 1;
+      }
     }
 
     return distribution;
