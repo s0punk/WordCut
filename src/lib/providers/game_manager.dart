@@ -54,6 +54,11 @@ class GameManager extends _$GameManager {
     debugPrint("INF: Checking $word");
 
     final gameState = ref.read(gameStateNotifierProvider);
+
+    if (gameState.words.isEmpty) {
+      return -1;
+    }
+
     final wordList = await ref.read(wordListProvider.future);
 
     var score = 0;
@@ -63,13 +68,8 @@ class GameManager extends _$GameManager {
       return -1;
     }
 
-    if (gameState.words.isEmpty) {
-      return -1;
-    }
-
     final lastWord = gameState.words.last;
-    if (lastWord.length >= word.length ||
-        (lastWord.length - word.length) > _maxLetterDiff) {
+    if ((lastWord.length - word.length).abs() > _maxLetterDiff) {
       return -1;
     }
 
@@ -119,7 +119,8 @@ class GameManager extends _$GameManager {
       return null;
     }
 
-    return possibleWords.first;
+    // Retourner un élément au hasard pour le système d'indice.
+    return possibleWords.elementAt(Random().nextInt(possibleWords.length - 1));
   }
 
   /// Démarre une nouvelle partie.
