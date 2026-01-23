@@ -56,5 +56,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get wordIncompatible => 'Le mot ne découle pas du précédent';
 
   @override
+  String get wordNotLongEnough => 'Le mot n\'est pas assez long';
+
+  @override
   String get wordRefused => 'Mot refusé';
 }

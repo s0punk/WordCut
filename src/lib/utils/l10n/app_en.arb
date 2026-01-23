@@ -19,5 +19,6 @@
 
     "wordNotInList": "Word not in list",
     "wordIncompatible": "Word not derived from previous one",
+    "wordNotLongEnough": "Word not long enough",
     "wordRefused": "Word refused"
 }

@@ -31,6 +31,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final error = switch (errorCode) {
       GameManager.wordNotInList => strings.wordNotInList,
       GameManager.incompatibleWord => strings.wordIncompatible,
+      GameManager.wordNotLongEnough => strings.wordNotLongEnough,
       _ => strings.wordRefused,
     };
 

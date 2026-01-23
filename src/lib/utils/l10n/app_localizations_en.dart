@@ -56,5 +56,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get wordIncompatible => 'Word not derived from previous one';
 
   @override
+  String get wordNotLongEnough => 'Word not long enough';
+
+  @override
   String get wordRefused => 'Word refused';
 }

@@ -37,6 +37,9 @@ class GameManager extends _$GameManager {
   /// Code d'erreur qui indique que le mot joué ne découle pas du mot précédent.
   static const int incompatibleWord = -2;
 
+  /// Code d'erreur qui indique que le mot joué n'est pas assez long.
+  static const int wordNotLongEnough = -3;
+
   static const int _firstWordMinLength = 5;
   static const int _firstWordMaxLength = 12;
 
@@ -57,6 +60,7 @@ class GameManager extends _$GameManager {
   /// Retourne le score obtenue avec le mot joué.
   /// Si le score est -1, le mot n'est pas dans la liste.
   /// Si le score est -2, le mot n'est pas compatible avec le précédent.
+  /// Si le score est -3, le mot n'est pas assez long.
   Future<int> playWord(String word) async {
     debugPrint("INF: Checking $word");
 
@@ -73,7 +77,7 @@ class GameManager extends _$GameManager {
     if (gameState.words.isNotEmpty) {
       final lastWord = gameState.words.last;
       if ((lastWord.length - word.length).abs() > _maxLetterDiff) {
-        return incompatibleWord;
+        return wordNotLongEnough;
       }
 
       score += _baseWordScore - (lastWord.length - word.length);
@@ -124,6 +128,10 @@ class GameManager extends _$GameManager {
 
     if (possibleWords.isEmpty) {
       return null;
+    }
+
+    if (possibleWords.length == 1) {
+      return possibleWords.elementAt(0);
     }
 
     // Retourner un élément au hasard pour le système d'indice.

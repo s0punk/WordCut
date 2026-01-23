@@ -189,6 +189,12 @@ abstract class AppLocalizations {
   /// **'Word not derived from previous one'**
   String get wordIncompatible;
 
+  /// No description provided for @wordNotLongEnough.
+  ///
+  /// In en, this message translates to:
+  /// **'Word not long enough'**
+  String get wordNotLongEnough;
+
   /// No description provided for @wordRefused.
   ///
   /// In en, this message translates to:
