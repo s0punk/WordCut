@@ -111,7 +111,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
               WordInput(
                 word: word,
               ),
-            if (gameState.words.isNotEmpty)
+            if (gameState.words.isNotEmpty && gameState.words.last.length != 1)
               WordInput(
                 length: gameState.words.last.length - 1,
                 enabled: true,
