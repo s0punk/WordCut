@@ -31,6 +31,12 @@ class GameStateNotifier extends _$GameStateNotifier {
 /// Provider de la gestion de l'état du jeux.
 @Riverpod(keepAlive: true)
 class GameManager extends _$GameManager {
+  /// Code d'erreur qui indique que le mot joué ne fait pas partie de la liste.
+  static const int wordNotInList = -1;
+
+  /// Code d'erreur qui indique que le mot joué ne découle pas du mot précédent.
+  static const int incompatibleWord = -2;
+
   static const int _firstWordMinLength = 5;
   static const int _firstWordMaxLength = 12;
 
@@ -61,13 +67,13 @@ class GameManager extends _$GameManager {
 
     if (!wordList.contains(word)) {
       debugPrint("INF: $word not in word list");
-      return -1;
+      return wordNotInList;
     }
 
     if (gameState.words.isNotEmpty) {
       final lastWord = gameState.words.last;
       if ((lastWord.length - word.length).abs() > _maxLetterDiff) {
-        return -2;
+        return incompatibleWord;
       }
 
       score += _baseWordScore - (lastWord.length - word.length);
@@ -76,7 +82,7 @@ class GameManager extends _$GameManager {
         if (_isWordCompatible(lastWord, word)) {
           score += 2;
         } else {
-          return -2;
+          return incompatibleWord;
         }
       }
     }

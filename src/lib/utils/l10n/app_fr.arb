@@ -13,5 +13,9 @@
     "congrats": "Félicitation!",
 
     "get": "Obtenir",
-    "getHint": "Obtenir un indice"
+    "getHint": "Obtenir un indice",
+
+    "wordNotInList": "Le mot ne fait pas partie de la liste",
+    "wordIncompatible": "Le mot ne découle pas du précédent",
+    "wordRefused": "Mot refusé"
 }

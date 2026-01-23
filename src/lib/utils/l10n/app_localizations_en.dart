@@ -42,4 +42,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get getHint => 'Get a hint';
+
+  @override
+  String get wordNotInList => 'Word not in list';
+
+  @override
+  String get wordIncompatible => 'Word not derived from previous one';
+
+  @override
+  String get wordRefused => 'Word refused';
 }

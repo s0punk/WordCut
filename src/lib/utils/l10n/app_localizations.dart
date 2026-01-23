@@ -164,6 +164,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Get a hint'**
   String get getHint;
+
+  /// No description provided for @wordNotInList.
+  ///
+  /// In en, this message translates to:
+  /// **'Word not in list'**
+  String get wordNotInList;
+
+  /// No description provided for @wordIncompatible.
+  ///
+  /// In en, this message translates to:
+  /// **'Word not derived from previous one'**
+  String get wordIncompatible;
+
+  /// No description provided for @wordRefused.
+  ///
+  /// In en, this message translates to:
+  /// **'Word refused'**
+  String get wordRefused;
 }
 
 class _AppLocalizationsDelegate

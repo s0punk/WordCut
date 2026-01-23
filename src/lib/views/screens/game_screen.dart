@@ -24,6 +24,20 @@ class GameScreen extends ConsumerStatefulWidget {
 class _GameScreenState extends ConsumerState<GameScreen> {
   bool gameOver = false;
 
+  void onError(int errorCode) {
+    final strings = ref.read(l10nProvider);
+
+    final error = switch (errorCode) {
+      GameManager.wordNotInList => strings.wordNotInList,
+      GameManager.incompatibleWord => strings.wordIncompatible,
+      _ => strings.wordRefused,
+    };
+
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: FitText(error)));
+  }
+
   void onGameOver() {
     setState(() {
       gameOver = true;
@@ -115,7 +129,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                           onGameOver();
                         }
                       } else {
-                        // show error...
+                        onError(result);
                       }
                     },
                   ),

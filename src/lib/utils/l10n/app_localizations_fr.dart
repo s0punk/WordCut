@@ -42,4 +42,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get getHint => 'Obtenir un indice';
+
+  @override
+  String get wordNotInList => 'Le mot ne fait pas partie de la liste';
+
+  @override
+  String get wordIncompatible => 'Le mot ne découle pas du précédent';
+
+  @override
+  String get wordRefused => 'Mot refusé';
 }

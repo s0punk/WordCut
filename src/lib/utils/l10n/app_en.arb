@@ -13,5 +13,9 @@
     "congrats": "Congratulation!",
 
     "get": "Get",
-    "getHint": "Get a hint"
+    "getHint": "Get a hint",
+
+    "wordNotInList": "Word not in list",
+    "wordIncompatible": "Word not derived from previous one",
+    "wordRefused": "Word refused"
 }
