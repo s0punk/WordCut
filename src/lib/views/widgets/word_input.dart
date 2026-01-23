@@ -39,7 +39,7 @@ class WordInput extends ConsumerStatefulWidget {
 
 class _WordInputState extends ConsumerState<WordInput> {
   late final TextEditingController controller = TextEditingController(
-    text: widget.word,
+    text: widget.word?.toUpperCase(),
   );
 
   @override
@@ -90,8 +90,10 @@ class _WordInputState extends ConsumerState<WordInput> {
             },
             length: length,
             controller: controller,
-            onCompleted: widget.onCompleted,
-            onSubmitted: widget.onCompleted,
+            onCompleted: (value) =>
+                widget.onCompleted?.call(value.toLowerCase()),
+            onSubmitted: (value) =>
+                widget.onCompleted?.call(value.toLowerCase()),
             autofocus: widget.autoFocus,
             enabled: widget.enabled,
             enableSuggestions: false,
