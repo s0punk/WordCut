@@ -23,6 +23,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings => 'Settings';
 
   @override
+  String get score => 'Score';
+
+  @override
   String get get => 'Get';
 
   @override

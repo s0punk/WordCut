@@ -6,6 +6,8 @@
     "play": "Jouer",
     "settings": "Paramètres",
 
+    "score": "Score",
+
     "get": "Obtenir",
     "getHint": "Obtenir un indice"
 }

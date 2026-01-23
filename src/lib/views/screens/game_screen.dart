@@ -30,11 +30,21 @@ class _GameScreenState extends ConsumerState<GameScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: FitText.title(
-          strings.app,
-          style: GoogleFonts.workbench(
-            fontSize: 32,
-          ),
+        title: Column(
+          children: [
+            FitText.title(
+              strings.app,
+              style: GoogleFonts.workbench(
+                fontSize: 32,
+              ),
+            ),
+            FitText.body(
+              "${strings.score}: ${gameState.score}",
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
         ),
         actions: [
           IconButton(

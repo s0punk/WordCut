@@ -6,6 +6,8 @@
     "play": "Play",
     "settings": "Settings",
 
+    "score": "Score",
+
     "get": "Get",
     "getHint": "Get a hint"
 }

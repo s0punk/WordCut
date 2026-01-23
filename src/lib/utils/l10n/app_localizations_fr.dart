@@ -23,6 +23,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings => 'Paramètres';
 
   @override
+  String get score => 'Score';
+
+  @override
   String get get => 'Obtenir';
 
   @override

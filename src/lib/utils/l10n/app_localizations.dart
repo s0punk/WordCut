@@ -123,6 +123,12 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get settings;
 
+  /// No description provided for @score.
+  ///
+  /// In en, this message translates to:
+  /// **'Score'**
+  String get score;
+
   /// No description provided for @get.
   ///
   /// In en, this message translates to:
