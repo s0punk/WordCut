@@ -83,6 +83,8 @@ class GameManager extends _$GameManager {
       }
     }
 
+    score *= 100;
+
     ref.read(gameStateNotifierProvider.notifier)
       ..incrementScore(score)
       ..addWord(word);
