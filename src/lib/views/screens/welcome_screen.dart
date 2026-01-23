@@ -15,6 +15,24 @@ class WelcomeScreen extends ConsumerWidget {
   /// Page d'accueil de l'app.
   const WelcomeScreen({super.key});
 
+  void _onReset(
+    WidgetRef ref,
+    BuildContext context, {
+    required bool addRandomWord,
+  }) {
+    ref
+        .read(gameManagerProvider.notifier)
+        .resetGame(addRandomWord: addRandomWord);
+
+    Navigator.of(
+      context,
+    ).pushReplacement(
+      MaterialPageRoute<void>(
+        builder: (_) => const GameScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final strings = ref.read(l10nProvider);
@@ -42,18 +60,18 @@ class WelcomeScreen extends ConsumerWidget {
             ),
             const Spacer(),
             FitButton(
-              onTap: () {
-                ref.read(gameManagerProvider.notifier).resetGame();
-
-                Navigator.of(
-                  context,
-                ).pushReplacement(
-                  MaterialPageRoute<void>(builder: (_) => const GameScreen()),
-                );
-              },
+              onTap: () => _onReset(ref, context, addRandomWord: true),
               color: ref.read(colorSchemeProvider).primary,
               child: FitText.button(
                 strings.play,
+              ),
+            ),
+            const SizedBox(height: 12),
+            FitButton(
+              onTap: () => _onReset(ref, context, addRandomWord: false),
+              color: ref.read(colorSchemeProvider).inversePrimary,
+              child: FitText.button(
+                strings.chooseWord,
               ),
             ),
             const Spacer(),
