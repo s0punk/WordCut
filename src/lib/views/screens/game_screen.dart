@@ -69,8 +69,6 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              onGameOver();
-              return;
               showModalBottomSheet<void>(
                 context: context,
                 builder: (context) => const SizedBox(
