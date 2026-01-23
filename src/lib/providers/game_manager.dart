@@ -56,6 +56,7 @@ class GameManager extends _$GameManager {
     final gameState = ref.read(gameStateNotifierProvider);
 
     if (gameState.words.isEmpty) {
+      debugPrint("WRN: No word played previously");
       return -1;
     }
 
@@ -137,9 +138,9 @@ class GameManager extends _$GameManager {
     ref
         .read(gameStateNotifierProvider.notifier)
         .addWord(
-          possibleWords
-              .elementAt(Random().nextInt(possibleWords.length - 1))
-              .toUpperCase(),
+          "matelas",
+          /*possibleWords
+              .elementAt(Random().nextInt(possibleWords.length - 1)),*/
         );
   }
 
