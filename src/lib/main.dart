@@ -29,7 +29,7 @@ class WordCut extends ConsumerWidget {
       ),
       child: MaterialApp(
         restorationScopeId: "word_cut",
-        title: "WordCut",
+        title: "Word Cut",
         debugShowCheckedModeBanner: false,
         home: const WelcomeScreen(),
         theme: ref.watch(themeProvider),
