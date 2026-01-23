@@ -48,10 +48,11 @@ class _GameOverScreenState extends ConsumerState<GameOverScreen> {
     final strings = ref.watch(l10nProvider);
     final gameState = ref.read(gameStateNotifierProvider);
 
-    final title = gameState.words.last.length == 1
+    final title = gameState.words.last.length <= 3
         ? strings.congrats
         : strings.gameOver;
 
+    // TODO(s0punk): Show special message if game ended because no possible solutions (game lost).
     // TODO(s0punk): Add time used to solve.
 
     return SafeArea(
