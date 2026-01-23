@@ -91,6 +91,7 @@ class _WordInputState extends ConsumerState<WordInput> {
             length: length,
             controller: controller,
             onCompleted: widget.onCompleted,
+            onSubmitted: widget.onCompleted,
             autofocus: widget.autoFocus,
             enabled: widget.enabled,
             enableSuggestions: false,
