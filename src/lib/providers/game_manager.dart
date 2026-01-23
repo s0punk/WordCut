@@ -49,17 +49,12 @@ class GameManager extends _$GameManager {
   /// Vérifie si le mot existe et si les règles du jeux sont respectées.
   ///
   /// Retourne le score obtenue avec le mot joué.
-  /// Si le score est -1, le mot est refusé et ne peut pas être joué.
+  /// Si le score est -1, le mot n'est pas dans la liste.
+  /// Si le score est -2, le mot n'est pas compatible avec le précédent.
   Future<int> playWord(String word) async {
     debugPrint("INF: Checking $word");
 
     final gameState = ref.read(gameStateNotifierProvider);
-
-    if (gameState.words.isEmpty) {
-      debugPrint("WRN: No word played previously");
-      return -1;
-    }
-
     final wordList = await ref.read(wordListProvider.future);
 
     var score = 0;
@@ -69,18 +64,20 @@ class GameManager extends _$GameManager {
       return -1;
     }
 
-    final lastWord = gameState.words.last;
-    if ((lastWord.length - word.length).abs() > _maxLetterDiff) {
-      return -1;
-    }
+    if (gameState.words.isNotEmpty) {
+      final lastWord = gameState.words.last;
+      if ((lastWord.length - word.length).abs() > _maxLetterDiff) {
+        return -2;
+      }
 
-    score += _baseWordScore - (lastWord.length - word.length);
+      score += _baseWordScore - (lastWord.length - word.length);
 
-    if (!lastWord.contains(word)) {
-      if (_isWordCompatible(lastWord, word)) {
-        score += 2;
-      } else {
-        return -1;
+      if (!lastWord.contains(word)) {
+        if (_isWordCompatible(lastWord, word)) {
+          score += 2;
+        } else {
+          return -2;
+        }
       }
     }
 
@@ -107,6 +104,10 @@ class GameManager extends _$GameManager {
 
     final lastWord = gameState.words.last;
     final wordList = await ref.read(wordListProvider.future);
+
+    if (lastWord.length == 1) {
+      return null;
+    }
 
     final possibleWords = wordList.where(
       (e) =>
