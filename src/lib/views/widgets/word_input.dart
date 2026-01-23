@@ -90,8 +90,6 @@ class _WordInputState extends ConsumerState<WordInput> {
             },
             length: length,
             controller: controller,
-            onCompleted: (value) =>
-                widget.onCompleted?.call(value.toLowerCase()),
             onSubmitted: (value) =>
                 widget.onCompleted?.call(value.toLowerCase()),
             autofocus: widget.autoFocus,
