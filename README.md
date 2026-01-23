@@ -17,5 +17,5 @@ Si le joueur réorganise les lettres du mot précédent, il obtient un bonus de 
 
 ## Features
 - Jouable sans connexion internet
-- Plus de 500k + mots supportés (anglais & français)
+- Plus de 450k + mots supportés (anglais & français)
 - Mode difficile avec un chronomètre qui limite le temps de jeux
