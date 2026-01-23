@@ -141,22 +141,20 @@ class GameManager extends _$GameManager {
   }
 
   bool _isWordCompatible(String lastWord, String word) {
+    if (word.length >= lastWord.length) {
+      return false;
+    }
+
     final oldDistribution = lastWord.getLetterDistribution();
     final newDistribution = word.getLetterDistribution();
 
     var differences = 0;
     for (final e in oldDistribution.entries) {
-      differences += e.value - (newDistribution[e.key] ?? 0);
+      differences += (e.value - (newDistribution[e.key] ?? 0)).abs();
     }
 
-    if (differences > lastWord.length - word.length) {
+    if (differences != lastWord.length - word.length) {
       // Trop de lettre différente, le nouveau ne découle pas du précédent.
-      return false;
-    }
-
-    // Vérifier que le nouveau mot ne contient une lettre qui n'est pas dans
-    // le mot précédent.
-    if (newDistribution.entries.any((e) => oldDistribution[e.key] == null)) {
       return false;
     }
 
