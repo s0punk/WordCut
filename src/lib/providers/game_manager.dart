@@ -118,14 +118,11 @@ class GameManager extends _$GameManager {
     final possibleWords = wordList.where(
       (e) =>
           e.length >= (lastWord.length - _maxLetterDiff) &&
-          e.length <= (lastWord.length - 1),
+          e.length <= (lastWord.length - 1) &&
+          _isWordCompatible(lastWord, e),
     );
 
     if (possibleWords.isEmpty) {
-      return null;
-    }
-
-    if (!possibleWords.any((e) => _isWordCompatible(lastWord, e))) {
       return null;
     }
 
@@ -146,9 +143,7 @@ class GameManager extends _$GameManager {
       ref
           .read(gameStateNotifierProvider.notifier)
           .addWord(
-            "matelas",
-            /*possibleWords
-              .elementAt(Random().nextInt(possibleWords.length - 1)),*/
+            possibleWords.elementAt(Random().nextInt(possibleWords.length - 1)),
           );
     }
   }
