@@ -1,3 +1,5 @@
+import 'package:diacritic/diacritic.dart';
+
 /// Extension de la class [String].
 /// Rajoute une méthode [getLetterDistribution] qui retourne le nombre de fois
 /// que chaque caractère apparait dans le string.
@@ -7,7 +9,7 @@ extension LetterExtension on String {
   Map<String, int> getLetterDistribution() {
     final distribution = <String, int>{};
 
-    for (final letter in toLowerCase().split("")) {
+    for (final letter in removeDiacritics(this).toLowerCase().split("")) {
       final count = distribution[letter];
       if (count == null) {
         distribution[letter] = 1;
