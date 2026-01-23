@@ -51605,7 +51605,6 @@ parlementarisme
 parlementariste
 parlementer
 parler
-parler
 parlerie
 parleuse
 parloir
