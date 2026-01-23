@@ -128,7 +128,7 @@ class GameManager extends _$GameManager {
   }
 
   /// Démarre une nouvelle partie.
-  Future<void> resetGame() async {
+  Future<void> resetGame({bool addRandomWord = true}) async {
     ref.invalidate(gameStateNotifierProvider);
 
     final wordList = await ref.read(wordListProvider.future);
@@ -136,13 +136,15 @@ class GameManager extends _$GameManager {
       (x) => x.length >= _firstWordMinLength && x.length <= _firstWordMaxLength,
     );
 
-    ref
-        .read(gameStateNotifierProvider.notifier)
-        .addWord(
-          "matelas",
-          /*possibleWords
+    if (addRandomWord) {
+      ref
+          .read(gameStateNotifierProvider.notifier)
+          .addWord(
+            "matelas",
+            /*possibleWords
               .elementAt(Random().nextInt(possibleWords.length - 1)),*/
-        );
+          );
+    }
   }
 
   bool _isWordCompatible(String lastWord, String word) {
