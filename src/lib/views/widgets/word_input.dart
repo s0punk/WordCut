@@ -69,7 +69,7 @@ class _WordInputState extends ConsumerState<WordInput> {
                   padding: EdgeInsets.zero,
                   radius: const Radius.circular(8),
                   dashPattern: [10, 4],
-                  color: state.index >= length - 2 && widget.enabled
+                  color: state.index >= length - 3 && widget.enabled
                       ? Colors.black
                       : Colors.transparent,
                 ),
