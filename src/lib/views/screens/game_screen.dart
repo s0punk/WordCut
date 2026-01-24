@@ -11,7 +11,6 @@ import 'package:word_cut/views/screens/setting_screen.dart';
 import 'package:word_cut/views/widgets/word_input.dart';
 
 /// Page de jeux de l'app.
-///
 /// Permet de saisir les mots, visualiser le score, démarrer une nouvelle partie
 /// et accéder aux paramètres.
 class GameScreen extends ConsumerStatefulWidget {
@@ -24,6 +23,8 @@ class GameScreen extends ConsumerStatefulWidget {
 
 class _GameScreenState extends ConsumerState<GameScreen> {
   bool gameOver = false;
+
+  final FocusNode wordInputFocusNode = FocusNode();
 
   void onError(int errorCode) {
     final strings = ref.read(l10nProvider);
@@ -39,7 +40,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       context,
     ).showSnackBar(SnackBar(content: FitText(error)));
 
-    // TODO(s0punk): Focus back on the input to avoid user having to manually click it to enter something else.
+    wordInputFocusNode.requestFocus();
   }
 
   void onGameOver() {
@@ -118,6 +119,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     length: gameState.words.last.length - 1,
                     enabled: true,
                     autoFocus: true,
+                    focusNode: wordInputFocusNode,
                     onCompleted: (value) async {
                       final result = await ref
                           .read(gameManagerProvider.notifier)

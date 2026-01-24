@@ -20,6 +20,9 @@ class WordInput extends ConsumerStatefulWidget {
   /// Indique si l'input doit être focused par défaut.
   final bool autoFocus;
 
+  /// [FocusNode] de l'input.
+  final FocusNode? focusNode;
+
   /// Callback a exécuter lorsque l'utilisateur soumet son input.
   final void Function(String value)? onCompleted;
 
@@ -29,6 +32,7 @@ class WordInput extends ConsumerStatefulWidget {
     this.length,
     this.enabled = false,
     this.autoFocus = false,
+    this.focusNode,
     this.onCompleted,
     super.key,
   });
@@ -92,7 +96,9 @@ class _WordInputState extends ConsumerState<WordInput> {
             controller: controller,
             onSubmitted: (value) =>
                 widget.onCompleted?.call(value.toLowerCase()),
+            onTapOutside: (_) => widget.focusNode?.unfocus(),
             autofocus: widget.autoFocus,
+            focusNode: widget.focusNode,
             enabled: widget.enabled,
             enableSuggestions: false,
             keyboardType: TextInputType.text,
