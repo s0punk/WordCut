@@ -8,6 +8,7 @@ import 'package:word_cut/utils/l10n/l10n_provider.dart';
 import 'package:word_cut/utils/theme.dart';
 import 'package:word_cut/views/screens/game_over_screen.dart';
 import 'package:word_cut/views/screens/setting_screen.dart';
+import 'package:word_cut/views/widgets/animated_score.dart';
 import 'package:word_cut/views/widgets/word_input.dart';
 
 /// Page de jeux de l'app.
@@ -22,9 +23,21 @@ class GameScreen extends ConsumerStatefulWidget {
 }
 
 class _GameScreenState extends ConsumerState<GameScreen> {
-  bool gameOver = false;
+  static const Duration scoreAnimationDuration = Duration(seconds: 3);
 
   final FocusNode wordInputFocusNode = FocusNode();
+
+  bool gameOver = false;
+
+  void onScore(int score) {
+    final entry = OverlayEntry(
+      builder: (_) => AnimatedScore(score: score),
+    );
+
+    Overlay.of(context).insert(entry);
+
+    Future.delayed(scoreAnimationDuration, entry.remove);
+  }
 
   void onError(int errorCode) {
     final strings = ref.read(l10nProvider);
@@ -126,7 +139,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                           .playWord(value);
 
                       if (result >= 0) {
-                        // TODO(s0punk): Show score animation.
+                        onScore(result);
 
                         if ((await ref
                                 .read(gameManagerProvider.notifier)

@@ -881,6 +881,7 @@ actuariat
 actuarielle
 actuation
 actuelle
+actuel
 actuellement
 acuité
 acul
