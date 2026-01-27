@@ -10,9 +10,9 @@ part 'game_manager.g.dart';
 
 /// Provider de l'état actif du jeux.
 @Riverpod(keepAlive: true)
-class GameStateNotifier extends _$GameStateNotifier {
+class CurrentGameState extends _$CurrentGameState {
   @override
-  GameState build() => GameState(words: []);
+  GameState build() => GameState(words: [], startedAt: DateTime.now());
 
   /// Incrémente le score de la partie de [score].
   void incrementScore(int score) {
@@ -64,7 +64,7 @@ class GameManager extends _$GameManager {
   Future<int> playWord(String word) async {
     debugPrint("INF: Checking $word");
 
-    final gameState = ref.read(gameStateNotifierProvider);
+    final gameState = ref.read(currentGameStateProvider);
     final wordList = await ref.read(wordListProvider.future);
 
     var score = 0;
@@ -93,7 +93,7 @@ class GameManager extends _$GameManager {
 
     score *= 100;
 
-    ref.read(gameStateNotifierProvider.notifier)
+    ref.read(currentGameStateProvider.notifier)
       ..incrementScore(score)
       ..addWord(word);
 
@@ -107,7 +107,7 @@ class GameManager extends _$GameManager {
   /// Si la partie peut être continuée, retourne un mot possible.
   /// Si la partie ne peut pas être continuée, retourne null.
   Future<String?> findCompatibleWord() async {
-    final gameState = ref.read(gameStateNotifierProvider);
+    final gameState = ref.read(currentGameStateProvider);
     if (gameState.words.isEmpty) {
       return null;
     }
@@ -140,7 +140,7 @@ class GameManager extends _$GameManager {
 
   /// Démarre une nouvelle partie.
   Future<void> resetGame({bool addRandomWord = true}) async {
-    ref.invalidate(gameStateNotifierProvider);
+    ref.invalidate(currentGameStateProvider);
 
     final wordList = await ref.read(wordListProvider.future);
     final possibleWords = wordList.where(
@@ -149,7 +149,7 @@ class GameManager extends _$GameManager {
 
     if (addRandomWord) {
       ref
-          .read(gameStateNotifierProvider.notifier)
+          .read(currentGameStateProvider.notifier)
           .addWord(
             possibleWords.elementAt(Random().nextInt(possibleWords.length - 1)),
           );

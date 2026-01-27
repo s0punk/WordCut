@@ -46,7 +46,7 @@ class _GameOverScreenState extends ConsumerState<GameOverScreen> {
   @override
   Widget build(BuildContext context) {
     final strings = ref.watch(l10nProvider);
-    final gameState = ref.read(gameStateNotifierProvider);
+    final gameState = ref.read(currentGameStateProvider);
 
     final gameOver = gameState.words.last.length > 3;
 

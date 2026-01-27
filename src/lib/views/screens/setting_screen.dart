@@ -57,7 +57,7 @@ class SettingScreen extends ConsumerWidget {
 
                   ref
                     ..invalidate(wordListProvider)
-                    ..invalidate(gameStateNotifierProvider);
+                    ..invalidate(currentGameStateProvider);
 
                   Navigator.of(context)
                     ..pop()

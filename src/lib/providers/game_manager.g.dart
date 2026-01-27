@@ -6,24 +6,24 @@ part of 'game_manager.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$gameStateNotifierHash() => r'ffc4f4673fbe11321a462e2e9ad919be42c9e92c';
+String _$currentGameStateHash() => r'6ffbca3a07d4881df7c153b58ee69097696763a1';
 
 /// Provider de l'état actif du jeux.
 ///
-/// Copied from [GameStateNotifier].
-@ProviderFor(GameStateNotifier)
-final gameStateNotifierProvider =
-    NotifierProvider<GameStateNotifier, GameState>.internal(
-      GameStateNotifier.new,
-      name: r'gameStateNotifierProvider',
+/// Copied from [CurrentGameState].
+@ProviderFor(CurrentGameState)
+final currentGameStateProvider =
+    NotifierProvider<CurrentGameState, GameState>.internal(
+      CurrentGameState.new,
+      name: r'currentGameStateProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$gameStateNotifierHash,
+          : _$currentGameStateHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$GameStateNotifier = Notifier<GameState>;
+typedef _$CurrentGameState = Notifier<GameState>;
 String _$gameManagerHash() => r'a2ef9e769efd8044ee0de621e3656fd449b560f5';
 
 /// Provider de la gestion de l'état du jeux.

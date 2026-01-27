@@ -87,7 +87,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   @override
   Widget build(BuildContext context) {
     final strings = ref.watch(l10nProvider);
-    final gameState = ref.watch(gameStateNotifierProvider);
+    final gameState = ref.watch(currentGameStateProvider);
 
     // TODO(s0punk): add way to start a game with a custom word. (It may exist or not)
 
