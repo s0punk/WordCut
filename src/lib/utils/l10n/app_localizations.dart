@@ -141,6 +141,18 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get settings;
 
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @getHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Get a hint'**
+  String get getHint;
+
   /// No description provided for @score.
   ///
   /// In en, this message translates to:
@@ -170,12 +182,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Get'**
   String get get;
-
-  /// No description provided for @getHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Get a hint'**
-  String get getHint;
 
   /// No description provided for @showMore.
   ///

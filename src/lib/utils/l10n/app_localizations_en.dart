@@ -32,6 +32,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings => 'Settings';
 
   @override
+  String get language => 'Language';
+
+  @override
+  String get getHint => 'Get a hint';
+
+  @override
   String get score => 'Score';
 
   @override
@@ -45,9 +51,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get get => 'Get';
-
-  @override
-  String get getHint => 'Get a hint';
 
   @override
   String get showMore => 'Show more';

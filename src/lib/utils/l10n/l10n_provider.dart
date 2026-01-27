@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:word_cut/utils/l10n/app_localizations.dart';
 
@@ -13,7 +14,9 @@ class L10n extends _$L10n {
 
     final observer = _LocaleObserver(
       (_) {
+        final old = state.localeName;
         state = _getLocale();
+        debugPrint("INF: Changed locale from $old to ${state.localeName}");
       },
     );
 
@@ -23,13 +26,27 @@ class L10n extends _$L10n {
     return state;
   }
 
-  AppLocalizations _getLocale() => lookupAppLocalizations(
+  /// Change le [Locale] utilisé par l'application.
+  void setLocale(Locale locale) {
+    state = _getLocale(locale: locale);
+    // TODO(s0punk): save preferred locale localy.
+  }
+
+  AppLocalizations _getLocale({Locale? locale}) => lookupAppLocalizations(
     basicLocaleListResolution(
-      [WidgetsBinding.instance.platformDispatcher.locale],
+      [locale ?? WidgetsBinding.instance.platformDispatcher.locale],
       AppLocalizations.supportedLocales,
     ),
   );
 }
+
+/// Provider des labels des [Locale] supportés par l'application.
+@riverpod
+String localeLabel(Ref ref, String code) => switch (code) {
+  "en" => "English",
+  "fr" => "Français",
+  _ => code,
+};
 
 /// Observeur qui notifie le provider lorsque la langue change.
 class _LocaleObserver extends WidgetsBindingObserver {

@@ -7,7 +7,10 @@
     "playAgain": "Rejouer",
     "chooseWord": "Choisir un mot",
     "seeResults": "Voir les résultats",
+    
     "settings": "Paramètres",
+    "language": "Langue",
+    "getHint": "Obtenir un indice",
 
     "score": "Score",
     "gameOver": "Partie terminée",
@@ -15,7 +18,6 @@
     "congrats": "Félicitation!",
 
     "get": "Obtenir",
-    "getHint": "Obtenir un indice",
     "showMore": "Voir plus",
 
     "wordNotInList": "Le mot ne fait pas partie de la liste",

@@ -25,7 +25,7 @@ final defaultRadiusProvider = Provider<double>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef DefaultRadiusRef = ProviderRef<double>;
-String _$colorSchemeHash() => r'fcea009787c78fe78e063e55720fd1829dab20f6';
+String _$colorSchemeHash() => r'746053fbd09dc8ebdb5e3993fb38a1182aef5cf1';
 
 /// Provider de la palette de couleur de l'application.
 ///
@@ -44,7 +44,7 @@ final colorSchemeProvider = Provider<ColorScheme>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ColorSchemeRef = ProviderRef<ColorScheme>;
-String _$pinThemeHash() => r'25dfdc6f5ccff33d465cc1e1d19ed0920b791519';
+String _$pinThemeHash() => r'7ffab0830d9efaca28e638ae18dc0a9e39f2a7a2';
 
 /// Thème par défaut utilisé par [WordInput].
 ///
@@ -63,7 +63,7 @@ final pinThemeProvider = Provider<PinTheme>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef PinThemeRef = ProviderRef<PinTheme>;
-String _$disabledPinThemeHash() => r'822e4c3eed8389c3467218b4b654aef64fed947c';
+String _$disabledPinThemeHash() => r'6171db26741697ce8cf6cc861e4db24c0465c13e';
 
 /// Thème d'un [WordInput] pour les mots acceptés.
 ///

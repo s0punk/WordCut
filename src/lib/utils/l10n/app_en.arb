@@ -7,7 +7,10 @@
     "playAgain": "Play Again",
     "chooseWord": "Choose a Word",
     "seeResults": "See results",
+    
     "settings": "Settings",
+    "language": "Language",
+    "getHint": "Get a hint",
 
     "score": "Score",
     "gameOver": "Game Over",
@@ -15,7 +18,6 @@
     "congrats": "Congratulation!",
 
     "get": "Get",
-    "getHint": "Get a hint",
     "showMore": "Show more",
 
     "wordNotInList": "Word not in list",

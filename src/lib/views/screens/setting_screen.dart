@@ -4,8 +4,11 @@ import 'package:flutter_fit_utils_ui/fit_text.dart';
 import 'package:flutter_fit_utils_ui/fit_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_cut/providers/game_manager.dart';
+import 'package:word_cut/providers/word_list.dart';
+import 'package:word_cut/utils/l10n/app_localizations.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
 import 'package:word_cut/utils/theme.dart';
+import 'package:word_cut/views/screens/welcome_screen.dart';
 
 /// Page des paramètres de l'application.
 class SettingScreen extends ConsumerWidget {
@@ -29,6 +32,43 @@ class SettingScreen extends ConsumerWidget {
         children: [
           FitText.title(strings.settings),
           const SizedBox(height: 12),
+          ListTile(
+            title: FitText.body(strings.language),
+            trailing: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.3,
+              child: DropdownButtonFormField<Locale>(
+                items: [
+                  for (final lang in AppLocalizations.supportedLocales)
+                    DropdownMenuItem(
+                      value: lang,
+                      child: FitText.body(
+                        ref.read(localeLabelProvider(lang.languageCode)),
+                      ),
+                    ),
+                ],
+                initialValue: AppLocalizations.supportedLocales.firstWhere(
+                  (l) => l.languageCode == ref.watch(l10nProvider).localeName,
+                ),
+                onChanged: (value) {
+                  if (value == null) {
+                    return;
+                  }
+
+                  ref.read(l10nProvider.notifier).setLocale(value);
+
+                  ref
+                    ..invalidate(wordListProvider)
+                    ..invalidate(gameStateNotifierProvider);
+
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const WelcomeScreen(),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
           ListTile(
             title: FitText.body(strings.getHint),
             trailing: FitButton(

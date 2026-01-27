@@ -32,6 +32,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings => 'Paramètres';
 
   @override
+  String get language => 'Langue';
+
+  @override
+  String get getHint => 'Obtenir un indice';
+
+  @override
   String get score => 'Score';
 
   @override
@@ -45,9 +51,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get get => 'Obtenir';
-
-  @override
-  String get getHint => 'Obtenir un indice';
 
   @override
   String get showMore => 'Voir plus';
