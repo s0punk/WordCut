@@ -58719,6 +58719,7 @@ rastafarienne
 rastafarisme
 rastaquouère
 raster
+rat
 ratafia
 ratage
 rataplan
@@ -73405,7 +73406,6 @@ virale
 viralité
 virasoro
 vire
-vire
 virée
 virelai
 virement
@@ -73460,6 +73460,7 @@ virtualiser
 virtualisme
 virtualiste
 virtualité
+virtuel
 virtuelle
 virtuellement
 virtuose
