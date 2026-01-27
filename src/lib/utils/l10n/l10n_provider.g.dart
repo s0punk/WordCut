@@ -155,7 +155,7 @@ class _LocaleLabelProviderElement extends AutoDisposeProviderElement<String>
   String get code => (origin as LocaleLabelProvider).code;
 }
 
-String _$l10nHash() => r'04cde812392c2d43509fff6309dbfa0c8986bb81';
+String _$l10nHash() => r'992b95deb8ce7c670da35eec2dcb4c2a81c001a3';
 
 /// Provider des strings localisés de l'application.
 ///

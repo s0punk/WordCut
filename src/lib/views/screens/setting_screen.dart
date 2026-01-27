@@ -59,11 +59,13 @@ class SettingScreen extends ConsumerWidget {
                     ..invalidate(wordListProvider)
                     ..invalidate(gameStateNotifierProvider);
 
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const WelcomeScreen(),
-                    ),
-                  );
+                  Navigator.of(context)
+                    ..pop()
+                    ..pushReplacement(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const WelcomeScreen(),
+                      ),
+                    );
                 },
               ),
             ),

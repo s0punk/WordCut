@@ -3,6 +3,7 @@ import 'package:flutter_fit_utils_ui/fit_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:word_cut/utils/l10n/app_localizations.dart';
+import 'package:word_cut/utils/l10n/l10n_provider.dart';
 import 'package:word_cut/utils/theme.dart';
 import 'package:word_cut/views/screens/welcome_screen.dart';
 
@@ -31,7 +32,20 @@ class WordCut extends ConsumerWidget {
         restorationScopeId: "word_cut",
         title: "Word Cut",
         debugShowCheckedModeBanner: false,
-        home: const WelcomeScreen(),
+        home: FutureBuilder(
+          future: ref.read(l10nProvider.notifier).restoreLocale(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              return const Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+
+            return const WelcomeScreen();
+          },
+        ),
         theme: ref.watch(themeProvider),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,

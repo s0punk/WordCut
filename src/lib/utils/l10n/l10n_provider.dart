@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:word_cut/utils/l10n/app_localizations.dart';
+import 'package:word_cut/utils/preferences.dart';
+import 'package:word_cut/utils/shared_preferences.dart';
 
 part 'l10n_provider.g.dart';
 
@@ -27,9 +29,30 @@ class L10n extends _$L10n {
   }
 
   /// Change le [Locale] utilisé par l'application.
-  void setLocale(Locale locale) {
+  Future<void> setLocale(Locale locale) async {
+    final old = state.localeName;
     state = _getLocale(locale: locale);
-    // TODO(s0punk): save preferred locale localy.
+    debugPrint("INF: Changed locale from $old to ${state.localeName}");
+
+    await ref
+        .read(preferencesProvider)
+        .setString(Preferences.language, locale.languageCode);
+  }
+
+  /// Trouve la langue préférée de l'utilisateur et l'applique à l'application.
+  /// Cette fonction devrait être appelée une seule fois lors du démarrage de
+  /// l'application.
+  Future<void> restoreLocale() async {
+    final preferred = await ref
+        .read(preferencesProvider)
+        .getString(Preferences.language);
+
+    if (preferred == null) {
+      debugPrint("INF: No preferred language found");
+      return;
+    }
+
+    state = _getLocale(locale: Locale(preferred));
   }
 
   AppLocalizations _getLocale({Locale? locale}) => lookupAppLocalizations(
