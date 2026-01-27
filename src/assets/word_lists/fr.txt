@@ -57785,6 +57785,7 @@ quartile
 quartique
 quarto
 quartolet
+quart
 quartz
 quartzeuse
 quartzifère
