@@ -85,7 +85,10 @@ class _GameOverScreenState extends ConsumerState<GameOverScreen> {
               ),
               FitText.title(gameOver ? strings.gameOver : strings.congrats),
               if (gameState.words.last.length != 1)
-                FitText.body(strings.noMorePossibilities),
+                FitText.body(
+                  strings.noMorePossibilities,
+                  textAlign: TextAlign.center,
+                ),
               FitText.body(
                 "${strings.score}: ${gameState.score}",
                 style: const TextStyle(
