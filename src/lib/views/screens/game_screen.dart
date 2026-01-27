@@ -29,9 +29,20 @@ class _GameScreenState extends ConsumerState<GameScreen> {
 
   bool gameOver = false;
 
-  void onScore(int score) {
+  void onScore(int score, RenderBox? box) {
+    final screenSize = MediaQuery.of(context).size;
+    final offset =
+        box?.localToGlobal(Offset.zero) ??
+        Offset(
+          screenSize.width / 2,
+          screenSize.height / 2,
+        );
+
     final entry = OverlayEntry(
-      builder: (_) => AnimatedScore(score: score),
+      builder: (_) => AnimatedScore(
+        score: score,
+        position: offset,
+      ),
     );
 
     Overlay.of(context).insert(entry);
@@ -128,28 +139,34 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                   ),
                 if (gameState.words.isNotEmpty &&
                     gameState.words.last.length != 1)
-                  WordInput(
-                    length: gameState.words.last.length - 1,
-                    enabled: true,
-                    autoFocus: true,
-                    focusNode: wordInputFocusNode,
-                    onCompleted: (value) async {
-                      final result = await ref
-                          .read(gameManagerProvider.notifier)
-                          .playWord(value);
+                  Builder(
+                    builder: (context) {
+                      return WordInput(
+                        length: gameState.words.last.length - 1,
+                        enabled: true,
+                        autoFocus: true,
+                        focusNode: wordInputFocusNode,
+                        onCompleted: (value) async {
+                          final box = context.findRenderObject() as RenderBox?;
 
-                      if (result >= 0) {
-                        onScore(result);
+                          final result = await ref
+                              .read(gameManagerProvider.notifier)
+                              .playWord(value);
 
-                        if ((await ref
-                                .read(gameManagerProvider.notifier)
-                                .findCompatibleWord()) ==
-                            null) {
-                          onGameOver();
-                        }
-                      } else {
-                        onError(result);
-                      }
+                          if (result >= 0) {
+                            onScore(result, box);
+
+                            if ((await ref
+                                    .read(gameManagerProvider.notifier)
+                                    .findCompatibleWord()) ==
+                                null) {
+                              onGameOver();
+                            }
+                          } else {
+                            onError(result);
+                          }
+                        },
+                      );
                     },
                   ),
                 if (gameOver)

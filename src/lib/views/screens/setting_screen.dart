@@ -10,7 +10,7 @@ import 'package:word_cut/utils/theme.dart';
 /// Page des paramètres de l'application.
 class SettingScreen extends ConsumerWidget {
   /// Pourcentage de lettres à afficher pour les indices.
-  static const double _hintPercentage = 0.5;
+  static const double _hintPercentage = 1;
 
   /// Page des paramètres de l'application.
   const SettingScreen({super.key});
