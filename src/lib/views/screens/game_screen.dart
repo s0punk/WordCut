@@ -32,7 +32,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   void onScore(int score, RenderBox? box) {
     final screenSize = MediaQuery.of(context).size;
     final offset =
-        box?.localToGlobal(Offset.zero) ??
+        box?.localToGlobal(Offset(box.size.width * 0.8, 0)) ??
         Offset(
           screenSize.width / 2,
           screenSize.height / 2,
@@ -142,6 +142,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                   Builder(
                     builder: (context) {
                       return WordInput(
+                        key: ValueKey(gameState.words.last.length - 1),
                         length: gameState.words.last.length - 1,
                         enabled: true,
                         autoFocus: true,

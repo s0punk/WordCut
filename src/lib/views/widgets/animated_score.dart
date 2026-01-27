@@ -21,7 +21,38 @@ class AnimatedScore extends ConsumerStatefulWidget {
   ConsumerState<AnimatedScore> createState() => _AnimatedScoreState();
 }
 
-class _AnimatedScoreState extends ConsumerState<AnimatedScore> {
+class _AnimatedScoreState extends ConsumerState<AnimatedScore>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 2000),
+  );
+
+  late final Animation<double> opacity = Tween<double>(begin: 1, end: 0)
+      .animate(
+        CurvedAnimation(parent: controller, curve: Curves.easeOut),
+      );
+
+  late final Animation<Offset> offset =
+      Tween<Offset>(
+        begin: Offset.zero,
+        end: const Offset(0, -10),
+      ).animate(
+        CurvedAnimation(parent: controller, curve: Curves.easeOut),
+      );
+
+  @override
+  void initState() {
+    super.initState();
+    controller.forward();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = ref.watch(themeProvider);
@@ -29,13 +60,19 @@ class _AnimatedScoreState extends ConsumerState<AnimatedScore> {
     return Positioned(
       left: widget.position.dx,
       top: widget.position.dy,
-      child: Text(
-        "+${widget.score}",
-        style: TextStyle(
-          color: theme.colorScheme.onSurface,
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          decoration: TextDecoration.none,
+      child: SlideTransition(
+        position: offset,
+        child: FadeTransition(
+          opacity: opacity,
+          child: Text(
+            "+${widget.score}",
+            style: TextStyle(
+              color: theme.colorScheme.onSurface,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.none,
+            ),
+          ),
         ),
       ),
     );
