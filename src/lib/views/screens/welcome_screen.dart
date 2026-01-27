@@ -31,23 +31,24 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
   }) async {
     final nav = Navigator.of(context);
 
-    // TODO(s0punk): Fix loading animation stutters.
     setState(() {
       loading = true;
     });
 
-    // Load word list in memory.
-    await ref.read(wordListProvider.future);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // Load word list in memory.
+      await ref.read(wordListProvider.future);
 
-    ref
-        .read(gameManagerProvider.notifier)
-        .resetGame(addRandomWord: addRandomWord);
+      ref
+          .read(gameManagerProvider.notifier)
+          .resetGame(addRandomWord: addRandomWord);
 
-    nav.pushReplacement(
-      MaterialPageRoute<void>(
-        builder: (_) => const GameScreen(),
-      ),
-    );
+      nav.pushReplacement(
+        MaterialPageRoute<void>(
+          builder: (_) => const GameScreen(),
+        ),
+      );
+    });
   }
 
   @override

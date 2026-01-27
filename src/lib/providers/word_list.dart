@@ -1,4 +1,4 @@
-import 'package:flutter/rendering.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -12,13 +12,17 @@ Future<Set<String>> wordList(Ref ref) async {
   try {
     final locale = ref.watch(l10nProvider).localeName;
 
-    final list = await rootBundle.loadString(
+    final rawList = await rootBundle.loadString(
       "assets/word_lists/$locale.txt",
     );
 
-    final set = list.split("\n").toSet();
+    final set = await compute<String, Set<String>>(
+      (list) => list.split("\n").toSet(),
+      rawList,
+    );
+
     debugPrint(
-      "INF: Loaded ${set.length} words ${locale.toUpperCase()} from word list",
+      """INF: Loaded ${set.length} words ${locale.toUpperCase()} from word list""",
     );
 
     return set;
