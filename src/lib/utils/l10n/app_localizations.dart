@@ -177,6 +177,12 @@ abstract class AppLocalizations {
   /// **'Get a hint'**
   String get getHint;
 
+  /// No description provided for @showMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Show more'**
+  String get showMore;
+
   /// No description provided for @wordNotInList.
   ///
   /// In en, this message translates to:

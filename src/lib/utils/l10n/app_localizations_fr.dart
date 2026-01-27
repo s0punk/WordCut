@@ -50,6 +50,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get getHint => 'Obtenir un indice';
 
   @override
+  String get showMore => 'Voir plus';
+
+  @override
   String get wordNotInList => 'Le mot ne fait pas partie de la liste';
 
   @override

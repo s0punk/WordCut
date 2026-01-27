@@ -50,6 +50,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get getHint => 'Get a hint';
 
   @override
+  String get showMore => 'Show more';
+
+  @override
   String get wordNotInList => 'Word not in list';
 
   @override

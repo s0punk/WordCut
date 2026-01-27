@@ -16,6 +16,7 @@
 
     "get": "Obtenir",
     "getHint": "Obtenir un indice",
+    "showMore": "Voir plus",
 
     "wordNotInList": "Le mot ne fait pas partie de la liste",
     "wordIncompatible": "Le mot ne découle pas du précédent",

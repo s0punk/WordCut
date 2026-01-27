@@ -10,7 +10,7 @@ import 'package:word_cut/utils/theme.dart';
 /// Page des paramètres de l'application.
 class SettingScreen extends ConsumerWidget {
   /// Pourcentage de lettres à afficher pour les indices.
-  static const double _hintPercentage = 1;
+  static const double _hintPercentage = 0.5;
 
   /// Page des paramètres de l'application.
   const SettingScreen({super.key});
@@ -47,8 +47,25 @@ class SettingScreen extends ConsumerWidget {
                 nav.pop();
                 messenger.showSnackBar(
                   SnackBar(
-                    content: FitText.body(
-                      """${hint.substring(0, (hint.length * _hintPercentage).floor())}...""",
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        FitText.body(
+                          """${hint.substring(0, (hint.length * _hintPercentage).floor())}...""",
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            messenger
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(
+                                SnackBar(
+                                  content: FitText.body(hint),
+                                ),
+                              );
+                          },
+                          child: FitText.body(strings.showMore),
+                        ),
+                      ],
                     ),
                   ),
                 );

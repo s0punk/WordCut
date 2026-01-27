@@ -16,6 +16,7 @@
 
     "get": "Get",
     "getHint": "Get a hint",
+    "showMore": "Show more",
 
     "wordNotInList": "Word not in list",
     "wordIncompatible": "Word not derived from previous one",
