@@ -22,7 +22,6 @@ class SettingScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final strings = ref.watch(l10nProvider);
 
-    // TODO(s0punk): Add option to switch language.
     // TODO(s0punk): Add option to restart game.
 
     return SafeArea(
