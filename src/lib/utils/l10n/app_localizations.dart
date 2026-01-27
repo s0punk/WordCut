@@ -177,6 +177,12 @@ abstract class AppLocalizations {
   /// **'Congratulation!'**
   String get congrats;
 
+  /// No description provided for @solvedIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Solved in'**
+  String get solvedIn;
+
   /// No description provided for @get.
   ///
   /// In en, this message translates to:

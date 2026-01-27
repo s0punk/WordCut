@@ -5,6 +5,7 @@ import 'package:flutter_fit_utils_ui/fit_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:word_cut/providers/game_manager.dart';
+import 'package:word_cut/utils/extensions/duration.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
 import 'package:word_cut/utils/theme.dart';
 import 'package:word_cut/views/screens/game_screen.dart';
@@ -96,6 +97,14 @@ class _GameOverScreenState extends ConsumerState<GameOverScreen> {
                 ),
                 margin: const EdgeInsets.only(top: 6),
               ),
+              if (gameState.endedAt != null)
+                FitText.body(
+                  """${strings.solvedIn}: ${gameState.endedAt!.difference(gameState.startedAt).toPrettyString()}""",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
+                  margin: const EdgeInsets.only(top: 6),
+                ),
               const Spacer(),
               FitButton(
                 onTap: () => onReset(addRandomWord: true),

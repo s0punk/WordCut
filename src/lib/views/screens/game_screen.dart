@@ -68,6 +68,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   }
 
   void onGameOver() {
+    ref.read(currentGameStateProvider.notifier).end();
+
     setState(() {
       gameOver = true;
     });

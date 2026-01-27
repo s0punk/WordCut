@@ -26,6 +26,11 @@ class CurrentGameState extends _$CurrentGameState {
 
     debugPrint("INF: Added $word to stack");
   }
+
+  /// Termine la partie.
+  void end() {
+    state = state.copyWith(endedAt: DateTime.now());
+  }
 }
 
 /// Provider de la gestion de l'état du jeux.

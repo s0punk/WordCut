@@ -50,6 +50,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get congrats => 'Congratulation!';
 
   @override
+  String get solvedIn => 'Solved in';
+
+  @override
   String get get => 'Get';
 
   @override
