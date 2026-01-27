@@ -89,6 +89,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final strings = ref.watch(l10nProvider);
     final gameState = ref.watch(gameStateNotifierProvider);
 
+    // TODO: add way to start a game with a custom word. (It may exist or not)
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 75,
