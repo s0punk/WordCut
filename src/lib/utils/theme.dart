@@ -73,6 +73,13 @@ ThemeData theme(Ref ref) {
       height: 48,
       minWidth: double.infinity,
     ),
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(ref.read(defaultRadiusProvider)),
+        ),
+      ),
+    ),
     snackBarTheme: SnackBarThemeData(
       elevation: 3,
       behavior: SnackBarBehavior.floating,

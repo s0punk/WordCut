@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fit_utils_ui/fit_button.dart';
 import 'package:flutter_fit_utils_ui/fit_text.dart';
@@ -21,6 +22,11 @@ class SettingScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final strings = ref.watch(l10nProvider);
+    final trailingWidth = clampDouble(
+      MediaQuery.of(context).size.width * 0.35,
+      0,
+      150,
+    );
 
     // TODO(s0punk): Add option to restart game.
 
@@ -34,7 +40,7 @@ class SettingScreen extends ConsumerWidget {
           ListTile(
             title: FitText.body(strings.language),
             trailing: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.3,
+              width: trailingWidth,
               child: DropdownButtonFormField<Locale>(
                 items: [
                   for (final lang in AppLocalizations.supportedLocales)
@@ -67,9 +73,13 @@ class SettingScreen extends ConsumerWidget {
                       ),
                     );
                 },
+                borderRadius: BorderRadius.all(
+                  Radius.circular(ref.read(defaultRadiusProvider)),
+                ),
               ),
             ),
           ),
+          const SizedBox(height: 24),
           ListTile(
             title: FitText.body(strings.getHint),
             trailing: FitButton(
@@ -111,7 +121,7 @@ class SettingScreen extends ConsumerWidget {
                   ),
                 );
               },
-              width: MediaQuery.of(context).size.width * 0.3,
+              width: trailingWidth,
               color: ref.watch(colorSchemeProvider).primary,
               child: FitText.button(strings.get),
             ),
