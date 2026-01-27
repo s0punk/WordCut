@@ -31,6 +31,7 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
   }) async {
     final nav = Navigator.of(context);
 
+    // TODO(s0punk): Fix loading animation stutters.
     setState(() {
       loading = true;
     });
