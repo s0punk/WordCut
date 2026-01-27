@@ -61,8 +61,10 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     };
 
     ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: FitText(error)));
+        context,
+      )
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: FitText(error)));
 
     wordInputFocusNode.requestFocus();
   }
