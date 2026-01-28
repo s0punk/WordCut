@@ -6,7 +6,7 @@ part of 'game_manager.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentGameStateHash() => r'6ffbca3a07d4881df7c153b58ee69097696763a1';
+String _$currentGameStateHash() => r'9d1d6fd747253891d8943597583de7efde856e9c';
 
 /// Provider de l'état actif du jeux.
 ///
@@ -24,7 +24,7 @@ final currentGameStateProvider =
     );
 
 typedef _$CurrentGameState = Notifier<GameState>;
-String _$gameManagerHash() => r'a2ef9e769efd8044ee0de621e3656fd449b560f5';
+String _$gameManagerHash() => r'8898418a97038ea8ba4e9b1a06a6cf44cc165c80';
 
 /// Provider de la gestion de l'état du jeux.
 ///

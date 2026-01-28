@@ -25,5 +25,6 @@
     "wordNotInList": "Le mot ne fait pas partie de la liste",
     "wordIncompatible": "Le mot ne découle pas du précédent",
     "wordNotLongEnough": "Le mot n'est pas assez long",
-    "wordRefused": "Mot refusé"
+    "wordRefused": "Mot refusé",
+    "invalidChars": "Le mot doit contenir des lettres seulement"
 }

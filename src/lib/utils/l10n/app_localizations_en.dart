@@ -72,4 +72,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get wordRefused => 'Word refused';
+
+  @override
+  String get invalidChars => 'Word must contain letters only';
 }

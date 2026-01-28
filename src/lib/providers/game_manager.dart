@@ -5,6 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:word_cut/models/game_state.dart';
 import 'package:word_cut/providers/word_list.dart';
 import 'package:word_cut/utils/extensions/letter_distribution.dart';
+import 'package:word_cut/utils/word_play_result.dart';
 
 part 'game_manager.g.dart';
 
@@ -36,15 +37,6 @@ class CurrentGameState extends _$CurrentGameState {
 /// Provider de la gestion de l'état du jeux.
 @Riverpod(keepAlive: true)
 class GameManager extends _$GameManager {
-  /// Code d'erreur qui indique que le mot joué ne fait pas partie de la liste.
-  static const int wordNotInList = -1;
-
-  /// Code d'erreur qui indique que le mot joué ne découle pas du mot précédent.
-  static const int incompatibleWord = -2;
-
-  /// Code d'erreur qui indique que le mot joué n'est pas assez long.
-  static const int wordNotLongEnough = -3;
-
   static const int _firstWordMinLength = 5;
   static const int _firstWordMaxLength = 12;
 
@@ -66,7 +58,7 @@ class GameManager extends _$GameManager {
   /// Si le score est -1, le mot n'est pas dans la liste.
   /// Si le score est -2, le mot n'est pas compatible avec le précédent.
   /// Si le score est -3, le mot n'est pas assez long.
-  Future<int> playWord(String word) async {
+  Future<({WordPlayResult status, int score})> playWord(String word) async {
     debugPrint("INF: Checking $word");
 
     final gameState = ref.read(currentGameStateProvider);
@@ -76,13 +68,13 @@ class GameManager extends _$GameManager {
 
     if (!wordList.contains(word)) {
       debugPrint("INF: $word not in word list");
-      return wordNotInList;
+      return (status: WordPlayResult.wordNotInList, score: 0);
     }
 
     if (gameState.words.isNotEmpty) {
       final lastWord = gameState.words.last;
       if ((lastWord.length - word.length).abs() > _maxLetterDiff) {
-        return wordNotLongEnough;
+        return (status: WordPlayResult.wordNotLongEnough, score: 0);
       }
 
       score += _baseWordScore - (lastWord.length - word.length);
@@ -91,7 +83,7 @@ class GameManager extends _$GameManager {
         if (_isWordCompatible(lastWord, word)) {
           score += 2;
         } else {
-          return incompatibleWord;
+          return (status: WordPlayResult.incompatibleWord, score: 0);
         }
       }
     }
@@ -102,7 +94,25 @@ class GameManager extends _$GameManager {
       ..incrementScore(score)
       ..addWord(word);
 
-    return score;
+    return (status: WordPlayResult.valid, score: score);
+  }
+
+  /// Joue un mot custom de l'utilisateur.
+  ///
+  /// Le mot doit être le premier de la partie.
+  /// Le mot n'a pas besoin d'être dans la liste, mais il doit contenir que des
+  /// lettres.
+  Future<WordPlayResult> playCustomFirstWord(String word) async {
+    if (word.length < _firstWordMinLength) {
+      return WordPlayResult.wordNotLongEnough;
+    }
+
+    if (RegExp(r"[^\p{L}]", unicode: true).hasMatch(word)) {
+      return WordPlayResult.invalidChars;
+    }
+
+    ref.read(currentGameStateProvider.notifier).addWord(word);
+    return WordPlayResult.valid;
   }
 
   /// Vérifie s'il est possible de continuer la partie.

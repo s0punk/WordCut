@@ -14,6 +14,15 @@ class WordInput extends ConsumerStatefulWidget {
   /// Longueur maximale de l'input.
   final int? length;
 
+  /// Longeur maximale de l'input lorsque [growing] est ```true```.
+  final int maxLength;
+
+  /// Fait en sorte que la longeur de l'input va augmenter de 1 automatiquement
+  /// lorsqu'on ajoute une lettre.
+  ///
+  /// Utile pour créer un mot de longeur variable.
+  final bool growing;
+
   /// Indique si la valeur de l'input est modifiable par l'utilisateur.
   final bool enabled;
 
@@ -30,6 +39,8 @@ class WordInput extends ConsumerStatefulWidget {
   const WordInput({
     this.word,
     this.length,
+    this.maxLength = 12,
+    this.growing = false,
     this.enabled = false,
     this.autoFocus = false,
     this.focusNode,
@@ -46,6 +57,10 @@ class _WordInputState extends ConsumerState<WordInput> {
     text: widget.word?.toUpperCase(),
   );
 
+  late int length = widget.growing
+      ? 1
+      : widget.word?.length ?? widget.length ?? 5;
+
   @override
   Widget build(BuildContext context) {
     final pinTheme = ref.watch(pinThemeProvider);
@@ -55,7 +70,6 @@ class _WordInputState extends ConsumerState<WordInput> {
       child: LayoutBuilder(
         builder: (context, constraints) {
           const spacing = 8.0;
-          final length = widget.word?.length ?? widget.length ?? 5;
 
           return Pinput.builder(
             separatorBuilder: (_) => const SizedBox(width: spacing),
@@ -94,6 +108,19 @@ class _WordInputState extends ConsumerState<WordInput> {
             },
             length: length,
             controller: controller,
+            onChanged: (value) {
+              if (!widget.growing) {
+                return;
+              }
+
+              setState(() {
+                if (length - value.length > 1) {
+                  length--;
+                } else if (length < widget.maxLength) {
+                  length++;
+                }
+              });
+            },
             onSubmitted: (value) =>
                 widget.onCompleted?.call(value.toLowerCase()),
             onTapOutside: (_) => widget.focusNode?.unfocus(),

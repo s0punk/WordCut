@@ -224,6 +224,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Word refused'**
   String get wordRefused;
+
+  /// No description provided for @invalidChars.
+  ///
+  /// In en, this message translates to:
+  /// **'Word must contain letters only'**
+  String get invalidChars;
 }
 
 class _AppLocalizationsDelegate

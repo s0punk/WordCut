@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
 import 'package:word_cut/utils/theme.dart';
+import 'package:word_cut/utils/word_play_result.dart';
 import 'package:word_cut/views/screens/game_over_screen.dart';
 import 'package:word_cut/views/screens/setting_screen.dart';
 import 'package:word_cut/views/widgets/animated_score.dart';
@@ -50,21 +51,14 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     Future.delayed(scoreAnimationDuration, entry.remove);
   }
 
-  void onError(int errorCode) {
-    final strings = ref.read(l10nProvider);
-
-    final error = switch (errorCode) {
-      GameManager.wordNotInList => strings.wordNotInList,
-      GameManager.incompatibleWord => strings.wordIncompatible,
-      GameManager.wordNotLongEnough => strings.wordNotLongEnough,
-      _ => strings.wordRefused,
-    };
-
+  void onError(WordPlayResult error) {
     ScaffoldMessenger.of(
         context,
       )
       ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: FitText(error)));
+      ..showSnackBar(
+        SnackBar(content: FitText(ref.read(wordPlayResultProvider(error)))),
+      );
 
     wordInputFocusNode.requestFocus();
   }
@@ -143,10 +137,28 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                   WordInput(
                     word: word,
                   ),
-                if (gameState.words.isNotEmpty &&
-                    gameState.words.last.length != 1)
-                  Builder(
-                    builder: (context) {
+                Builder(
+                  builder: (context) {
+                    if (gameState.words.isEmpty) {
+                      return WordInput(
+                        key: ValueKey(gameState.words.length),
+                        growing: true,
+                        enabled: true,
+                        autoFocus: true,
+                        focusNode: wordInputFocusNode,
+                        onCompleted: (value) async {
+                          final result = await ref
+                              .read(gameManagerProvider.notifier)
+                              .playCustomFirstWord(value);
+
+                          if (result != WordPlayResult.valid) {
+                            onError(result);
+                          }
+                        },
+                      );
+                    }
+
+                    if (gameState.words.last.length != 1) {
                       return WordInput(
                         key: ValueKey(gameState.words.last.length - 1),
                         length: gameState.words.last.length - 1,
@@ -160,8 +172,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                               .read(gameManagerProvider.notifier)
                               .playWord(value);
 
-                          if (result >= 0) {
-                            onScore(result, box);
+                          if (result.status == WordPlayResult.valid) {
+                            onScore(result.score, box);
 
                             if ((await ref
                                     .read(gameManagerProvider.notifier)
@@ -170,12 +182,15 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                               onGameOver();
                             }
                           } else {
-                            onError(result);
+                            onError(result.status);
                           }
                         },
                       );
-                    },
-                  ),
+                    }
+
+                    return const SizedBox.shrink();
+                  },
+                ),
                 if (gameOver)
                   FitButton(
                     onTap: onGameOver,
