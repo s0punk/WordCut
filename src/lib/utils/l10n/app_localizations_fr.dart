@@ -23,6 +23,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get playAgain => 'Rejouer';
 
   @override
+  String get newGame => 'Nouvelle partie';
+
+  @override
   String get chooseWord => 'Choisir un mot';
 
   @override

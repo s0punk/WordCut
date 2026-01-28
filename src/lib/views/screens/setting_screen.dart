@@ -10,6 +10,7 @@ import 'package:word_cut/utils/l10n/app_localizations.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
 import 'package:word_cut/utils/theme.dart';
 import 'package:word_cut/views/screens/welcome_screen.dart';
+import 'package:word_cut/views/widgets/game_restart_button.dart';
 
 /// Page des paramètres de l'application.
 class SettingScreen extends ConsumerWidget {
@@ -27,8 +28,6 @@ class SettingScreen extends ConsumerWidget {
       0,
       150,
     );
-
-    // TODO(s0punk): Add option to restart game.
 
     return SafeArea(
       minimum:
@@ -125,6 +124,10 @@ class SettingScreen extends ConsumerWidget {
               color: ref.watch(colorSchemeProvider).primary,
               child: FitText.button(strings.get),
             ),
+          ),
+          const Spacer(),
+          GameRestartButton(
+            newGameLabel: strings.newGame,
           ),
         ],
       ),

@@ -23,6 +23,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get playAgain => 'Play Again';
 
   @override
+  String get newGame => 'New Game';
+
+  @override
   String get chooseWord => 'Choose a Word';
 
   @override

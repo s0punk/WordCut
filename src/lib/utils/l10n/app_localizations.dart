@@ -123,6 +123,12 @@ abstract class AppLocalizations {
   /// **'Play Again'**
   String get playAgain;
 
+  /// No description provided for @newGame.
+  ///
+  /// In en, this message translates to:
+  /// **'New Game'**
+  String get newGame;
+
   /// No description provided for @chooseWord.
   ///
   /// In en, this message translates to:

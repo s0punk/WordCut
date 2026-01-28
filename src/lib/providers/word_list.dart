@@ -17,7 +17,7 @@ Future<Set<String>> wordList(Ref ref) async {
     );
 
     final set = await compute<String, Set<String>>(
-      (list) => list.split("\r\n").toSet(),
+      (list) => list.split("\n").toSet(),
       rawList,
     );
 
