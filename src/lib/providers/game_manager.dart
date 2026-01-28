@@ -147,12 +147,13 @@ class GameManager extends _$GameManager {
   Future<void> resetGame({bool addRandomWord = true}) async {
     ref.invalidate(currentGameStateProvider);
 
-    final wordList = await ref.read(wordListProvider.future);
-    final possibleWords = wordList.where(
-      (x) => x.length >= _firstWordMinLength && x.length <= _firstWordMaxLength,
-    );
-
     if (addRandomWord) {
+      final wordList = await ref.read(wordListProvider.future);
+      final possibleWords = wordList.where(
+        (x) =>
+            x.length >= _firstWordMinLength && x.length <= _firstWordMaxLength,
+      );
+
       ref
           .read(currentGameStateProvider.notifier)
           .addWord(
