@@ -26,5 +26,6 @@
     "wordIncompatible": "Le mot ne découle pas du précédent",
     "wordNotLongEnough": "Le mot n'est pas assez long",
     "wordRefused": "Mot refusé",
-    "invalidChars": "Le mot doit contenir des lettres seulement"
+    "invalidChars": "Le mot doit contenir des lettres seulement",
+    "noOtherPossibleWords": "Aucun mot possible"
 }

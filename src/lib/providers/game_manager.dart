@@ -111,34 +111,32 @@ class GameManager extends _$GameManager {
       return WordPlayResult.invalidChars;
     }
 
+    if ((await findCompatibleWord(word)) == null) {
+      return WordPlayResult.noOtherPossibilities;
+    }
+
     ref.read(currentGameStateProvider.notifier).addWord(word);
     return WordPlayResult.valid;
   }
 
-  /// Vérifie s'il est possible de continuer la partie.
+  /// Vérifie s'il est possible de continuer la partie avec [word].
   /// Il n'est pas possible de continuer la partie s'il ne reste plus de mot
   /// possible selon les lettres disponibles et le nombre de lettres restant.
   ///
   /// Si la partie peut être continuée, retourne un mot possible.
   /// Si la partie ne peut pas être continuée, retourne null.
-  Future<String?> findCompatibleWord() async {
-    final gameState = ref.read(currentGameStateProvider);
-    if (gameState.words.isEmpty) {
+  Future<String?> findCompatibleWord(String word) async {
+    if (word.length <= 1) {
       return null;
     }
 
-    final lastWord = gameState.words.last;
     final wordList = await ref.read(wordListProvider.future);
-
-    if (lastWord.length == 1) {
-      return null;
-    }
 
     final possibleWords = wordList.where(
       (e) =>
-          e.length >= (lastWord.length - _maxLetterDiff) &&
-          e.length <= (lastWord.length - 1) &&
-          _isWordCompatible(lastWord, e),
+          e.length >= (word.length - _maxLetterDiff) &&
+          e.length <= (word.length - 1) &&
+          _isWordCompatible(word, e),
     );
 
     if (possibleWords.isEmpty) {

@@ -26,5 +26,6 @@
     "wordIncompatible": "Word not derived from previous one",
     "wordNotLongEnough": "Word not long enough",
     "wordRefused": "Word refused",
-    "invalidChars": "Word must contain letters only"
+    "invalidChars": "Word must contain letters only",
+    "noOtherPossibleWords": "No other words can be played"
 }

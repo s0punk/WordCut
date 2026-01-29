@@ -24,6 +24,9 @@ enum WordPlayResult {
 
   /// Le mot joué contient un ou plusieurs caractère invalie.
   invalidChars,
+
+  /// Aucun autre mot découle du mot joué.
+  noOtherPossibilities,
 }
 
 /// Provider des labels des [WordPlayResult].
@@ -37,5 +40,6 @@ String wordPlayResult(Ref ref, WordPlayResult result) {
     WordPlayResult.incompatibleWord => strings.wordIncompatible,
     WordPlayResult.wordNotLongEnough => strings.wordNotLongEnough,
     WordPlayResult.invalidChars => strings.invalidChars,
+    WordPlayResult.noOtherPossibilities => strings.noOtherPossibleWords,
   };
 }

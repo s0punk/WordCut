@@ -175,7 +175,9 @@ class _GameScreenState extends ConsumerState<GameScreen> {
 
                             if ((await ref
                                     .read(gameManagerProvider.notifier)
-                                    .findCompatibleWord()) ==
+                                    .findCompatibleWord(
+                                      gameState.words.last,
+                                    )) ==
                                 null) {
                               onGameOver();
                             }

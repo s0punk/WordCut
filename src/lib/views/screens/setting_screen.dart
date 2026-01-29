@@ -88,7 +88,9 @@ class SettingScreen extends ConsumerWidget {
 
                 final hint = await ref
                     .read(gameManagerProvider.notifier)
-                    .findCompatibleWord();
+                    .findCompatibleWord(
+                      ref.read(currentGameStateProvider).words.last,
+                    );
 
                 if (hint == null || !context.mounted) {
                   return;

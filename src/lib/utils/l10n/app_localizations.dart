@@ -230,6 +230,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Word must contain letters only'**
   String get invalidChars;
+
+  /// No description provided for @noOtherPossibleWords.
+  ///
+  /// In en, this message translates to:
+  /// **'No other words can be played'**
+  String get noOtherPossibleWords;
 }
 
 class _AppLocalizationsDelegate
