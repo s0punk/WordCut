@@ -1,1 +1,1 @@
-PyDictionary==2.0.1
+pyenchant>=3.3.0
