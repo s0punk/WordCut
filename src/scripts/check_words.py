@@ -1,6 +1,7 @@
 import argparse
 import enchant
 from word_list import read_word_list, get_lang_code
+from colorama import init, Fore, Style
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", type=str)
@@ -28,15 +29,17 @@ if __name__ == "__main__":
     file = args.f
 
     broker = enchant.Broker()
+    d = enchant.Dict(get_lang_code(file))
 
     print(f"Detected language: {get_lang_code(file)}")
 
     while (True):
         print("\n")
-        print("1. Find invalid words")
-        print("2. See current dictionnary providers")
-        print("3. See available languages")
-        choice = input("Choose an option: ")
+        print(f"{Fore.YELLOW}1. Find invalid words")
+        print("2. Check a word")
+        print("3. See current dictionnary providers")
+        print("4. See available languages")
+        choice = input(f"{Style.RESET_ALL}Choose an option: ")
         print("\n")
 
         if choice == "1":
@@ -46,11 +49,17 @@ if __name__ == "__main__":
                 print(w)
             print(f"Found {len(words)} invalid words in {file}:")
         if choice == "2":
+            word = input("Enter the word to check: ")
+            word_exists = d.check(word)
+            print(f"{Fore.GREEN if word_exists else Fore.RED}{word}{Style.RESET_ALL}")
+            print(f"Other suggestions: {d.suggest(word)}")
+
+        if choice == "3":
             providers = broker.describe()
             for p in providers:
                 print(p.name)
             print(f"Found {len(providers)} providers")
-        if choice == "3":
+        if choice == "4":
             languages = broker.list_languages()
             for l in languages:
                 print(l)
