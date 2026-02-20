@@ -15,9 +15,8 @@ def find_invalid_words(file: str):
     invalids = []
 
     for w in words:
-        pass
-        #if word_frequency(w, lang, wordlist="best") == 0:
-        #    invalids.append(w)
+        if not d.check(w):
+            invalids.append(w)
 
     return invalids
 
@@ -28,11 +27,17 @@ if __name__ == "__main__":
 
     file = args.f
 
-    print(f"Detected language: {get_lang_code(file)}\n")
-    
+    broker = enchant.Broker()
+
+    print(f"Detected language: {get_lang_code(file)}")
+
     while (True):
+        print("\n")
         print("1. Find invalid words")
+        print("2. See current dictionnary providers")
+        print("3. See available languages")
         choice = input("Choose an option: ")
+        print("\n")
 
         if choice == "1":
             words = find_invalid_words(file)
@@ -40,4 +45,14 @@ if __name__ == "__main__":
             for w in words:
                 print(w)
             print(f"Found {len(words)} invalid words in {file}:")
+        if choice == "2":
+            providers = broker.describe()
+            for p in providers:
+                print(p.name)
+            print(f"Found {len(providers)} providers")
+        if choice == "3":
+            languages = broker.list_languages()
+            for l in languages:
+                print(l)
+            print(f"Found {len(languages)} languages")
 
