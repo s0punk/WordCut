@@ -1,7 +1,7 @@
 import os
 import argparse
 import enchant
-from word_list import read_word_list, get_lang_code
+from word_list import get_dicts, read_word_list, get_lang_code
 from colorama import Fore, Style
 
 parser = argparse.ArgumentParser()
@@ -9,28 +9,40 @@ parser.add_argument("-f", type=str)
 args = parser.parse_args()
 
 def find_invalid_words(file: str):
-    lang = get_lang_code(file)
     words = read_word_list(file)
-
-    # TODO: load all fr_* dictionnaries and mark a word as invalid only if no
-    # dictionnary has the word
-    d = enchant.Dict(lang)
 
     invalids = []
 
     for w in words:
-        if not d.check(w):
+        if not check_word(w):
             invalids.append(w)
     
     try:
-       os.makedirs("output")
+       os.makedirs("output", exist_ok=True)
        with open(f"output/invalid_words_{lang}.txt", "w", encoding='utf-8') as file:
             for w in invalids:
                 file.write(w + "\n")
-    except:
-        print("Could not save the invalid word list")
+    except Exception as e:
+        print(f"Could not save the invalid word list: {e}")
 
     return invalids
+
+def check_word(word: str):
+    for d in dicts:
+        if d.check(word):
+            return True
+    
+    return False
+
+def get_suggestions(word: str):
+    suggestions = set()
+
+    for d in dicts:
+        s = d.suggest(word)
+        for ss in s:
+            suggestions.add(ss)
+
+    return suggestions
 
 if __name__ == "__main__":
     if args.f is None:
@@ -41,7 +53,9 @@ if __name__ == "__main__":
 
     broker = enchant.Broker()
     lang = get_lang_code(file)
-    d = enchant.Dict(lang)
+
+    global dicts
+    dicts = get_dicts(lang)
 
     print(f"Detected language: {lang}")
 
@@ -62,9 +76,9 @@ if __name__ == "__main__":
             print(f"Invalid word list is at {os.getcwd()}/ouput/invalid_words_{lang}.txt")
         if choice == "2":
             word = input("Enter the word to check: ")
-            word_exists = d.check(word)
+            word_exists = check_word(word)
             print(f"{Fore.GREEN if word_exists else Fore.RED}{word}{Style.RESET_ALL}")
-            print(f"Other suggestions: {d.suggest(word)}")
+            print(f"Other suggestions: {get_suggestions(word)}")
 
         if choice == "3":
             providers = broker.describe()
@@ -78,4 +92,3 @@ if __name__ == "__main__":
             print(f"Found {len(languages)} languages")
         if choice == "9":
             exit(0)
-
