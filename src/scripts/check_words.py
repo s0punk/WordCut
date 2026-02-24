@@ -1,7 +1,9 @@
 import os
 import argparse
 import enchant
-from word_list import get_dicts, read_word_list, get_lang_code
+import tqdm
+import language_tool_python
+from word_list import get_dicts, read_word_list, get_lang_code, chunks
 from colorama import Fore, Style
 
 parser = argparse.ArgumentParser()
@@ -14,14 +16,19 @@ def find_invalid_words(file: str):
 
     invalids = []
 
-    for w in words:
+    print("Checking words...")
+    for w in tqdm.tqdm(words):
         if not check_word(w):
             invalids.append(w)
+
+    print("Double checking invalid words...")
+    invalids = double_check_words(invalids)
     
     try:
        os.makedirs("output", exist_ok=True)
        with open(f"output/invalid_words_{lang}.txt", "w", encoding='utf-8') as file:
-            for w in range(len(invalids)):
+            print(f"Writing invalid words to output/invalid_words_{lang}.txt")
+            for w in tqdm.tqdm(range(len(invalids))):
                 file.write(invalids[w])
                 if w < len(invalids) - 1:
                     file.write("\n")
@@ -35,13 +42,15 @@ def remove_words(in_file: str, from_file: str):
     words = read_word_list(from_file)
     lang = get_lang_code(from_file)
 
-    for w in wtd:
+    print("Removing words...")
+    for w in tqdm.tqdm(wtd):
         words.remove(w)
 
     try:
        os.makedirs("output", exist_ok=True)
        with open(f"output/currated_words_{lang}.txt", "w", encoding='utf-8') as file:
-            for w in range(len(words)):
+            print(f"Writing invalid words to output/currated_words_{lang}.txt")
+            for w in tqdm.tqdm(range(len(words))):
                 file.write(words[w])
                 if w < len(words) - 1:
                     file.write("\n")
@@ -55,6 +64,22 @@ def check_word(word: str):
     
     return False
 
+def double_check_words(invalid_words: list):
+    truly_invalids = []
+
+    for chunk in tqdm.tqdm(chunks(invalid_words, 500)):
+        context = " ".join(chunk)
+        res = tool.check(context)
+
+        for match in res:
+            if match.category != "TYPOS":
+                continue
+            
+            end = context.find(" ", match.offset)
+            truly_invalids.append(context[match.offset:(end if end != -1 else None)])
+
+    return truly_invalids
+
 def get_suggestions(word: str):
     suggestions = set()
 
@@ -67,18 +92,19 @@ def get_suggestions(word: str):
 
 if __name__ == "__main__":
     if args.f is None:
-        print("ERROR: No word list provided. Provide one with the -f flag.\nE.g: 'en.txt'")
+        print("No word list provided. Provide one with the -f flag.\nE.g: 'en.txt'")
         exit(1)
 
     file = args.f
 
-    broker = enchant.Broker()
     lang = get_lang_code(file)
-
-    global dicts
-    dicts = get_dicts(lang)
-
     print(f"Detected language: {lang}")
+
+    global dicts, tool
+    dicts = get_dicts(lang)
+    tool = language_tool_python.LanguageTool(lang)
+
+    broker = enchant.Broker()
 
     while (True):
         print("\n")
@@ -99,8 +125,11 @@ if __name__ == "__main__":
         if choice == "2":
             word = input("Enter the word to check: ")
             word_exists = check_word(word)
+            if not word_exists:
+                word_exists = word in double_check_words([word])
             print(f"{Fore.GREEN if word_exists else Fore.RED}{word}{Style.RESET_ALL}")
-            print(f"Other suggestions: {get_suggestions(word)}")
+            if not word_exists:
+                print(f"Other suggestions: {get_suggestions(word)}")
         if choice == "3":
             words_file = input("Enter the words list's path (words to delete): ")
             remove_words(words_file, file)

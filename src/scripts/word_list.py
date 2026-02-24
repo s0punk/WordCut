@@ -23,3 +23,10 @@ def get_dicts(lang: str):
             dicts.append(enchant.Dict(l))
 
     return dicts
+
+def chunks(lst, n):
+    res = []
+    for i in range(0, len(lst), n):
+        res.append(lst[i:i + n])
+
+    return res
