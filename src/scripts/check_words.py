@@ -10,6 +10,7 @@ args = parser.parse_args()
 
 def find_invalid_words(file: str):
     words = read_word_list(file)
+    lang = get_lang_code(file)
 
     invalids = []
 
@@ -20,12 +21,32 @@ def find_invalid_words(file: str):
     try:
        os.makedirs("output", exist_ok=True)
        with open(f"output/invalid_words_{lang}.txt", "w", encoding='utf-8') as file:
-            for w in invalids:
-                file.write(w + "\n")
+            for w in range(len(invalids)):
+                file.write(invalids[w])
+                if w < len(invalids) - 1:
+                    file.write("\n")
     except Exception as e:
         print(f"Could not save the invalid word list: {e}")
 
     return invalids
+
+def remove_words(in_file: str, from_file: str):
+    wtd = read_word_list(in_file)
+    words = read_word_list(from_file)
+    lang = get_lang_code(from_file)
+
+    for w in wtd:
+        words.remove(w)
+
+    try:
+       os.makedirs("output", exist_ok=True)
+       with open(f"output/currated_words_{lang}.txt", "w", encoding='utf-8') as file:
+            for w in range(len(words)):
+                file.write(words[w])
+                if w < len(words) - 1:
+                    file.write("\n")
+    except Exception as e:
+        print(f"Could not save the currated word list: {e}")
 
 def check_word(word: str):
     for d in dicts:
@@ -63,8 +84,9 @@ if __name__ == "__main__":
         print("\n")
         print(f"{Fore.YELLOW}1. Find invalid words")
         print("2. Check a word")
-        print("3. See current dictionnary providers")
-        print("4. See available languages")
+        print("3. Delete words from file")
+        print("4. See current dictionnary providers")
+        print("5. See available languages")
         print("9. Quit")
         choice = input(f"{Style.RESET_ALL}Choose an option: ")
         print("\n")
@@ -79,13 +101,16 @@ if __name__ == "__main__":
             word_exists = check_word(word)
             print(f"{Fore.GREEN if word_exists else Fore.RED}{word}{Style.RESET_ALL}")
             print(f"Other suggestions: {get_suggestions(word)}")
-
         if choice == "3":
+            words_file = input("Enter the words list's path (words to delete): ")
+            remove_words(words_file, file)
+
+        if choice == "4":
             providers = broker.describe()
             for p in providers:
                 print(p.name)
             print(f"Found {len(providers)} providers")
-        if choice == "4":
+        if choice == "5":
             languages = broker.list_dicts()
             for l in languages:
                 print(l)
