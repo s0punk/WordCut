@@ -1,6 +1,6 @@
-from os.path import basename
-
 import enchant
+
+from os.path import basename
 
 spacy = [
     "en_core_web_lg",

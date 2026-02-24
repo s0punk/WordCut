@@ -1,6 +1,7 @@
 import os
 import tqdm
-from scripts.word_list import get_lang_code, read_word_list
+
+from word_list import get_lang_code, read_word_list
 
 def remove_words(in_file: str, from_file: str):
     wtd = read_word_list(in_file)

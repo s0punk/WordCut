@@ -1,5 +1,6 @@
 import os
 import tqdm
+
 from word_list import read_word_list, get_lang_code, chunks
 from scripts import config
 

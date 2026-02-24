@@ -1,11 +1,12 @@
 import argparse
 import os
-from colorama import Fore, Style
 import enchant
-from scripts import remove_words
-from scripts.check_words import check_word, double_check_words, find_invalid_words
-from scripts.config import setConfig
-from scripts.word_list import get_lang_code
+import remove_words
+
+from colorama import Fore, Style
+from check_words import check_word, double_check_words, find_invalid_words
+from config import setConfig
+from word_list import get_lang_code
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", type=str)

@@ -1,7 +1,7 @@
-# PyEnchant dicts loaded based on the user's file
 import language_tool_python
 import spacy
-from scripts.word_list import get_dicts, get_spacy
+
+from word_list import get_dicts, get_spacy
 
 # PyEnchant dicts loaded based on the user's file
 dicts = None
