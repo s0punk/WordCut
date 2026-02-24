@@ -2,8 +2,9 @@ import os
 import argparse
 import enchant
 import tqdm
+import spacy
 import language_tool_python
-from word_list import get_dicts, read_word_list, get_lang_code, chunks
+from word_list import get_dicts, read_word_list, get_lang_code, get_spacy, chunks
 from colorama import Fore, Style
 
 parser = argparse.ArgumentParser()
@@ -28,7 +29,7 @@ def find_invalid_words(file: str):
        os.makedirs("output", exist_ok=True)
        with open(f"output/invalid_words_{lang}.txt", "w", encoding='utf-8') as file:
             print(f"Writing invalid words to output/invalid_words_{lang}.txt")
-            for w in tqdm.tqdm(range(len(invalids))):
+            for w in range(len(invalids)):
                 file.write(invalids[w])
                 if w < len(invalids) - 1:
                     file.write("\n")
@@ -37,6 +38,7 @@ def find_invalid_words(file: str):
 
     return invalids
 
+# todo: put in it's own file
 def remove_words(in_file: str, from_file: str):
     wtd = read_word_list(in_file)
     words = read_word_list(from_file)
@@ -50,7 +52,7 @@ def remove_words(in_file: str, from_file: str):
        os.makedirs("output", exist_ok=True)
        with open(f"output/currated_words_{lang}.txt", "w", encoding='utf-8') as file:
             print(f"Writing invalid words to output/currated_words_{lang}.txt")
-            for w in tqdm.tqdm(range(len(words))):
+            for w in range(len(words)):
                 file.write(words[w])
                 if w < len(words) - 1:
                     file.write("\n")
@@ -68,28 +70,39 @@ def double_check_words(invalid_words: list):
     truly_invalids = []
 
     for chunk in tqdm.tqdm(chunks(invalid_words, 500)):
-        context = " ".join(chunk)
-        res = tool.check(context)
-
-        for match in res:
-            if match.category != "TYPOS":
-                continue
-            
-            end = context.find(" ", match.offset)
-            truly_invalids.append(context[match.offset:(end if end != -1 else None)])
+        truly_invalids.extend(check_spelling(chunk))
+        truly_invalids.extend(check_proper_nouns(chunk))
 
     return truly_invalids
 
-def get_suggestions(word: str):
-    suggestions = set()
+def check_spelling(invalid_words: list):
+    misspelled_words = []
 
-    for d in dicts:
-        s = d.suggest(word)
-        for ss in s:
-            suggestions.add(ss)
+    context = " ".join(invalid_words)
+    res = tool.check(context)
 
-    return suggestions
+    for match in res:
+        if match.category != "TYPOS":
+            continue
+        
+        end = context.find(" ", match.offset)
+        misspelled_words.append(context[match.offset:(end if end != -1 else None)])
+    
+    return misspelled_words
 
+def check_proper_nouns(invalid_words: list):
+    proper_nouns = []
+
+    context = ". ".join(invalid_words)
+    res = nlp(context)
+
+    for token in res:
+        if token.pos_ == "PROPN":
+            proper_nouns.append(str(token))
+
+    return proper_nouns
+
+# todo: put in it's own file
 if __name__ == "__main__":
     if args.f is None:
         print("No word list provided. Provide one with the -f flag.\nE.g: 'en.txt'")
@@ -100,9 +113,10 @@ if __name__ == "__main__":
     lang = get_lang_code(file)
     print(f"Detected language: {lang}")
 
-    global dicts, tool
+    global dicts, tool, nlp
     dicts = get_dicts(lang)
     tool = language_tool_python.LanguageTool(lang)
+    nlp = spacy.load(get_spacy(lang))
 
     broker = enchant.Broker()
 
@@ -128,8 +142,6 @@ if __name__ == "__main__":
             if not word_exists:
                 word_exists = word in double_check_words([word])
             print(f"{Fore.GREEN if word_exists else Fore.RED}{word}{Style.RESET_ALL}")
-            if not word_exists:
-                print(f"Other suggestions: {get_suggestions(word)}")
         if choice == "3":
             words_file = input("Enter the words list's path (words to delete): ")
             remove_words(words_file, file)

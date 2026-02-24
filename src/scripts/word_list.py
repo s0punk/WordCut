@@ -2,6 +2,11 @@ from os.path import basename
 
 import enchant
 
+spacy = [
+    "en_core_web_lg",
+    "fr_core_news_lg",
+]
+
 def read_word_list(file: str):
     try:
         with open(file, "r", encoding="utf-8") as fc:
@@ -23,6 +28,13 @@ def get_dicts(lang: str):
             dicts.append(enchant.Dict(l))
 
     return dicts
+
+def get_spacy(lang: str):
+    for s in spacy:
+        if lang in s:
+            return s
+        
+    return None
 
 def chunks(lst, n):
     res = []

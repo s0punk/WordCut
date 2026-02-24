@@ -1,4 +1,7 @@
 pyenchant>=3.3.0
 language_tool_python
+setuptools
+wheel
+spacy
 colorama
 tqdm
