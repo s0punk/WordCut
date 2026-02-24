@@ -1,8 +1,8 @@
 import os
 import tqdm
+import config
 
 from word_list import read_word_list, get_lang_code, chunks
-from scripts import config
 
 def find_invalid_words(file: str):
     words = read_word_list(file)
