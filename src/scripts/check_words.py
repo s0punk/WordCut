@@ -1,15 +1,7 @@
 import os
-import argparse
-import enchant
 import tqdm
-import spacy
-import language_tool_python
-from word_list import get_dicts, read_word_list, get_lang_code, get_spacy, chunks
-from colorama import Fore, Style
-
-parser = argparse.ArgumentParser()
-parser.add_argument("-f", type=str)
-args = parser.parse_args()
+from word_list import read_word_list, get_lang_code, chunks
+from scripts import config
 
 def find_invalid_words(file: str):
     words = read_word_list(file)
@@ -38,32 +30,8 @@ def find_invalid_words(file: str):
 
     return invalids
 
-# todo: put in it's own file
-def remove_words(in_file: str, from_file: str):
-    wtd = read_word_list(in_file)
-    words = read_word_list(from_file)
-    lang = get_lang_code(from_file)
-
-    print("Removing words...")
-    for w in tqdm.tqdm(wtd):
-        try:
-            words.remove(w)
-        except:
-            pass # ignore if w not in list already
-
-    try:
-       os.makedirs("output", exist_ok=True)
-       with open(f"output/currated_words_{lang}.txt", "w", encoding='utf-8') as file:
-            print(f"Writing invalid words to output/currated_words_{lang}.txt")
-            for w in range(len(words)):
-                file.write(words[w])
-                if w < len(words) - 1:
-                    file.write("\n")
-    except Exception as e:
-        print(f"Could not save the currated word list: {e}")
-
 def check_word(word: str):
-    for d in dicts:
+    for d in config.dicts:
         if d.check(word):
             return True
     
@@ -82,7 +50,7 @@ def check_spelling(invalid_words: list):
     misspelled_words = []
 
     context = " ".join(invalid_words)
-    res = tool.check(context)
+    res = config.tool.check(context)
 
     for match in res:
         if match.category != "TYPOS":
@@ -97,67 +65,10 @@ def check_proper_nouns(invalid_words: list):
     proper_nouns = []
 
     context = ". ".join(invalid_words)
-    res = nlp(context)
+    res = config.nlp(context)
 
     for token in res:
         if token.pos_ == "PROPN":
             proper_nouns.append(str(token))
 
     return proper_nouns
-
-# todo: put in it's own file
-if __name__ == "__main__":
-    if args.f is None:
-        print("No word list provided. Provide one with the -f flag.\nE.g: 'en.txt'")
-        exit(1)
-
-    file = args.f
-
-    lang = get_lang_code(file)
-    print(f"Detected language: {lang}")
-
-    global dicts, tool, nlp
-    dicts = get_dicts(lang)
-    tool = language_tool_python.LanguageTool(lang)
-    nlp = spacy.load(get_spacy(lang))
-
-    broker = enchant.Broker()
-
-    while (True):
-        print("\n")
-        print(f"{Fore.YELLOW}1. Find invalid words")
-        print("2. Check a word")
-        print("3. Delete words from file")
-        print("4. See current dictionnary providers")
-        print("5. See available languages")
-        print("9. Quit")
-        choice = input(f"{Style.RESET_ALL}Choose an option: ")
-        print("\n")
-
-        if choice == "1":
-            words = find_invalid_words(file)
-
-            print(f"Found {len(words)} invalid words in {file}:")
-            print(f"Invalid word list is at {os.getcwd()}/ouput/invalid_words_{lang}.txt")
-        if choice == "2":
-            word = input("Enter the word to check: ")
-            word_exists = check_word(word)
-            if not word_exists:
-                word_exists = word in double_check_words([word])
-            print(f"{Fore.GREEN if word_exists else Fore.RED}{word}{Style.RESET_ALL}")
-        if choice == "3":
-            words_file = input("Enter the words list's path (words to delete): ")
-            remove_words(words_file, file)
-
-        if choice == "4":
-            providers = broker.describe()
-            for p in providers:
-                print(p.name)
-            print(f"Found {len(providers)} providers")
-        if choice == "5":
-            languages = broker.list_dicts()
-            for l in languages:
-                print(l)
-            print(f"Found {len(languages)} languages")
-        if choice == "9":
-            exit(0)
