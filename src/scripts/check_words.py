@@ -46,7 +46,10 @@ def remove_words(in_file: str, from_file: str):
 
     print("Removing words...")
     for w in tqdm.tqdm(wtd):
-        words.remove(w)
+        try:
+            words.remove(w)
+        except:
+            pass # ignore if w not in list already
 
     try:
        os.makedirs("output", exist_ok=True)
