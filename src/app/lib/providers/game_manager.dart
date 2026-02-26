@@ -184,7 +184,7 @@ class GameManager extends _$GameManager {
     }
 
     if (differences != lastWord.length - word.length) {
-      // Trop de lettre différente, le nouveau ne découle pas du précédent.
+      // Trop de lettres différentes, le nouveau ne découle pas du précédent.
       return false;
     }
 
