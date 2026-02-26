@@ -124,7 +124,7 @@ class GameManager extends _$GameManager {
   /// possible selon les lettres disponibles et le nombre de lettres restant.
   ///
   /// Si la partie peut être continuée, retourne un mot possible.
-  /// Si la partie ne peut pas être continuée, retourne null.
+  /// Si la partie ne peut pas être continuée, retourne ```null```.
   Future<String?> findCompatibleWord(String word) async {
     if (word.length <= 1) {
       return null;
@@ -144,6 +144,7 @@ class GameManager extends _$GameManager {
     }
 
     if (possibleWords.length == 1) {
+      // Nécessaire car le maximum de Random().nextInt() ne peut pas être 0.
       return possibleWords.elementAt(0);
     }
 
