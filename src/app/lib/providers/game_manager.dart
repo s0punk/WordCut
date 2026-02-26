@@ -149,7 +149,7 @@ class GameManager extends _$GameManager {
     }
 
     // Retourner un élément au hasard pour le système d'indice.
-    return possibleWords.elementAt(Random().nextInt(possibleWords.length - 1));
+    return possibleWords.elementAt(Random().nextInt(possibleWords.length));
   }
 
   /// Démarre une nouvelle partie.
@@ -166,7 +166,7 @@ class GameManager extends _$GameManager {
       ref
           .read(currentGameStateProvider.notifier)
           .addWord(
-            possibleWords.elementAt(Random().nextInt(possibleWords.length - 1)),
+            possibleWords.elementAt(Random().nextInt(possibleWords.length)),
           );
     }
   }
