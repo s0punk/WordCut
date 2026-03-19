@@ -1,4 +1,0 @@
-arb-dir: lib/utils/l10n/
-template-arb-file: app_en.arb
-nullable-getter: false
-header: "// coverage:ignore-file"
