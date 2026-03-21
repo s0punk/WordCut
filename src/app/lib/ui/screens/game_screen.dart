@@ -4,13 +4,13 @@ import 'package:flutter_fit_utils_ui/flutter_fit_utils_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:word_cut/providers/game_manager.dart';
+import 'package:word_cut/ui/screens/game_over_screen.dart';
+import 'package:word_cut/ui/screens/setting_screen.dart';
+import 'package:word_cut/ui/theme.dart';
+import 'package:word_cut/ui/widgets/animated_score.dart';
+import 'package:word_cut/ui/widgets/word_input.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
-import 'package:word_cut/utils/theme.dart';
 import 'package:word_cut/utils/word_play_result.dart';
-import 'package:word_cut/views/screens/game_over_screen.dart';
-import 'package:word_cut/views/screens/setting_screen.dart';
-import 'package:word_cut/views/widgets/animated_score.dart';
-import 'package:word_cut/views/widgets/word_input.dart';
 
 /// Page de jeux de l'app.
 /// Permet de saisir les mots, visualiser le score, démarrer une nouvelle partie

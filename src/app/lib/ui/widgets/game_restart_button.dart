@@ -3,9 +3,9 @@ import 'package:flutter_fit_utils_ui/fit_button.dart';
 import 'package:flutter_fit_utils_ui/fit_text.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_cut/providers/game_manager.dart';
+import 'package:word_cut/ui/screens/game_screen.dart';
+import 'package:word_cut/ui/theme.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
-import 'package:word_cut/utils/theme.dart';
-import 'package:word_cut/views/screens/game_screen.dart';
 
 /// Widget qui permet de commencer une partie avec ou sans mot custom.
 class GameRestartButton extends ConsumerWidget {

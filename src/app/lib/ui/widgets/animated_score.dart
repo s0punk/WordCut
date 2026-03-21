@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:word_cut/utils/theme.dart';
+import 'package:word_cut/ui/theme.dart';
 
 /// Score animé qui apparait lorsqu'un mot est joué et accepté.
 class AnimatedScore extends ConsumerStatefulWidget {

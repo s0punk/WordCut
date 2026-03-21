@@ -6,9 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/providers/word_list.dart';
+import 'package:word_cut/ui/screens/game_screen.dart';
+import 'package:word_cut/ui/widgets/game_restart_button.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
-import 'package:word_cut/views/screens/game_screen.dart';
-import 'package:word_cut/views/widgets/game_restart_button.dart';
 
 /// Page d'accueil de l'app.
 /// Permet à l'utilisateur de commencer une nouvelle partie.

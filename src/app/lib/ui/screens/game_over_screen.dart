@@ -4,9 +4,9 @@ import 'package:flutter_fit_utils_ui/fit_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:word_cut/providers/game_manager.dart';
+import 'package:word_cut/ui/widgets/game_restart_button.dart';
 import 'package:word_cut/utils/extensions/duration.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
-import 'package:word_cut/views/widgets/game_restart_button.dart';
 
 /// Page affichée lorsqu'une partie est terminée.
 class GameOverScreen extends ConsumerStatefulWidget {

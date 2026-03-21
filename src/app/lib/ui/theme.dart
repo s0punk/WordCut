@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:word_cut/views/widgets/word_input.dart';
+import 'package:word_cut/ui/widgets/word_input.dart';
 
 part 'theme.g.dart';
 

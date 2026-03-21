@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fit_utils_ui/fit_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:word_cut/ui/screens/welcome_screen.dart';
+import 'package:word_cut/ui/theme.dart';
 import 'package:word_cut/utils/l10n/app_localizations.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
-import 'package:word_cut/utils/theme.dart';
-import 'package:word_cut/views/screens/welcome_screen.dart';
 
 void main() {
   runApp(

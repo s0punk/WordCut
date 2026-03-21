@@ -6,11 +6,11 @@ import 'package:flutter_fit_utils_ui/fit_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/providers/word_list.dart';
+import 'package:word_cut/ui/screens/welcome_screen.dart';
+import 'package:word_cut/ui/theme.dart';
+import 'package:word_cut/ui/widgets/game_restart_button.dart';
 import 'package:word_cut/utils/l10n/app_localizations.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
-import 'package:word_cut/utils/theme.dart';
-import 'package:word_cut/views/screens/welcome_screen.dart';
-import 'package:word_cut/views/widgets/game_restart_button.dart';
 
 /// Page des paramètres de l'application.
 class SettingScreen extends ConsumerWidget {

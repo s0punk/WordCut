@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pinput/pinput.dart';
-import 'package:word_cut/utils/theme.dart';
+import 'package:word_cut/ui/theme.dart';
 import 'package:word_cut/utils/uppercase_formatter.dart';
 
 /// Input qui permet d'entrer et d'afficher un mot du jeux.
