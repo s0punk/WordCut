@@ -29,6 +29,8 @@ class SettingScreen extends ConsumerWidget {
       150,
     );
 
+    final isInGame = ref.watch(currentGameStateProvider).words.isNotEmpty;
+
     return SafeArea(
       minimum:
           FitTheme.of(context).pageMargin?.copyWith(top: 24) ?? EdgeInsets.zero,
@@ -79,58 +81,60 @@ class SettingScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 24),
-          ListTile(
-            title: FitText.body(strings.getHint),
-            trailing: FitButton(
-              onTap: () async {
-                final nav = Navigator.of(context);
-                final messenger = ScaffoldMessenger.of(context);
+          if (isInGame) ...[
+            ListTile(
+              title: FitText.body(strings.getHint),
+              trailing: FitButton(
+                onTap: () async {
+                  final nav = Navigator.of(context);
+                  final messenger = ScaffoldMessenger.of(context);
 
-                final hint = await ref
-                    .read(gameManagerProvider.notifier)
-                    .findCompatibleWord(
-                      ref.read(currentGameStateProvider).words.last,
-                    );
+                  final hint = await ref
+                      .read(gameManagerProvider.notifier)
+                      .findCompatibleWord(
+                        ref.read(currentGameStateProvider).words.last,
+                      );
 
-                if (hint == null || !context.mounted) {
-                  return;
-                }
+                  if (hint == null || !context.mounted) {
+                    return;
+                  }
 
-                nav.pop();
-                messenger.showSnackBar(
-                  SnackBar(
-                    content: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        FitText.body(
-                          """${hint.substring(0, (hint.length * _hintPercentage).floor())}...""",
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            messenger
-                              ..hideCurrentSnackBar()
-                              ..showSnackBar(
-                                SnackBar(
-                                  content: FitText.body(hint),
-                                ),
-                              );
-                          },
-                          child: FitText.body(strings.showMore),
-                        ),
-                      ],
+                  nav.pop();
+                  messenger.showSnackBar(
+                    SnackBar(
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          FitText.body(
+                            """${hint.substring(0, (hint.length * _hintPercentage).floor())}...""",
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              messenger
+                                ..hideCurrentSnackBar()
+                                ..showSnackBar(
+                                  SnackBar(
+                                    content: FitText.body(hint),
+                                  ),
+                                );
+                            },
+                            child: FitText.body(strings.showMore),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
-              width: trailingWidth,
-              color: ref.watch(colorSchemeProvider).primary,
-              child: FitText.button(strings.get),
+                  );
+                },
+                width: trailingWidth,
+                color: ref.watch(colorSchemeProvider).primary,
+                child: FitText.button(strings.get),
+              ),
             ),
-          ),
-          const Spacer(),
-          GameRestartButton(
-            newGameLabel: strings.newGame,
-          ),
+            const Spacer(),
+            GameRestartButton(
+              newGameLabel: strings.newGame,
+            ),
+          ],
         ],
       ),
     );

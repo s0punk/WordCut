@@ -112,6 +112,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
             onPressed: () {
               showModalBottomSheet<void>(
                 context: context,
+                showDragHandle: true,
                 builder: (context) => const SizedBox(
                   width: double.infinity,
                   child: SettingScreen(),

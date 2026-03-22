@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/providers/word_list.dart';
 import 'package:word_cut/ui/screens/game_screen.dart';
+import 'package:word_cut/ui/screens/setting_screen.dart';
 import 'package:word_cut/ui/widgets/game_restart_button.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
 
@@ -55,6 +56,23 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
     final strings = ref.read(l10nProvider);
 
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet<void>(
+                context: context,
+                showDragHandle: true,
+                builder: (context) => const SizedBox(
+                  width: double.infinity,
+                  child: SettingScreen(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.settings),
+          ),
+        ],
+      ),
       body: FitLoadingHandler(
         loading: loading,
         child: SafeArea(
