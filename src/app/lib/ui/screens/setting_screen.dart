@@ -5,6 +5,7 @@ import 'package:flutter_fit_utils_ui/fit_text.dart';
 import 'package:flutter_fit_utils_ui/fit_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_cut/providers/game_manager.dart';
+import 'package:word_cut/providers/game_mode.dart';
 import 'package:word_cut/providers/word_list.dart';
 import 'package:word_cut/ui/screens/welcome_screen.dart';
 import 'package:word_cut/ui/theme.dart';
@@ -30,6 +31,8 @@ class SettingScreen extends ConsumerWidget {
     );
 
     final isInGame = ref.watch(currentGameStateProvider).words.isNotEmpty;
+
+    final gameMode = ref.watch(activeGameModeProvider);
 
     return SafeArea(
       minimum:
@@ -78,6 +81,22 @@ class SettingScreen extends ConsumerWidget {
                   Radius.circular(ref.read(defaultRadiusProvider)),
                 ),
               ),
+            ),
+          ),
+          const SizedBox(height: 24),
+          ListTile(
+            title: FitText.body(strings.hardMode),
+            subtitle: FitText.hint(strings.hardModeDesc),
+            trailing: gameMode.maybeWhen(
+              data: (gameMode) => Switch(
+                value: gameMode == GameModes.hard,
+                onChanged: (value) async {
+                  ref
+                      .read(activeGameModeProvider.notifier)
+                      .setGameMode(GameModes.values[value ? 1 : 0]);
+                },
+              ),
+              orElse: () => const CircularProgressIndicator(),
             ),
           ),
           const SizedBox(height: 24),

@@ -12,15 +12,20 @@
     "settings": "Settings",
     "language": "Language",
     "getHint": "Get a hint",
+    "hardMode": "Hard mode",
+    "hardModeDesc": "Gives a limited time to solve a word.",
 
     "score": "Score",
     "gameOver": "Game Over",
     "noMorePossibilities": "No other words can be played",
     "congrats": "Congratulation!",
     "solvedIn": "Solved in",
+    "ranOutOfTime": "Your time is up!",
 
     "get": "Get",
     "showMore": "Show more",
+    "ok": "Ok",
+    "cancel": "Cancel",
 
     "wordNotInList": "Word not in list",
     "wordIncompatible": "Word not derived from previous one",

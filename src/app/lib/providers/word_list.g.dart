@@ -6,7 +6,7 @@ part of 'word_list.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$wordListHash() => r'49fc379c69855da43a3f04d0c9a3fb7fbdb1f6ef';
+String _$wordListHash() => r'5edd938a272b4cee21eafd84fa9e60962d22f9b2';
 
 /// Provider de la liste de mot selon la langue utilisé.
 ///

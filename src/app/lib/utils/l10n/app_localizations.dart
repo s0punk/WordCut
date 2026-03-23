@@ -159,6 +159,18 @@ abstract class AppLocalizations {
   /// **'Get a hint'**
   String get getHint;
 
+  /// No description provided for @hardMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Hard mode'**
+  String get hardMode;
+
+  /// No description provided for @hardModeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Gives a limited time to solve a word.'**
+  String get hardModeDesc;
+
   /// No description provided for @score.
   ///
   /// In en, this message translates to:
@@ -189,6 +201,12 @@ abstract class AppLocalizations {
   /// **'Solved in'**
   String get solvedIn;
 
+  /// No description provided for @ranOutOfTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Your time is up!'**
+  String get ranOutOfTime;
+
   /// No description provided for @get.
   ///
   /// In en, this message translates to:
@@ -200,6 +218,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Show more'**
   String get showMore;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'Ok'**
+  String get ok;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
 
   /// No description provided for @wordNotInList.
   ///

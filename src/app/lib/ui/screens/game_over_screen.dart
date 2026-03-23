@@ -10,8 +10,13 @@ import 'package:word_cut/utils/l10n/l10n_provider.dart';
 
 /// Page affichée lorsqu'une partie est terminée.
 class GameOverScreen extends ConsumerStatefulWidget {
+  /// User-facing string qui indique pourquoi la partie est terminée.
+  ///
+  /// Si null, trouve automatiquement la raison.
+  final String? reason;
+
   /// Page affichée lorsqu'une partie est terminée.
-  const GameOverScreen({super.key});
+  const GameOverScreen({super.key, this.reason});
 
   @override
   ConsumerState<GameOverScreen> createState() => _GameOverScreenState();
@@ -32,6 +37,10 @@ class _GameOverScreenState extends ConsumerState<GameOverScreen> {
     final gameState = ref.read(currentGameStateProvider);
 
     final gameOver = gameState.words.last.length > 3;
+
+    final reason =
+        widget.reason ??
+        (gameState.words.last.length != 1 ? strings.noMorePossibilities : null);
 
     return SafeArea(
       minimum:
@@ -65,9 +74,9 @@ class _GameOverScreenState extends ConsumerState<GameOverScreen> {
                 ],
               ),
               FitText.title(gameOver ? strings.gameOver : strings.congrats),
-              if (gameState.words.last.length != 1)
+              if (reason != null)
                 FitText.body(
-                  strings.noMorePossibilities,
+                  reason,
                   textAlign: TextAlign.center,
                 ),
               FitText.body(

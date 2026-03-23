@@ -63,6 +63,8 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
               showModalBottomSheet<void>(
                 context: context,
                 showDragHandle: true,
+                isScrollControlled: true,
+                useSafeArea: true,
                 builder: (context) => const SizedBox(
                   width: double.infinity,
                   child: SettingScreen(),

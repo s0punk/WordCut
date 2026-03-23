@@ -41,6 +41,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get getHint => 'Obtenir un indice';
 
   @override
+  String get hardMode => 'Mode difficile';
+
+  @override
+  String get hardModeDesc => 'Donne un temps limité pour résoudre un mot.';
+
+  @override
   String get score => 'Score';
 
   @override
@@ -56,10 +62,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get solvedIn => 'Résolue en';
 
   @override
+  String get ranOutOfTime => 'Votre temps est écoulé!';
+
+  @override
   String get get => 'Obtenir';
 
   @override
   String get showMore => 'Voir plus';
+
+  @override
+  String get ok => 'Ok';
+
+  @override
+  String get cancel => 'Annuler';
 
   @override
   String get wordNotInList => 'Le mot ne fait pas partie de la liste';

@@ -41,6 +41,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get getHint => 'Get a hint';
 
   @override
+  String get hardMode => 'Hard mode';
+
+  @override
+  String get hardModeDesc => 'Gives a limited time to solve a word.';
+
+  @override
   String get score => 'Score';
 
   @override
@@ -56,10 +62,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get solvedIn => 'Solved in';
 
   @override
+  String get ranOutOfTime => 'Your time is up!';
+
+  @override
   String get get => 'Get';
 
   @override
   String get showMore => 'Show more';
+
+  @override
+  String get ok => 'Ok';
+
+  @override
+  String get cancel => 'Cancel';
 
   @override
   String get wordNotInList => 'Word not in list';

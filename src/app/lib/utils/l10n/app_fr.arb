@@ -12,15 +12,20 @@
     "settings": "Paramètres",
     "language": "Langue",
     "getHint": "Obtenir un indice",
+    "hardMode": "Mode difficile",
+    "hardModeDesc": "Donne un temps limité pour résoudre un mot.",
 
     "score": "Score",
     "gameOver": "Partie terminée",
     "noMorePossibilities": "Aucun autre mot ne peut être joué",
     "congrats": "Félicitation!",
     "solvedIn": "Résolue en",
+    "ranOutOfTime": "Votre temps est écoulé!",
 
     "get": "Obtenir",
     "showMore": "Voir plus",
+    "ok": "Ok",
+    "cancel": "Annuler",
 
     "wordNotInList": "Le mot ne fait pas partie de la liste",
     "wordIncompatible": "Le mot ne découle pas du précédent",

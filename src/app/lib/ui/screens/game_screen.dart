@@ -4,10 +4,12 @@ import 'package:flutter_fit_utils_ui/flutter_fit_utils_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:word_cut/providers/game_manager.dart';
+import 'package:word_cut/providers/game_mode.dart';
 import 'package:word_cut/ui/screens/game_over_screen.dart';
 import 'package:word_cut/ui/screens/setting_screen.dart';
 import 'package:word_cut/ui/theme.dart';
 import 'package:word_cut/ui/widgets/animated_score.dart';
+import 'package:word_cut/ui/widgets/countdown.dart';
 import 'package:word_cut/ui/widgets/word_input.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
 import 'package:word_cut/utils/word_play_result.dart';
@@ -63,7 +65,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     wordInputFocusNode.requestFocus();
   }
 
-  void onGameOver() {
+  void onGameOver({String? reason}) {
     ref.read(currentGameStateProvider.notifier).end();
 
     setState(() {
@@ -76,7 +78,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         child: SizedBox(
           height: clampDouble(MediaQuery.of(context).size.height * 0.5, 0, 450),
           width: clampDouble(MediaQuery.of(context).size.width * 0.85, 0, 400),
-          child: const GameOverScreen(),
+          child: GameOverScreen(reason: reason),
         ),
       ),
     );
@@ -85,11 +87,13 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   @override
   Widget build(BuildContext context) {
     final strings = ref.watch(l10nProvider);
+
     final gameState = ref.watch(currentGameStateProvider);
+    final gameMode = ref.watch(activeGameModeProvider);
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 75,
+        toolbarHeight: 100,
         title: Column(
           children: [
             FitText.title(
@@ -97,6 +101,24 @@ class _GameScreenState extends ConsumerState<GameScreen> {
               style: GoogleFonts.workbench(
                 fontSize: 32,
               ),
+            ),
+            gameMode.maybeWhen(
+              data: (gameMode) {
+                if (gameMode == GameModes.hard) {
+                  return Countdown(
+                    start: gameState.startedAt,
+                    duration: const Duration(minutes: 2),
+                    onDone: () {
+                      if (ref.read(currentGameStateProvider).endedAt == null) {
+                        onGameOver(reason: strings.ranOutOfTime);
+                      }
+                    },
+                  );
+                }
+
+                return const SizedBox.shrink();
+              },
+              orElse: () => const SizedBox.shrink(),
             ),
             FitText.body(
               "${strings.score}: ${gameState.score}",
@@ -113,6 +135,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
               showModalBottomSheet<void>(
                 context: context,
                 showDragHandle: true,
+                isScrollControlled: true,
+                useSafeArea: true,
                 builder: (context) => const SizedBox(
                   width: double.infinity,
                   child: SettingScreen(),
