@@ -1,4 +1,4 @@
-package com.example.word_cut
+package com.vaistudio.word_cut
 
 import io.flutter.embedding.android.FlutterActivity
 
