@@ -108,6 +108,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                   return Countdown(
                     start: gameState.startedAt,
                     duration: const Duration(minutes: 2),
+                    running: gameState.endedAt == null,
                     onDone: () {
                       if (ref.read(currentGameStateProvider).endedAt == null) {
                         onGameOver(reason: strings.ranOutOfTime);

@@ -12,6 +12,9 @@ class Countdown extends StatefulWidget {
   /// Durée du timer.
   final Duration duration;
 
+  /// Indique si le timer doit avancer.
+  final bool running;
+
   /// Appelé lorsque le timer est terminé.
   final VoidCallback? onDone;
 
@@ -19,6 +22,7 @@ class Countdown extends StatefulWidget {
   const Countdown({
     required this.start,
     required this.duration,
+    this.running = true,
     this.onDone,
     super.key,
   });
@@ -41,11 +45,12 @@ class _CountdownState extends State<Countdown> {
       setState(() {
         remaining = remaining - tickDuration;
 
-        if (remaining.inSeconds <= 0) {
-          remaining = Duration.zero;
+        if (remaining.inSeconds <= 0 || !widget.running) {
           timer.cancel();
 
-          widget.onDone?.call();
+          if (widget.running) {
+            widget.onDone?.call();
+          }
         }
       });
     });
