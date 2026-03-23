@@ -90,6 +90,7 @@ class SettingScreen extends ConsumerWidget {
                 showModalBottomSheet<void>(
                   context: context,
                   showDragHandle: true,
+                  isScrollControlled: true,
                   useSafeArea: true,
                   builder: (context) => const SizedBox(
                     width: double.infinity,
