@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:word_cut/models/game_state.dart';
+import 'package:word_cut/providers/game_mode.dart';
 import 'package:word_cut/providers/word_list.dart';
 import 'package:word_cut/utils/extensions/letter_distribution.dart';
 import 'package:word_cut/utils/word_play_result.dart';
@@ -157,10 +158,14 @@ class GameManager extends _$GameManager {
     ref.invalidate(currentGameStateProvider);
 
     if (addRandomWord) {
+      final gameMode = await ref.read(activeGameModeProvider.future);
+      final bonusLetter = gameMode == GameModes.hard ? 3 : 0;
+
       final wordList = await ref.read(wordListProvider.future);
       final possibleWords = wordList.where(
         (x) =>
-            x.length >= _firstWordMinLength && x.length <= _firstWordMaxLength,
+            x.length >= _firstWordMinLength + bonusLetter &&
+            x.length <= _firstWordMaxLength + bonusLetter,
       );
 
       ref
