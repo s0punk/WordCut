@@ -47,6 +47,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hardModeDesc => 'Gives a limited time to solve a word.';
 
   @override
+  String get customDictionary => 'Custom dictionary';
+
+  @override
+  String get selectCustomDictionary => 'Select a custom dictionary';
+
+  @override
+  String get formatDesc =>
+      'The dictionary must be a text file with one word per line.';
+
+  @override
+  String get useURL => 'From an URL';
+
+  @override
+  String get useFile => 'From my device';
+
+  @override
+  String get chooseFile => 'Choose file';
+
+  @override
+  String get incompatibleFormat => 'Incompatible format';
+
+  @override
+  String detectedWordsCount(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count words',
+      one: '1 word',
+    );
+    return '$_temp0 detected';
+  }
+
+  @override
   String get score => 'Score';
 
   @override
@@ -75,6 +108,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cancel => 'Cancel';
+
+  @override
+  String get select => 'Select';
 
   @override
   String get wordNotInList => 'Word not in list';

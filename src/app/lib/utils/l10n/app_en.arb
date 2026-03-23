@@ -14,6 +14,23 @@
     "getHint": "Get a hint",
     "hardMode": "Hard mode",
     "hardModeDesc": "Gives a limited time to solve a word.",
+    "customDictionary": "Custom dictionary",
+
+    "selectCustomDictionary": "Select a custom dictionary",
+    "formatDesc": "The dictionary must be a text file with one word per line.",
+    "useURL": "From an URL",
+    "useFile": "From my device",
+    "chooseFile": "Choose file",
+    "incompatibleFormat": "Incompatible format",
+    "detectedWordsCount": "{count, plural, =1{1 word} other{{count} words}} detected",
+     "@detectedWordsCount": {
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "example": "100"
+            }
+        }
+    },
 
     "score": "Score",
     "gameOver": "Game Over",
@@ -26,6 +43,7 @@
     "showMore": "Show more",
     "ok": "Ok",
     "cancel": "Cancel",
+    "select": "Select",
 
     "wordNotInList": "Word not in list",
     "wordIncompatible": "Word not derived from previous one",

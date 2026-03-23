@@ -14,6 +14,23 @@
     "getHint": "Obtenir un indice",
     "hardMode": "Mode difficile",
     "hardModeDesc": "Donne un temps limité pour résoudre un mot.",
+    "customDictionary": "Dictionnaire personnalisé",
+
+    "selectCustomDictionary": "Sélectionner un dictionnaire personnalisé",
+    "formatDesc": "Le dictionnaire personnalisé doit être sous la forme d'un fichier texte avec 1 mot par ligne.",
+    "useURL": "Via un URL",
+    "useFile": "Via mon appareil",
+    "chooseFile": "Choisir un fichier",
+    "incompatibleFormat": "Format incompatible",
+    "detectedWordsCount": "{count, plural, =1{1 mot détecté} other{{count} mots détectés}}",
+     "@detectedWordsCount": {
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "example": "100"
+            }
+        }
+    },
 
     "score": "Score",
     "gameOver": "Partie terminée",
@@ -26,6 +43,7 @@
     "showMore": "Voir plus",
     "ok": "Ok",
     "cancel": "Annuler",
+    "select": "Sélectionner",
 
     "wordNotInList": "Le mot ne fait pas partie de la liste",
     "wordIncompatible": "Le mot ne découle pas du précédent",

@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/providers/game_mode.dart';
 import 'package:word_cut/providers/word_list.dart';
+import 'package:word_cut/ui/screens/custom_dictionary_screen.dart';
 import 'package:word_cut/ui/screens/welcome_screen.dart';
 import 'package:word_cut/ui/theme.dart';
 import 'package:word_cut/ui/widgets/game_restart_button.dart';
@@ -31,16 +32,15 @@ class SettingScreen extends ConsumerWidget {
     );
 
     final isInGame = ref.watch(currentGameStateProvider).words.isNotEmpty;
-
     final gameMode = ref.watch(activeGameModeProvider);
 
     return SafeArea(
       minimum:
           FitTheme.of(context).pageMargin?.copyWith(top: 24) ?? EdgeInsets.zero,
       child: Column(
+        spacing: 24,
         children: [
           FitText.title(strings.settings),
-          const SizedBox(height: 12),
           ListTile(
             title: FitText.body(strings.language),
             trailing: SizedBox(
@@ -83,7 +83,24 @@ class SettingScreen extends ConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(height: 24),
+          ListTile(
+            title: FitText.body(strings.customDictionary),
+            trailing: FitButton(
+              onTap: () async {
+                showModalBottomSheet<void>(
+                  context: context,
+                  showDragHandle: true,
+                  useSafeArea: true,
+                  builder: (context) => const SizedBox(
+                    width: double.infinity,
+                    child: CustomWordListScreen(),
+                  ),
+                );
+              },
+              width: trailingWidth,
+              child: FitText.button(strings.select),
+            ),
+          ),
           ListTile(
             title: FitText.body(strings.hardMode),
             subtitle: FitText.hint(strings.hardModeDesc),
@@ -99,7 +116,6 @@ class SettingScreen extends ConsumerWidget {
               orElse: () => const CircularProgressIndicator(),
             ),
           ),
-          const SizedBox(height: 24),
           if (isInGame) ...[
             ListTile(
               title: FitText.body(strings.getHint),

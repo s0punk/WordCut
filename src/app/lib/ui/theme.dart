@@ -80,6 +80,9 @@ ThemeData theme(Ref ref) {
         ),
       ),
     ),
+    cardTheme: CardThemeData(
+      color: colorScheme.tertiaryContainer,
+    ),
     snackBarTheme: SnackBarThemeData(
       elevation: 3,
       behavior: SnackBarBehavior.floating,

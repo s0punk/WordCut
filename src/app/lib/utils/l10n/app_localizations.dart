@@ -171,6 +171,54 @@ abstract class AppLocalizations {
   /// **'Gives a limited time to solve a word.'**
   String get hardModeDesc;
 
+  /// No description provided for @customDictionary.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom dictionary'**
+  String get customDictionary;
+
+  /// No description provided for @selectCustomDictionary.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a custom dictionary'**
+  String get selectCustomDictionary;
+
+  /// No description provided for @formatDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'The dictionary must be a text file with one word per line.'**
+  String get formatDesc;
+
+  /// No description provided for @useURL.
+  ///
+  /// In en, this message translates to:
+  /// **'From an URL'**
+  String get useURL;
+
+  /// No description provided for @useFile.
+  ///
+  /// In en, this message translates to:
+  /// **'From my device'**
+  String get useFile;
+
+  /// No description provided for @chooseFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose file'**
+  String get chooseFile;
+
+  /// No description provided for @incompatibleFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'Incompatible format'**
+  String get incompatibleFormat;
+
+  /// No description provided for @detectedWordsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 word} other{{count} words}} detected'**
+  String detectedWordsCount(num count);
+
   /// No description provided for @score.
   ///
   /// In en, this message translates to:
@@ -230,6 +278,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancel;
+
+  /// No description provided for @select.
+  ///
+  /// In en, this message translates to:
+  /// **'Select'**
+  String get select;
 
   /// No description provided for @wordNotInList.
   ///
