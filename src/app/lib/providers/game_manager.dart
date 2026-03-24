@@ -162,17 +162,19 @@ class GameManager extends _$GameManager {
       final bonusLetter = gameMode == GameModes.hard ? 3 : 0;
 
       final wordList = await ref.read(wordListProvider.future);
-      final possibleWords = wordList.where(
+      final idealWords = wordList.where(
         (x) =>
             x.length >= _firstWordMinLength + bonusLetter &&
             x.length <= _firstWordMaxLength + bonusLetter,
       );
 
-      ref
-          .read(currentGameStateProvider.notifier)
-          .addWord(
-            possibleWords.elementAt(Random().nextInt(possibleWords.length)),
-          );
+      // Si l'utilisateur utilise un dictionnaire personnalisé, il se peut que
+      // son dictionnaire ne contienne aucun mot idéal pour débuter la partie.
+      final word = idealWords.isEmpty
+          ? wordList.elementAt(Random().nextInt(wordList.length))
+          : idealWords.elementAt(Random().nextInt(idealWords.length));
+
+      ref.read(currentGameStateProvider.notifier).addWord(word);
     }
   }
 

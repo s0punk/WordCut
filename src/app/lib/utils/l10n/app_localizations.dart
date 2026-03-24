@@ -186,7 +186,7 @@ abstract class AppLocalizations {
   /// No description provided for @formatDesc.
   ///
   /// In en, this message translates to:
-  /// **'The dictionary must be a text file with one word per line.'**
+  /// **'The dictionary must be a text file with one word per line. The dictionary must have at least 2 words.'**
   String get formatDesc;
 
   /// No description provided for @useURL.

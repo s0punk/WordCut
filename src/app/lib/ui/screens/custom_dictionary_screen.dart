@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fit_utils_ui/flutter_fit_utils_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -51,7 +52,44 @@ class _CustomDictionaryScreenState extends ConsumerState<CustomWordListScreen> {
     }
   }
 
-  Future<void> loadFile() async {}
+  Future<void> loadFile() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    final navigator = Navigator.of(context);
+
+    try {
+      final result = await FilePicker.platform.pickFiles(
+        dialogTitle: ref.read(l10nProvider).selectCustomDictionary,
+        type: FileType.custom,
+        allowedExtensions: ["txt"],
+        withData: true,
+      );
+
+      if (result == null) {
+        setState(() {
+          isLoading = false;
+        });
+        return;
+      }
+
+      final isValid = await ref
+          .read(wordListProvider.notifier)
+          .setCustomWordList(
+            result.files.first.name,
+            String.fromCharCodes(result.files.first.bytes ?? []),
+          );
+
+      if (!isValid) {
+        throw Exception();
+      }
+
+      navigator.pop();
+    } on Exception {
+      showError();
+    }
+  }
 
   void showError() {
     setState(() {
@@ -114,7 +152,9 @@ class _CustomDictionaryScreenState extends ConsumerState<CustomWordListScreen> {
                 children: [
                   FitText.body(strings.useFile),
                   FitButton(
-                    onTap: () async {},
+                    onTap: () async {
+                      await loadFile();
+                    },
                     child: FitText.button(strings.chooseFile),
                   ),
                 ],

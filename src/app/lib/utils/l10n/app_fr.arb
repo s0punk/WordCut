@@ -17,7 +17,7 @@
     "customDictionary": "Dictionnaire personnalisé",
 
     "selectCustomDictionary": "Sélectionner un dictionnaire personnalisé",
-    "formatDesc": "Le dictionnaire personnalisé doit être sous la forme d'un fichier texte avec 1 mot par ligne.",
+    "formatDesc": "Le dictionnaire personnalisé doit être sous la forme d'un fichier texte avec 1 mot par ligne. Le dictionnaire doit avoir au moins 2 mots.",
     "useURL": "Via un URL",
     "useFile": "Via mon appareil",
     "chooseFile": "Choisir un fichier",

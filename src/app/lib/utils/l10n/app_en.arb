@@ -17,7 +17,7 @@
     "customDictionary": "Custom dictionary",
 
     "selectCustomDictionary": "Select a custom dictionary",
-    "formatDesc": "The dictionary must be a text file with one word per line.",
+    "formatDesc": "The dictionary must be a text file with one word per line. The dictionary must have at least 2 words.",
     "useURL": "From an URL",
     "useFile": "From my device",
     "chooseFile": "Choose file",

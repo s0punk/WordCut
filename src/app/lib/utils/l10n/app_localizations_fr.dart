@@ -55,7 +55,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get formatDesc =>
-      'Le dictionnaire personnalisé doit être sous la forme d\'un fichier texte avec 1 mot par ligne.';
+      'Le dictionnaire personnalisé doit être sous la forme d\'un fichier texte avec 1 mot par ligne. Le dictionnaire doit avoir au moins 2 mots.';
 
   @override
   String get useURL => 'Via un URL';

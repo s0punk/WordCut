@@ -54,7 +54,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get formatDesc =>
-      'The dictionary must be a text file with one word per line.';
+      'The dictionary must be a text file with one word per line. The dictionary must have at least 2 words.';
 
   @override
   String get useURL => 'From an URL';

@@ -93,6 +93,11 @@ class WordList extends _$WordList {
       return false;
     }
 
+    final wordList = await _extractList(content);
+    if (wordList.length < 2) {
+      return false;
+    }
+
     try {
       final appDir = await getApplicationDocumentsDirectory();
 
@@ -109,7 +114,7 @@ class WordList extends _$WordList {
         .read(preferencesProvider)
         .setString(Preferences.customWordList, name);
 
-    state = AsyncData(await _extractList(content));
+    state = AsyncData(wordList);
     ref.read(customWordListProvider.notifier).state = name;
 
     return true;
@@ -122,5 +127,7 @@ class WordList extends _$WordList {
   Future<void> deleteCustomWordList() async {
     await ref.read(preferencesProvider).remove(Preferences.customWordList);
     ref.read(customWordListProvider.notifier).state = null;
+
+    ref.invalidateSelf();
   }
 }
