@@ -81,7 +81,7 @@ class GameRestartButton extends ConsumerWidget {
 
             _onReset(ref, context, customGame: false);
           },
-          color: ref.read(colorSchemeProvider).inversePrimary,
+          color: ref.read(colorSchemeProvider).secondary,
           child: FitText.button(
             newCustomGameLabel,
           ),

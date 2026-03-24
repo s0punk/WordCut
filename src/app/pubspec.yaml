@@ -19,6 +19,7 @@ dependencies:
   http: ^1.6.0
   intl: any
   lottie: ^3.3.2
+  path_provider: ^2.1.5
   pinput: ^6.0.1
   riverpod_annotation: ^2.6.1
   shared_preferences: ^2.5.4

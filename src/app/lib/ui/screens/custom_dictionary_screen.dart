@@ -1,11 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_fit_utils_ui/fit_button.dart';
-import 'package:flutter_fit_utils_ui/fit_text.dart';
-import 'package:flutter_fit_utils_ui/fit_theme.dart';
+import 'package:flutter_fit_utils_ui/flutter_fit_utils_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:word_cut/providers/word_list.dart';
 import 'package:word_cut/ui/theme.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
 
@@ -23,9 +20,15 @@ class CustomWordListScreen extends ConsumerStatefulWidget {
 }
 
 class _CustomDictionaryScreenState extends ConsumerState<CustomWordListScreen> {
-  final Set<String> customWordList = {};
+  bool isLoading = false;
 
   Future<void> loadURL(String url) async {
+    setState(() {
+      isLoading = true;
+    });
+
+    final navigator = Navigator.of(context);
+
     try {
       final res = await http.get(Uri.parse(url));
 
@@ -33,6 +36,16 @@ class _CustomDictionaryScreenState extends ConsumerState<CustomWordListScreen> {
           !res.headers["content-type"].toString().contains("text/plain")) {
         throw Exception();
       }
+
+      final isValid = await ref
+          .read(wordListProvider.notifier)
+          .setCustomWordList(url, res.body);
+
+      if (!isValid) {
+        throw Exception();
+      }
+
+      navigator.pop();
     } on Exception {
       showError();
     }
@@ -41,6 +54,10 @@ class _CustomDictionaryScreenState extends ConsumerState<CustomWordListScreen> {
   Future<void> loadFile() async {}
 
   void showError() {
+    setState(() {
+      isLoading = false;
+    });
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: ref.read(colorSchemeProvider).errorContainer,
@@ -58,52 +75,53 @@ class _CustomDictionaryScreenState extends ConsumerState<CustomWordListScreen> {
   Widget build(BuildContext context) {
     final strings = ref.watch(l10nProvider);
 
-    final trailingWidth = clampDouble(
-      MediaQuery.of(context).size.width * 0.35,
-      0,
-      150,
-    );
-
-    return SafeArea(
-      minimum:
-          FitTheme.of(context).pageMargin?.copyWith(top: 24) ?? EdgeInsets.zero,
-      child: Column(
-        spacing: 24,
-        children: [
-          FitText.title(strings.selectCustomDictionary),
-          Card(
-            child: FitText.body(
-              strings.formatDesc,
-              margin: const EdgeInsets.all(8),
-            ),
-          ),
-          TextFormField(
-            initialValue: "https://s0punk.github.io/WordCut/fr-en.txt", // TEMP
-            onFieldSubmitted: loadURL,
-            decoration: InputDecoration(
-              labelText: strings.useURL,
-              helperText: "https://my-dictionary.txt",
-            ),
-          ),
-          ListTile(
-            title: FitText.body(strings.useFile),
-            trailing: FitButton(
-              onTap: () async {
-                showModalBottomSheet<void>(
-                  context: context,
-                  showDragHandle: true,
-                  useSafeArea: true,
-                  builder: (context) => const SizedBox(
-                    width: double.infinity,
-                    child: CustomWordListScreen(),
+    return FitLoadingHandler(
+      loading: isLoading,
+      child: Scaffold(
+        body: SafeArea(
+          minimum:
+              FitTheme.of(context).pageMargin?.copyWith(top: 24) ??
+              EdgeInsets.zero,
+          child: Column(
+            spacing: 24,
+            children: [
+              FitText.title(strings.selectCustomDictionary),
+              Card(
+                child: FitText.body(
+                  strings.formatDesc,
+                  margin: const EdgeInsets.all(8),
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 8,
+                children: [
+                  FitText.body(strings.useURL),
+                  TextFormField(
+                    initialValue:
+                        "https://s0punk.github.io/WordCut/fr-en.txt", // TEMP
+                    onFieldSubmitted: loadURL,
+                    decoration: const InputDecoration(
+                      labelText: "URL",
+                      helperText: "https://my-dictionary.txt",
+                    ),
                   ),
-                );
-              },
-              width: trailingWidth,
-              child: FitText.button(strings.chooseFile),
-            ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 8,
+                children: [
+                  FitText.body(strings.useFile),
+                  FitButton(
+                    onTap: () async {},
+                    child: FitText.button(strings.chooseFile),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

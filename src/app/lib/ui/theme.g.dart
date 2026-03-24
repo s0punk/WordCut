@@ -82,7 +82,7 @@ final disabledPinThemeProvider = Provider<PinTheme>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef DisabledPinThemeRef = ProviderRef<PinTheme>;
-String _$themeHash() => r'1303db6ffd1866fb37f2f8a15fda4ead6ad05340';
+String _$themeHash() => r'de93f8fa9a4d95e3c88988dcd4e1673ca6faf9cb';
 
 /// Provider du thème de l'application.
 ///

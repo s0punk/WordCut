@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_fit_utils_ui/fit_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:word_cut/providers/word_list.dart';
 import 'package:word_cut/ui/screens/welcome_screen.dart';
 import 'package:word_cut/ui/theme.dart';
 import 'package:word_cut/utils/l10n/app_localizations.dart';
@@ -29,6 +30,8 @@ class WordCut extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(wordListProvider); // Load word list early.
+
     return FitTheme(
       baseTextStyle: GoogleFonts.workSans(),
       pageMargin: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),

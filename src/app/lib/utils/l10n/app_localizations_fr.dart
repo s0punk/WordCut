@@ -111,7 +111,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cancel => 'Annuler';
 
   @override
-  String get select => 'Sélectionner';
+  String get select => 'Choisir';
 
   @override
   String get wordNotInList => 'Le mot ne fait pas partie de la liste';

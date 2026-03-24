@@ -11,4 +11,9 @@ abstract class Preferences {
   ///
   /// Si null, le mode est [GameModes.classic].
   static const String gameMode = "game_mode";
+
+  /// Nom du dictionnaire personnalisé de l'utilisateur.
+  ///
+  /// Si null, aucun dictionnaire personnalisé n'est utilisé.
+  static const String customWordList = "custom_word_list";
 }

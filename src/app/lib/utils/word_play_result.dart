@@ -13,7 +13,7 @@ enum WordPlayResult {
   /// Le mot est valide et a été ajouté au [GameState].
   valid,
 
-  /// Le mot ne figure pas dans [wordList].
+  /// Le mot ne figure pas dans [WordList].
   wordNotInList,
 
   /// Le mot joué ne découle pas du mot précédent.

@@ -33,6 +33,7 @@ class SettingScreen extends ConsumerWidget {
 
     final isInGame = ref.watch(currentGameStateProvider).words.isNotEmpty;
     final gameMode = ref.watch(activeGameModeProvider);
+    final customWordList = ref.watch(customWordListProvider);
 
     return SafeArea(
       minimum:
@@ -85,6 +86,9 @@ class SettingScreen extends ConsumerWidget {
           ),
           ListTile(
             title: FitText.body(strings.customDictionary),
+            subtitle: customWordList != null
+                ? FitText.hint(customWordList)
+                : null,
             trailing: FitButton(
               onTap: () async {
                 showModalBottomSheet<void>(

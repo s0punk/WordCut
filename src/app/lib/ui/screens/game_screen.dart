@@ -220,7 +220,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                 if (gameOver)
                   FitButton(
                     onTap: onGameOver,
-                    color: ref.read(colorSchemeProvider).inversePrimary,
+                    color: ref.read(colorSchemeProvider).secondary,
                     child: FitText.button(
                       strings.seeResults,
                     ),
