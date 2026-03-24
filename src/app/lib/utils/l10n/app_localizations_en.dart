@@ -132,4 +132,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noOtherPossibleWords => 'No other words can be played';
+
+  @override
+  String get settingTutorial => 'Tap here to go to settings';
+
+  @override
+  String get wordInputTutorial =>
+      'Create a shorter word by removing 1 to 3 letters. Rearrange the letters to score more points!\nDotted slots are optional.';
+
+  @override
+  String get customWordTutorial =>
+      'Start the game with any word or combination of letters.';
 }

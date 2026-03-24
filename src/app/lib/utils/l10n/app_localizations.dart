@@ -326,6 +326,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No other words can be played'**
   String get noOtherPossibleWords;
+
+  /// No description provided for @settingTutorial.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap here to go to settings'**
+  String get settingTutorial;
+
+  /// No description provided for @wordInputTutorial.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a shorter word by removing 1 to 3 letters. Rearrange the letters to score more points!\nDotted slots are optional.'**
+  String get wordInputTutorial;
+
+  /// No description provided for @customWordTutorial.
+  ///
+  /// In en, this message translates to:
+  /// **'Start the game with any word or combination of letters.'**
+  String get customWordTutorial;
 }
 
 class _AppLocalizationsDelegate

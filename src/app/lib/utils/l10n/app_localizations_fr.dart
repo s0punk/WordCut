@@ -133,4 +133,15 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get noOtherPossibleWords => 'Aucun mot possible';
+
+  @override
+  String get settingTutorial => 'Appui ici pour accéder aux paramètres';
+
+  @override
+  String get wordInputTutorial =>
+      'Forme un mot plus court en retirant de 1 à 3 lettres. Réorganise les lettres pour gagner plus de points!\nLes cases en pointillés sont facultatives.';
+
+  @override
+  String get customWordTutorial =>
+      'Commence la partie avec n\'importe quel mot ou ensemble de lettres.';
 }
