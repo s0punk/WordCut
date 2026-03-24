@@ -69,8 +69,9 @@ class _CountdownState extends State<Countdown> {
 
   @override
   Widget build(BuildContext context) {
+    // On ne veut afficher une valeur plus petite que 0.
     return FitText.body(
-      remaining.toTimerString(),
+      (remaining.inSeconds <= 0 ? Duration.zero : remaining).toTimerString(),
       style: TextStyle(
         color: remaining.inSeconds <= 10 ? Colors.red : null,
       ),
