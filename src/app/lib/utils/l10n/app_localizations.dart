@@ -213,11 +213,11 @@ abstract class AppLocalizations {
   /// **'Incompatible format'**
   String get incompatibleFormat;
 
-  /// No description provided for @detectedWordsCount.
+  /// No description provided for @availableDictionaries.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =1{1 word} other{{count} words}} detected'**
-  String detectedWordsCount(num count);
+  /// **'Other available dictionaries'**
+  String get availableDictionaries;
 
   /// No description provided for @score.
   ///

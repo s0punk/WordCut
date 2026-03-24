@@ -136,8 +136,6 @@ class _CustomDictionaryScreenState extends ConsumerState<CustomWordListScreen> {
                 children: [
                   FitText.body(strings.useURL),
                   TextFormField(
-                    initialValue:
-                        "https://s0punk.github.io/WordCut/fr-en.txt", // TEMP
                     onFieldSubmitted: loadURL,
                     decoration: const InputDecoration(
                       labelText: "URL",
@@ -156,6 +154,22 @@ class _CustomDictionaryScreenState extends ConsumerState<CustomWordListScreen> {
                       await loadFile();
                     },
                     child: FitText.button(strings.chooseFile),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 8,
+                children: [
+                  FitText.body(strings.availableDictionaries),
+                  FitButton(
+                    onTap: () async {
+                      await loadURL(
+                        "https://s0punk.github.io/WordCut/fr-en.txt",
+                      );
+                    },
+                    child: const FitText.button("EN + FR"),
                   ),
                 ],
               ),

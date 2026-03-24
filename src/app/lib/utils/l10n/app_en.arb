@@ -22,15 +22,7 @@
     "useFile": "From my device",
     "chooseFile": "Choose file",
     "incompatibleFormat": "Incompatible format",
-    "detectedWordsCount": "{count, plural, =1{1 word} other{{count} words}} detected",
-     "@detectedWordsCount": {
-        "placeholders": {
-            "count": {
-                "type": "num",
-                "example": "100"
-            }
-        }
-    },
+    "availableDictionaries": "Other available dictionaries",
 
     "score": "Score",
     "gameOver": "Game Over",

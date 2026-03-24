@@ -70,15 +70,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get incompatibleFormat => 'Format incompatible';
 
   @override
-  String detectedWordsCount(num count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count mots détectés',
-      one: '1 mot détecté',
-    );
-    return '$_temp0';
-  }
+  String get availableDictionaries => 'Autres dictionnaires disponibles';
 
   @override
   String get score => 'Score';

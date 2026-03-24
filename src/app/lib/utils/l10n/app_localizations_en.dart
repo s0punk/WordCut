@@ -69,15 +69,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get incompatibleFormat => 'Incompatible format';
 
   @override
-  String detectedWordsCount(num count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count words',
-      one: '1 word',
-    );
-    return '$_temp0 detected';
-  }
+  String get availableDictionaries => 'Other available dictionaries';
 
   @override
   String get score => 'Score';
