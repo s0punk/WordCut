@@ -51,5 +51,9 @@
     "wordNotLongEnough": "Le mot n'est pas assez long",
     "wordRefused": "Mot refusé",
     "invalidChars": "Le mot doit contenir des lettres seulement",
-    "noOtherPossibleWords": "Aucun mot possible"
+    "noOtherPossibleWords": "Aucun mot possible",
+
+    "settingTutorial": "Appui ici pour accéder aux paramètres",
+    "wordInputTutorial": "Forme un mot plus court en retirant de 1 à 3 lettres. Réorganise les lettres pour gagner plus de points!\nLes cases en pointillés sont facultatives.",
+    "customWordTutorial": "Commence la partie avec n'importe quel mot ou ensemble de lettres."
 }
