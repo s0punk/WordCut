@@ -114,6 +114,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get select => 'Choisir';
 
   @override
+  String get remove => 'Retirer';
+
+  @override
   String get wordNotInList => 'Le mot ne fait pas partie de la liste';
 
   @override

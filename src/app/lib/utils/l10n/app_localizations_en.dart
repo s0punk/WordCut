@@ -113,6 +113,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get select => 'Select';
 
   @override
+  String get remove => 'Remove';
+
+  @override
   String get wordNotInList => 'Word not in list';
 
   @override

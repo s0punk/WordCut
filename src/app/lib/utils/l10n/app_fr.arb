@@ -44,6 +44,7 @@
     "ok": "Ok",
     "cancel": "Annuler",
     "select": "Choisir",
+    "remove": "Retirer",
 
     "wordNotInList": "Le mot ne fait pas partie de la liste",
     "wordIncompatible": "Le mot ne découle pas du précédent",

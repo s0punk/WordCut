@@ -114,4 +114,13 @@ class WordList extends _$WordList {
 
     return true;
   }
+
+  /// Supprime le dictionnaire personnalisé de l'utilisateur.
+  ///
+  /// Ne prend pas la peine de supprimer le fichier locale puisqu'il sera
+  /// écraser si l'utilisateur utilise un autre dictionnaire personnalisé.
+  Future<void> deleteCustomWordList() async {
+    await ref.read(preferencesProvider).remove(Preferences.customWordList);
+    ref.read(customWordListProvider.notifier).state = null;
+  }
 }

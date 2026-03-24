@@ -84,28 +84,41 @@ class SettingScreen extends ConsumerWidget {
               ),
             ),
           ),
-          ListTile(
-            title: FitText.body(strings.customDictionary),
-            subtitle: customWordList != null
-                ? FitText.hint(customWordList)
-                : null,
-            trailing: FitButton(
-              onTap: () async {
-                showModalBottomSheet<void>(
-                  context: context,
-                  showDragHandle: true,
-                  isScrollControlled: true,
-                  useSafeArea: true,
-                  builder: (context) => const SizedBox(
-                    width: double.infinity,
-                    child: CustomWordListScreen(),
-                  ),
-                );
-              },
-              width: trailingWidth,
-              child: FitText.button(strings.select),
+          if (customWordList != null)
+            ListTile(
+              title: FitText.body(strings.customDictionary),
+              subtitle: FitText.hint(customWordList),
+              trailing: FitButton(
+                onTap: () async {
+                  await ref
+                      .read(wordListProvider.notifier)
+                      .deleteCustomWordList();
+                },
+                width: trailingWidth,
+                color: ref.read(colorSchemeProvider).error,
+                child: FitText.button(strings.remove),
+              ),
+            )
+          else
+            ListTile(
+              title: FitText.body(strings.customDictionary),
+              trailing: FitButton(
+                onTap: () async {
+                  showModalBottomSheet<void>(
+                    context: context,
+                    showDragHandle: true,
+                    isScrollControlled: true,
+                    useSafeArea: true,
+                    builder: (context) => const SizedBox(
+                      width: double.infinity,
+                      child: CustomWordListScreen(),
+                    ),
+                  );
+                },
+                width: trailingWidth,
+                child: FitText.button(strings.select),
+              ),
             ),
-          ),
           ListTile(
             title: FitText.body(strings.hardMode),
             subtitle: FitText.hint(strings.hardModeDesc),
