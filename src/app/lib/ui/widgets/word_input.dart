@@ -39,7 +39,7 @@ class WordInput extends ConsumerStatefulWidget {
   const WordInput({
     this.word,
     this.length,
-    this.maxLength = 12,
+    this.maxLength = 15,
     this.growing = false,
     this.enabled = false,
     this.autoFocus = false,

@@ -147,9 +147,5 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get wordInputTutorial =>
-      'Forme un mot plus court en retirant de 1 à 3 lettres. Réorganise les lettres pour gagner plus de points!\nLes cases en pointillés sont facultatives.';
-
-  @override
-  String get customWordTutorial =>
-      'Commence la partie avec n\'importe quel mot ou ensemble de lettres.';
+      'Forme un mot plus court en retirant de 1 à 3 lettres. Réorganise les lettres pour gagner plus de points!\n\nLes cases en pointillés sont facultatives.';
 }

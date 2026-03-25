@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hotspot/hotspot.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/utils/shared_preferences.dart';
 
 part 'tutorial.g.dart';
@@ -13,7 +12,6 @@ class Tutorial extends _$Tutorial {
   /// Liste des différents flow de tutoriel.
   static const List<String> flows = [
     "main", // Flow principal: settings, jeu de base.
-    "custom_word", // Comment faire une partie avec son propre mot de départ.
   ];
 
   @override
@@ -62,13 +60,6 @@ class Tutorial extends _$Tutorial {
     final tutorials = await ref.read(tutorialProvider.future);
 
     if (tutorials.isNotEmpty) {
-      // Ne pas afficher le tutoriel de custom words si on n'est pas dans
-      // ce mode.
-      if (tutorials.first == Tutorial.flows.last &&
-          ref.read(currentGameStateProvider).words.isNotEmpty) {
-        return;
-      }
-
       hotspot.startFlow(tutorials.first);
       ref.read(tutorialProvider.notifier).markAs(tutorials.first, seen: true);
     }

@@ -8,6 +8,7 @@ import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/providers/game_mode.dart';
 import 'package:word_cut/providers/word_list.dart';
 import 'package:word_cut/ui/screens/custom_dictionary_screen.dart';
+import 'package:word_cut/ui/screens/game_screen.dart';
 import 'package:word_cut/ui/screens/welcome_screen.dart';
 import 'package:word_cut/ui/theme.dart';
 import 'package:word_cut/ui/widgets/game_restart_button.dart';
@@ -139,7 +140,10 @@ class SettingScreen extends ConsumerWidget {
             title: FitText.body(strings.resetTutorials),
             trailing: FitButton(
               onTap: () async {
+                final navigator = Navigator.of(context);
+
                 await ref.read(tutorialProvider.notifier).reset();
+                navigator.pushReplacement(buildGameScreenRoute(strings));
               },
               width: trailingWidth,
               child: FitText.button(strings.reset),

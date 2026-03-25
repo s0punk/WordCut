@@ -240,77 +240,69 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     word: word,
                   ),
                 Builder(
-                      builder: (context) {
-                        if (gameState.words.isEmpty) {
-                          return WordInput(
-                            key: ValueKey(gameState.words.length),
-                            growing: true,
-                            enabled: true,
-                            autoFocus: true,
-                            focusNode: wordInputFocusNode,
-                            onCompleted: (value) async {
-                              final result = await ref
-                                  .read(gameManagerProvider.notifier)
-                                  .playCustomFirstWord(value);
+                  builder: (context) {
+                    if (gameState.words.isEmpty) {
+                      return WordInput(
+                        key: ValueKey(gameState.words.length),
+                        growing: true,
+                        enabled: true,
+                        autoFocus: true,
+                        focusNode: wordInputFocusNode,
+                        onCompleted: (value) async {
+                          final result = await ref
+                              .read(gameManagerProvider.notifier)
+                              .playCustomFirstWord(value);
 
-                              if (result != WordPlayResult.valid) {
-                                onError(result);
-                              }
-                            },
-                          );
-                        }
+                          if (result != WordPlayResult.valid) {
+                            onError(result);
+                          }
+                        },
+                      );
+                    }
 
-                        if (gameState.words.last.length != 1) {
-                          return WordInput(
-                            key: ValueKey(
-                              gameState.words.last.length - 1,
-                            ),
-                            length: gameState.words.last.length - 1,
-                            enabled: true,
-                            autoFocus: true,
-                            focusNode: wordInputFocusNode,
-                            onCompleted: (value) async {
-                              final box =
-                                  context.findRenderObject() as RenderBox?;
+                    if (gameState.words.last.length != 1) {
+                      return WordInput(
+                        key: ValueKey(
+                          gameState.words.last.length - 1,
+                        ),
+                        length: gameState.words.last.length - 1,
+                        enabled: true,
+                        autoFocus: true,
+                        focusNode: wordInputFocusNode,
+                        onCompleted: (value) async {
+                          final box = context.findRenderObject() as RenderBox?;
 
-                              final result = await ref
-                                  .read(gameManagerProvider.notifier)
-                                  .playWord(value);
+                          final result = await ref
+                              .read(gameManagerProvider.notifier)
+                              .playWord(value);
 
-                              if (result.status == WordPlayResult.valid) {
-                                onScore(result.score, box);
+                          if (result.status == WordPlayResult.valid) {
+                            onScore(result.score, box);
 
-                                if ((await ref
-                                        .read(
-                                          gameManagerProvider.notifier,
-                                        )
-                                        .findCompatibleWord(
-                                          gameState.words.last,
-                                        )) ==
-                                    null) {
-                                  onGameOver();
-                                }
-                              } else {
-                                onError(result.status);
-                              }
-                            },
-                          );
-                        }
+                            if ((await ref
+                                    .read(
+                                      gameManagerProvider.notifier,
+                                    )
+                                    .findCompatibleWord(
+                                      gameState.words.last,
+                                    )) ==
+                                null) {
+                              onGameOver();
+                            }
+                          } else {
+                            onError(result.status);
+                          }
+                        },
+                      );
+                    }
 
-                        return const SizedBox.shrink();
-                      },
-                    )
-                    .withHotspot(
-                      order: 2,
-                      title: strings.play,
-                      text: strings.wordInputTutorial,
-                    )
-                    .withHotspot(
-                      flow: Tutorial.flows.last,
-                      order: 2,
-                      title: strings.play,
-                      text: strings.customWordTutorial,
-                    ),
+                    return const SizedBox.shrink();
+                  },
+                ).withHotspot(
+                  order: 2,
+                  title: strings.play,
+                  text: strings.wordInputTutorial,
+                ),
                 if (gameOver)
                   FitButton(
                     onTap: onGameOver,

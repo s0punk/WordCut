@@ -51,6 +51,5 @@
     "done": "Done",
     "next": "Next",
     "settingTutorial": "Tap here to go to settings.\nYou can change game mode, get hints and more.",
-    "wordInputTutorial": "Create a shorter word by removing 1 to 3 letters. Rearrange the letters to score more points!\nDotted slots are optional.",
-    "customWordTutorial": "Start the game with any word or combination of letters."
+    "wordInputTutorial": "Create a shorter word by removing 1 to 3 letters. Rearrange the letters to score more points!\n\nDotted slots are optional."
 }

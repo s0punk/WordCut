@@ -51,6 +51,5 @@
     "done": "Fin",
     "next": "Prochain",
     "settingTutorial": "Appui ici pour accéder aux paramètres.\nTu peux changer le mode de jeux, obtenir des indices et plus encore.",
-    "wordInputTutorial": "Forme un mot plus court en retirant de 1 à 3 lettres. Réorganise les lettres pour gagner plus de points!\nLes cases en pointillés sont facultatives.",
-    "customWordTutorial": "Commence la partie avec n'importe quel mot ou ensemble de lettres."
+    "wordInputTutorial": "Forme un mot plus court en retirant de 1 à 3 lettres. Réorganise les lettres pour gagner plus de points!\n\nLes cases en pointillés sont facultatives."
 }
