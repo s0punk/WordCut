@@ -15,6 +15,7 @@
     "hardMode": "Mode difficile",
     "hardModeDesc": "Donne un temps limité pour résoudre un mot.",
     "customDictionary": "Dictionnaire personnalisé",
+    "resetTutorials": "Rétablir les tutoriels",
 
     "selectCustomDictionary": "Sélectionner un dictionnaire personnalisé",
     "formatDesc": "Le dictionnaire personnalisé doit être sous la forme d'un fichier texte avec 1 mot par ligne. Le dictionnaire doit avoir au moins 2 mots.",
@@ -37,6 +38,7 @@
     "cancel": "Annuler",
     "select": "Choisir",
     "remove": "Retirer",
+    "reset": "Rétablir",
 
     "wordNotInList": "Le mot ne fait pas partie de la liste",
     "wordIncompatible": "Le mot ne découle pas du précédent",
@@ -45,7 +47,10 @@
     "invalidChars": "Le mot doit contenir des lettres seulement",
     "noOtherPossibleWords": "Aucun mot possible",
 
-    "settingTutorial": "Appui ici pour accéder aux paramètres",
+    "endTour": "Arrêter",
+    "done": "Fin",
+    "next": "Prochain",
+    "settingTutorial": "Appui ici pour accéder aux paramètres.\nTu peux changer le mode de jeux, obtenir des indices et plus encore.",
     "wordInputTutorial": "Forme un mot plus court en retirant de 1 à 3 lettres. Réorganise les lettres pour gagner plus de points!\nLes cases en pointillés sont facultatives.",
     "customWordTutorial": "Commence la partie avec n'importe quel mot ou ensemble de lettres."
 }

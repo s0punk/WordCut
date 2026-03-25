@@ -177,6 +177,12 @@ abstract class AppLocalizations {
   /// **'Custom dictionary'**
   String get customDictionary;
 
+  /// No description provided for @resetTutorials.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset tutorials'**
+  String get resetTutorials;
+
   /// No description provided for @selectCustomDictionary.
   ///
   /// In en, this message translates to:
@@ -291,6 +297,12 @@ abstract class AppLocalizations {
   /// **'Remove'**
   String get remove;
 
+  /// No description provided for @reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
   /// No description provided for @wordNotInList.
   ///
   /// In en, this message translates to:
@@ -327,10 +339,28 @@ abstract class AppLocalizations {
   /// **'No other words can be played'**
   String get noOtherPossibleWords;
 
+  /// No description provided for @endTour.
+  ///
+  /// In en, this message translates to:
+  /// **'End tour'**
+  String get endTour;
+
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
   /// No description provided for @settingTutorial.
   ///
   /// In en, this message translates to:
-  /// **'Tap here to go to settings'**
+  /// **'Tap here to go to settings.\nYou can change game mode, get hints and more.'**
   String get settingTutorial;
 
   /// No description provided for @wordInputTutorial.

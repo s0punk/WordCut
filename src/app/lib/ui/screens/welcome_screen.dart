@@ -30,6 +30,7 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
     required bool addRandomWord,
   }) async {
     final nav = Navigator.of(context);
+    final strings = ref.read(l10nProvider);
 
     setState(() {
       loading = true;
@@ -43,11 +44,7 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
           .read(gameManagerProvider.notifier)
           .resetGame(addRandomWord: addRandomWord);
 
-      nav.pushReplacement(
-        MaterialPageRoute<void>(
-          builder: (_) => const GameScreen(),
-        ),
-      );
+      nav.pushReplacement(buildGameScreenRoute(strings));
     });
   }
 

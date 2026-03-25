@@ -24,7 +24,7 @@ final currentGameStateProvider =
     );
 
 typedef _$CurrentGameState = Notifier<GameState>;
-String _$gameManagerHash() => r'9551672bf6c03adbdf94838b397e79353c19ef49';
+String _$gameManagerHash() => r'a70eeb07600db70e8328dc5cc1eade64e73befa3';
 
 /// Provider de la gestion de l'état du jeux.
 ///

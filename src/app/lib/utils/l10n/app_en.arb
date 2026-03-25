@@ -15,6 +15,7 @@
     "hardMode": "Hard mode",
     "hardModeDesc": "Gives a limited time to solve a word.",
     "customDictionary": "Custom dictionary",
+    "resetTutorials": "Reset tutorials",
 
     "selectCustomDictionary": "Select a custom dictionary",
     "formatDesc": "The dictionary must be a text file with one word per line. The dictionary must have at least 2 words.",
@@ -37,6 +38,7 @@
     "cancel": "Cancel",
     "select": "Select",
     "remove": "Remove",
+    "reset": "Reset",
 
     "wordNotInList": "Word not in list",
     "wordIncompatible": "Word not derived from previous one",
@@ -45,7 +47,10 @@
     "invalidChars": "Word must contain letters only",
     "noOtherPossibleWords": "No other words can be played",
 
-    "settingTutorial": "Tap here to go to settings",
+    "endTour": "End tour",
+    "done": "Done",
+    "next": "Next",
+    "settingTutorial": "Tap here to go to settings.\nYou can change game mode, get hints and more.",
     "wordInputTutorial": "Create a shorter word by removing 1 to 3 letters. Rearrange the letters to score more points!\nDotted slots are optional.",
     "customWordTutorial": "Start the game with any word or combination of letters."
 }

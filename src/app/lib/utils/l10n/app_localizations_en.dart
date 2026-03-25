@@ -50,6 +50,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get customDictionary => 'Custom dictionary';
 
   @override
+  String get resetTutorials => 'Reset tutorials';
+
+  @override
   String get selectCustomDictionary => 'Select a custom dictionary';
 
   @override
@@ -108,6 +111,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get remove => 'Remove';
 
   @override
+  String get reset => 'Reset';
+
+  @override
   String get wordNotInList => 'Word not in list';
 
   @override
@@ -126,7 +132,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noOtherPossibleWords => 'No other words can be played';
 
   @override
-  String get settingTutorial => 'Tap here to go to settings';
+  String get endTour => 'End tour';
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get settingTutorial =>
+      'Tap here to go to settings.\nYou can change game mode, get hints and more.';
 
   @override
   String get wordInputTutorial =>

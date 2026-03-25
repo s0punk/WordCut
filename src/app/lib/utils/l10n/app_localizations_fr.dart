@@ -50,6 +50,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get customDictionary => 'Dictionnaire personnalisé';
 
   @override
+  String get resetTutorials => 'Rétablir les tutoriels';
+
+  @override
   String get selectCustomDictionary =>
       'Sélectionner un dictionnaire personnalisé';
 
@@ -109,6 +112,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get remove => 'Retirer';
 
   @override
+  String get reset => 'Rétablir';
+
+  @override
   String get wordNotInList => 'Le mot ne fait pas partie de la liste';
 
   @override
@@ -127,7 +133,17 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noOtherPossibleWords => 'Aucun mot possible';
 
   @override
-  String get settingTutorial => 'Appui ici pour accéder aux paramètres';
+  String get endTour => 'Arrêter';
+
+  @override
+  String get done => 'Fin';
+
+  @override
+  String get next => 'Prochain';
+
+  @override
+  String get settingTutorial =>
+      'Appui ici pour accéder aux paramètres.\nTu peux changer le mode de jeux, obtenir des indices et plus encore.';
 
   @override
   String get wordInputTutorial =>

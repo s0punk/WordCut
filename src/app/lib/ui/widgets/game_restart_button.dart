@@ -41,11 +41,7 @@ class GameRestartButton extends ConsumerWidget {
         context,
       )
       ..pop()
-      ..pushReplacement(
-        MaterialPageRoute<void>(
-          builder: (_) => const GameScreen(),
-        ),
-      );
+      ..pushReplacement(buildGameScreenRoute(ref.read(l10nProvider)));
   }
 
   @override

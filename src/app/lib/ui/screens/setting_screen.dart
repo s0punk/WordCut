@@ -13,6 +13,7 @@ import 'package:word_cut/ui/theme.dart';
 import 'package:word_cut/ui/widgets/game_restart_button.dart';
 import 'package:word_cut/utils/l10n/app_localizations.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
+import 'package:word_cut/utils/tutorial.dart';
 
 /// Page des paramètres de l'application.
 class SettingScreen extends ConsumerWidget {
@@ -132,6 +133,16 @@ class SettingScreen extends ConsumerWidget {
                 },
               ),
               orElse: () => const CircularProgressIndicator(),
+            ),
+          ),
+          ListTile(
+            title: FitText.body(strings.resetTutorials),
+            trailing: FitButton(
+              onTap: () async {
+                await ref.read(tutorialProvider.notifier).reset();
+              },
+              width: trailingWidth,
+              child: FitText.button(strings.reset),
             ),
           ),
           if (isInGame) ...[
