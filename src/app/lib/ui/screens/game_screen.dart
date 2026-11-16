@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_fit_utils_ui/flutter_fit_utils_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotspot/hotspot.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/providers/game_mode.dart';
 import 'package:word_cut/ui/screens/game_over_screen.dart';
@@ -110,16 +110,10 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final screenSize = MediaQuery.of(context).size;
     final offset =
         box?.localToGlobal(Offset(box.size.width * 0.8, 0)) ??
-        Offset(
-          screenSize.width / 2,
-          screenSize.height / 2,
-        );
+        Offset(screenSize.width / 2, screenSize.height / 2);
 
     final entry = OverlayEntry(
-      builder: (_) => AnimatedScore(
-        score: score,
-        position: offset,
-      ),
+      builder: (_) => AnimatedScore(score: score, position: offset),
     );
 
     Overlay.of(context).insert(entry);
@@ -128,9 +122,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   }
 
   void onError(WordPlayResult error) {
-    ScaffoldMessenger.of(
-        context,
-      )
+    ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(content: FitText(ref.read(wordPlayResultProvider(error)))),
@@ -172,9 +164,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
           children: [
             FitText.title(
               strings.app,
-              style: GoogleFonts.workbench(
-                fontSize: 32,
-              ),
+              style: GoogleFonts.workbench(fontSize: 32),
             ),
             gameMode.maybeWhen(
               data: (gameMode) {
@@ -197,9 +187,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
             ),
             FitText.body(
               "${strings.score}: ${gameState.score}",
-              style: const TextStyle(
-                fontWeight: FontWeight.w500,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.w500),
               margin: const EdgeInsets.only(top: 6),
             ),
           ],
@@ -235,10 +223,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
               spacing: 12,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (final word in gameState.words)
-                  WordInput(
-                    word: word,
-                  ),
+                for (final word in gameState.words) WordInput(word: word),
                 Builder(
                   builder: (context) {
                     if (gameState.words.isEmpty) {
@@ -262,9 +247,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
 
                     if (gameState.words.last.length != 1) {
                       return WordInput(
-                        key: ValueKey(
-                          gameState.words.last.length - 1,
-                        ),
+                        key: ValueKey(gameState.words.last.length - 1),
                         length: gameState.words.last.length - 1,
                         enabled: true,
                         autoFocus: true,
@@ -280,9 +263,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                             onScore(result.score, box);
 
                             if ((await ref
-                                    .read(
-                                      gameManagerProvider.notifier,
-                                    )
+                                    .read(gameManagerProvider.notifier)
                                     .findCompatibleWord(
                                       gameState.words.last,
                                     )) ==
@@ -307,9 +288,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                   FitButton(
                     onTap: onGameOver,
                     color: ref.read(colorSchemeProvider).secondary,
-                    child: FitText.button(
-                      strings.seeResults,
-                    ),
+                    child: FitText.button(strings.seeResults),
                   ),
               ],
             ),

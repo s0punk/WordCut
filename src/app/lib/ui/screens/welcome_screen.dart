@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_fit_utils_ui/fit_loading_handler/fit_loading_handler.dart';
 import 'package:flutter_fit_utils_ui/fit_text.dart';
 import 'package:flutter_fit_utils_ui/fit_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/providers/word_list.dart';
 import 'package:word_cut/ui/screens/game_screen.dart';
@@ -83,9 +83,7 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
               FitText.headline(
                 strings.app,
                 alignment: Alignment.center,
-                style: GoogleFonts.workbench(
-                  fontSize: 64,
-                ),
+                style: GoogleFonts.workbench(fontSize: 64),
               ),
               FitText.title(
                 strings.pitch,

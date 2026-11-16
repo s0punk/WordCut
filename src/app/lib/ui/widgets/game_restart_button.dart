@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_fit_utils_ui/fit_button.dart';
 import 'package:flutter_fit_utils_ui/fit_text.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/ui/screens/game_screen.dart';
 import 'package:word_cut/ui/theme.dart';
@@ -37,9 +37,7 @@ class GameRestartButton extends ConsumerWidget {
   }) {
     ref.read(gameManagerProvider.notifier).resetGame(addRandomWord: customGame);
 
-    Navigator.of(
-        context,
-      )
+    Navigator.of(context)
       ..pop()
       ..pushReplacement(buildGameScreenRoute(ref.read(l10nProvider)));
   }
@@ -64,9 +62,7 @@ class GameRestartButton extends ConsumerWidget {
             _onReset(ref, context, customGame: true);
           },
           color: ref.read(colorSchemeProvider).primary,
-          child: FitText.button(
-            newGameLabel,
-          ),
+          child: FitText.button(newGameLabel),
         ),
         FitButton(
           onTap: () {
@@ -78,9 +74,7 @@ class GameRestartButton extends ConsumerWidget {
             _onReset(ref, context, customGame: false);
           },
           color: ref.read(colorSchemeProvider).secondary,
-          child: FitText.button(
-            newCustomGameLabel,
-          ),
+          child: FitText.button(newCustomGameLabel),
         ),
       ],
     );

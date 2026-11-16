@@ -1,8 +1,8 @@
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_fit_utils_ui/flutter_fit_utils_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:material_ui/material_ui.dart';
 import 'package:word_cut/providers/word_list.dart';
 import 'package:word_cut/ui/theme.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
@@ -60,26 +60,24 @@ class _CustomDictionaryScreenState extends ConsumerState<CustomWordListScreen> {
     final navigator = Navigator.of(context);
 
     try {
-      final result = await FilePicker.platform.pickFiles(
+      final file = await FilePicker.pickFile(
         dialogTitle: ref.read(l10nProvider).selectCustomDictionary,
         type: FileType.custom,
         allowedExtensions: ["txt"],
-        withData: true,
       );
 
-      if (result == null) {
+      if (file == null) {
         setState(() {
           isLoading = false;
         });
         return;
       }
 
+      final bytes = await file.readAsBytes();
+
       final isValid = await ref
           .read(wordListProvider.notifier)
-          .setCustomWordList(
-            result.files.first.name,
-            String.fromCharCodes(result.files.first.bytes ?? []),
-          );
+          .setCustomWordList(file.name, String.fromCharCodes(bytes));
 
       if (!isValid) {
         throw Exception();

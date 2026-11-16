@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:word_cut/models/game_state.dart';
 import 'package:word_cut/providers/game_mode.dart';

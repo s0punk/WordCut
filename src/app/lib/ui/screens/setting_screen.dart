@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_fit_utils_ui/fit_button.dart';
 import 'package:flutter_fit_utils_ui/fit_text.dart';
 import 'package:flutter_fit_utils_ui/fit_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:word_cut/providers/game_manager.dart';
 import 'package:word_cut/providers/game_mode.dart';
 import 'package:word_cut/providers/word_list.dart';
@@ -61,7 +61,7 @@ class SettingScreen extends ConsumerWidget {
                 initialValue: AppLocalizations.supportedLocales.firstWhere(
                   (l) => l.languageCode == ref.watch(l10nProvider).localeName,
                 ),
-                onChanged: (value) {
+                onChanged: (value) async {
                   if (value == null) {
                     return;
                   }
@@ -181,9 +181,7 @@ class SettingScreen extends ConsumerWidget {
                               messenger
                                 ..hideCurrentSnackBar()
                                 ..showSnackBar(
-                                  SnackBar(
-                                    content: FitText.body(hint),
-                                  ),
+                                  SnackBar(content: FitText.body(hint)),
                                 );
                             },
                             child: FitText.body(strings.showMore),
@@ -199,9 +197,7 @@ class SettingScreen extends ConsumerWidget {
               ),
             ),
             const Spacer(),
-            GameRestartButton(
-              newGameLabel: strings.newGame,
-            ),
+            GameRestartButton(newGameLabel: strings.newGame),
           ],
         ],
       ),

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:word_cut/utils/l10n/app_localizations.dart';
 import 'package:word_cut/utils/preferences.dart';
@@ -14,13 +14,11 @@ class L10n extends _$L10n {
   AppLocalizations build() {
     state = _getLocale();
 
-    final observer = _LocaleObserver(
-      (_) {
-        final old = state.localeName;
-        state = _getLocale();
-        debugPrint("INF: Changed locale from $old to ${state.localeName}");
-      },
-    );
+    final observer = _LocaleObserver((_) {
+      final old = state.localeName;
+      state = _getLocale();
+      debugPrint("INF: Changed locale from $old to ${state.localeName}");
+    });
 
     final binding = WidgetsBinding.instance..addObserver(observer);
     ref.onDispose(() => binding.removeObserver(observer));
@@ -56,10 +54,9 @@ class L10n extends _$L10n {
   }
 
   AppLocalizations _getLocale({Locale? locale}) => lookupAppLocalizations(
-    basicLocaleListResolution(
-      [locale ?? WidgetsBinding.instance.platformDispatcher.locale],
-      AppLocalizations.supportedLocales,
-    ),
+    basicLocaleListResolution([
+      locale ?? WidgetsBinding.instance.platformDispatcher.locale,
+    ], AppLocalizations.supportedLocales),
   );
 }
 

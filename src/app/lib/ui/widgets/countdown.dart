@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_fit_utils_ui/fit_text.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:word_cut/utils/extensions/duration.dart';
 
 /// Widget qui affiche un countdown timer.
@@ -72,9 +72,7 @@ class _CountdownState extends State<Countdown> {
     // On ne veut afficher une valeur plus petite que 0.
     return FitText.body(
       (remaining.inSeconds <= 0 ? Duration.zero : remaining).toTimerString(),
-      style: TextStyle(
-        color: remaining.inSeconds <= 10 ? Colors.red : null,
-      ),
+      style: TextStyle(color: remaining.inSeconds <= 10 ? Colors.red : null),
     );
   }
 }

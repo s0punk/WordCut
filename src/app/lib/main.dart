@@ -1,26 +1,22 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_fit_utils_ui/fit_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:word_cut/providers/word_list.dart';
 import 'package:word_cut/ui/screens/welcome_screen.dart';
 import 'package:word_cut/ui/theme.dart';
 import 'package:word_cut/utils/l10n/app_localizations.dart';
 import 'package:word_cut/utils/l10n/l10n_provider.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.manual,
     overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top],
   );
 
-  runApp(
-    const ProviderScope(
-      child: WordCut(),
-    ),
-  );
+  runApp(const ProviderScope(child: WordCut()));
 }
 
 /// Widget principal de l'application.
@@ -47,9 +43,7 @@ class WordCut extends ConsumerWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
               return const Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(),
-                ),
+                body: Center(child: CircularProgressIndicator()),
               );
             }
 

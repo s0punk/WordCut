@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:word_cut/ui/theme.dart';
 
 /// Score animé qui apparait lorsqu'un mot est joué et accepté.
@@ -11,11 +11,7 @@ class AnimatedScore extends ConsumerStatefulWidget {
   final Offset position;
 
   /// Score animé qui apparait lorsqu'un mot est joué et accepté.
-  const AnimatedScore({
-    required this.score,
-    required this.position,
-    super.key,
-  });
+  const AnimatedScore({required this.score, required this.position, super.key});
 
   @override
   ConsumerState<AnimatedScore> createState() => _AnimatedScoreState();
@@ -28,18 +24,15 @@ class _AnimatedScoreState extends ConsumerState<AnimatedScore>
     duration: const Duration(milliseconds: 2000),
   );
 
-  late final Animation<double> opacity = Tween<double>(begin: 1, end: 0)
-      .animate(
-        CurvedAnimation(parent: controller, curve: Curves.easeOut),
-      );
+  late final Animation<double> opacity = Tween<double>(
+    begin: 1,
+    end: 0,
+  ).animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
 
-  late final Animation<Offset> offset =
-      Tween<Offset>(
-        begin: Offset.zero,
-        end: const Offset(0, -10),
-      ).animate(
-        CurvedAnimation(parent: controller, curve: Curves.easeOut),
-      );
+  late final Animation<Offset> offset = Tween<Offset>(
+    begin: Offset.zero,
+    end: const Offset(0, -10),
+  ).animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
 
   @override
   void initState() {

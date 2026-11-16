@@ -1,7 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pinput/pinput.dart';
 import 'package:word_cut/ui/theme.dart';
 import 'package:word_cut/utils/uppercase_formatter.dart';
@@ -99,10 +99,7 @@ class _WordInputState extends ConsumerState<WordInput> {
                   decoration: theme.decoration,
                   constraints: theme.constraints,
                   alignment: Alignment.center,
-                  child: Text(
-                    state.value,
-                    style: theme.textStyle,
-                  ),
+                  child: Text(state.value, style: theme.textStyle),
                 ),
               );
             },
@@ -131,9 +128,7 @@ class _WordInputState extends ConsumerState<WordInput> {
             keyboardType: TextInputType.text,
             closeKeyboardWhenCompleted: false,
             hapticFeedbackType: HapticFeedbackType.lightImpact,
-            inputFormatters: [
-              UpperCaseTextFormatter(),
-            ],
+            inputFormatters: [UpperCaseTextFormatter()],
           );
         },
       ),

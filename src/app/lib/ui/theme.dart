@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pinput/pinput.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:word_cut/ui/widgets/word_input.dart';
@@ -26,9 +26,7 @@ PinTheme pinTheme(Ref ref) {
   return const PinTheme(
     width: 56,
     height: 60,
-    textStyle: TextStyle(
-      fontSize: 16,
-    ),
+    textStyle: TextStyle(fontSize: 16),
     decoration: BoxDecoration(
       color: Color.fromRGBO(222, 231, 240, .57),
       borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -62,17 +60,10 @@ ThemeData theme(Ref ref) {
   return ThemeData(
     colorScheme: colorScheme,
     textTheme: GoogleFonts.workSansTextTheme().copyWith(
-      labelLarge: const TextStyle(
-        fontSize: 20,
-      ),
+      labelLarge: const TextStyle(fontSize: 20),
     ),
-    appBarTheme: const AppBarThemeData(
-      centerTitle: true,
-    ),
-    buttonTheme: const ButtonThemeData(
-      height: 48,
-      minWidth: double.infinity,
-    ),
+    appBarTheme: const AppBarThemeData(centerTitle: true),
+    buttonTheme: const ButtonThemeData(height: 48, minWidth: double.infinity),
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
         borderRadius: BorderRadius.all(
@@ -80,9 +71,7 @@ ThemeData theme(Ref ref) {
         ),
       ),
     ),
-    cardTheme: CardThemeData(
-      color: colorScheme.tertiaryContainer,
-    ),
+    cardTheme: CardThemeData(color: colorScheme.tertiaryContainer),
     snackBarTheme: SnackBarThemeData(
       elevation: 3,
       behavior: SnackBarBehavior.floating,
